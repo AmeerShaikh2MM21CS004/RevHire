@@ -24,6 +24,25 @@ public class JobSeekersDAO {
         }
     }
 
+    public int getSeekerIdByUserId(int userId) {
+        String sql = "SELECT seeker_id FROM job_seekers WHERE user_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("seeker_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("⚠️ Error fetching seeker ID: " + e.getMessage());
+        }
+        return -1;
+    }
+
+
     public List<String> getAllJobSeekers() {
         List<String> seekers = new ArrayList<>();
         String sql = "SELECT seeker_id, user_id, full_name, phone, location FROM job_seekers";
@@ -40,5 +59,27 @@ public class JobSeekersDAO {
         }
         return seekers;
     }
+
+    public int getUserIdBySeekerId(int seekerId) {
+
+        String sql = "SELECT user_id FROM job_seekers WHERE seeker_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, seekerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; // not found
+    }
+
 }
 

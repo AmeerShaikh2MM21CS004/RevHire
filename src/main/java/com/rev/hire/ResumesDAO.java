@@ -42,22 +42,77 @@ public class ResumesDAO {
         return resumes;
     }
 
-    public String getResumeById(int resumeId) {
-        String sql = "SELECT * FROM resumes WHERE resume_id=?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public static void viewResume(int seekerId) {
+        String sql = "SELECT * FROM resumes WHERE seeker_id = ?";
 
-            pstmt.setInt(1, resumeId);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("resume_id") + " | " + rs.getInt("seeker_id") + " | " +
-                            rs.getString("objective") + " | " + rs.getString("education") +
-                            " | " + rs.getString("experience");
-                }
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, seekerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("=== Resume ===");
+                System.out.println("Objective: " + rs.getString("objective"));
+                System.out.println("Education: " + rs.getString("education"));
+                System.out.println("Experience: " + rs.getString("experience"));
+                System.out.println("Skills: " + rs.getString("skills"));
+                System.out.println("Projects: " + rs.getString("projects"));
+                System.out.println("================");
+            } else {
+                System.out.println("⚠️ Resume not found.");
             }
+
+        } catch (SQLException e) {
+            System.out.println("⚠️ Error fetching resume: " + e.getMessage());
+        }
+    }
+
+    public static void saveOrUpdateResume(
+            int seekerId,
+            String objective,
+            String education,
+            String experience,
+            String skills,
+            String projects
+    ) {
+
+        String sql = """
+        MERGE INTO resumes r
+        USING dual
+        ON (r.seeker_id = ?)
+        WHEN MATCHED THEN
+          UPDATE SET
+            objective = ?, education = ?, experience = ?,
+            skills = ?, projects = ?, updated_at = CURRENT_TIMESTAMP
+        WHEN NOT MATCHED THEN
+          INSERT (seeker_id, objective, education, experience, skills, projects)
+          VALUES (?, ?, ?, ?, ?, ?)
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, seekerId);
+            ps.setString(2, objective);
+            ps.setString(3, education);
+            ps.setString(4, experience);
+            ps.setString(5, skills);
+            ps.setString(6, projects);
+
+            ps.setInt(7, seekerId);
+            ps.setString(8, objective);
+            ps.setString(9, education);
+            ps.setString(10, experience);
+            ps.setString(11, skills);
+            ps.setString(12, projects);
+
+            ps.executeUpdate();
+            System.out.println("📄 Resume saved successfully!");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
+
 }

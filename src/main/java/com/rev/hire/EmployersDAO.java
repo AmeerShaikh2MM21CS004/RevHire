@@ -25,6 +25,25 @@ public class EmployersDAO {
         }
     }
 
+    public int getEmployerIdByUserId(int userId) {
+        String sql = "SELECT employer_id FROM employers WHERE user_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("employer_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("⚠️ Error fetching employer ID: " + e.getMessage());
+        }
+        return -1;
+    }
+
+
     public List<String> getAllEmployers() {
         List<String> employers = new ArrayList<>();
         String sql = "SELECT employer_id, user_id, company_name, industry, location FROM employers";
@@ -41,5 +60,28 @@ public class EmployersDAO {
         }
         return employers;
     }
+
+    public void updateApplicationStatus(int appId, String status, int userId) {
+
+        String sql = "UPDATE applications SET status=? WHERE application_id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status);
+            ps.setInt(2, appId);
+            ps.executeUpdate();
+
+            new NotificationsDAO()
+                    .addNotification(userId,
+                            "Your application #" + appId + " is now " + status);
+
+            System.out.println("✅ Status updated.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

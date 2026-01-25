@@ -6,56 +6,73 @@ import java.util.List;
 
 public class NotificationsDAO {
 
-    public void addNotification(int userId, String message, char isRead) {
-        String sql = "INSERT INTO notifications (user_id, message, is_read) VALUES (?, ?, ?)";
+    // 🔔 Create notification
+    public void addNotification(int userId, String message) {
+
+        String sql = """
+            INSERT INTO notifications (user_id, message)
+            VALUES (?, ?)
+        """;
+
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, userId);
-            pstmt.setString(2, message);
-            pstmt.setString(3, String.valueOf(isRead));
+            ps.setInt(1, userId);
+            ps.setString(2, message);
+            ps.executeUpdate();
 
-            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<String> getAllNotifications() {
-        List<String> notifications = new ArrayList<>();
-        String sql = "SELECT notification_id, user_id, is_read, created_at FROM notifications";
+    // 📥 View notifications
+    public static List<String> getUserNotifications(int userId) {
+
+        List<String> notes = new ArrayList<>();
+
+        String sql = """
+            SELECT notification_id, message, is_read, created_at
+            FROM notifications
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+        """;
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                notifications.add(rs.getInt("notification_id") + " | " + rs.getInt("user_id") + " | " +
-                        rs.getString("is_read") + " | " + rs.getTimestamp("created_at"));
+                notes.add(
+                        rs.getInt("notification_id") + " | " +
+                                rs.getString("message") + " | " +
+                                (rs.getString("is_read").equals("Y") ? "READ" : "UNREAD") +
+                                " | " + rs.getTimestamp("created_at")
+                );
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return notifications;
+
+        return notes;
     }
 
-    public String getNotificationById(int notificationId) {
-        String sql = "SELECT * FROM notifications WHERE notification_id=?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    // ✅ Mark notification as read
+    public void markAsRead(int notificationId) {
 
-            pstmt.setInt(1, notificationId);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("notification_id") + " | " + rs.getInt("user_id") + " | " +
-                            rs.getString("message") + " | " + rs.getString("is_read") + " | " +
-                            rs.getTimestamp("created_at");
-                }
-            }
+        String sql = "UPDATE notifications SET is_read='Y' WHERE notification_id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, notificationId);
+            ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 }
-

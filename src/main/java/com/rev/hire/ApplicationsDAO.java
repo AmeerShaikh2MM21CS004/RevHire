@@ -8,27 +8,91 @@ public class ApplicationsDAO {
 
     // Add a new job application (status default = APPLIED)
     public void addApplication(int jobId, int seekerId) {
-        String sql = "INSERT INTO applications (job_id, seeker_id) VALUES (?, ?)";
+
+        String checkSql = """
+        SELECT COUNT(*) 
+        FROM applications 
+        WHERE job_id = ? AND seeker_id = ?
+    """;
+
+        String insertSql = """
+        INSERT INTO applications (job_id, seeker_id)
+        VALUES (?, ?)
+    """;
+
+        try (Connection conn = DBConnection.getConnection()) {
+
+            // 1️⃣ Check duplicate
+            try (PreparedStatement checkPs = conn.prepareStatement(checkSql)) {
+                checkPs.setInt(1, jobId);
+                checkPs.setInt(2, seekerId);
+
+                ResultSet rs = checkPs.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.out.println("⚠️ You have already applied for this job.");
+                    return;
+                }
+            }
+
+            // 2️⃣ Insert application
+            try (PreparedStatement insertPs = conn.prepareStatement(insertSql)) {
+                insertPs.setInt(1, jobId);
+                insertPs.setInt(2, seekerId);
+                insertPs.executeUpdate();
+            }
+
+            System.out.println("✅ Application submitted successfully!");
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to apply: " + e.getMessage());
+        }
+    }
+
+    public List<String> getApplicationsBySeeker(int seekerId) {
+
+        List<String> applications = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            a.application_id,
+            j.title,
+            e.company_name,
+            j.location,
+            a.status,
+            a.applied_date
+        FROM applications a
+        JOIN jobs j ON a.job_id = j.job_id
+        JOIN employers e ON j.employer_id = e.employer_id
+        WHERE a.seeker_id = ?
+        ORDER BY a.applied_date DESC
+    """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, jobId);
-            pstmt.setInt(2, seekerId);
+            pstmt.setInt(1, seekerId);
+            ResultSet rs = pstmt.executeQuery();
 
-            pstmt.executeUpdate();
-            System.out.println("✅ Application submitted successfully.");
+            while (rs.next()) {
+                String record =
+                        "Application ID: " + rs.getInt("application_id") +
+                                " | Job: " + rs.getString("title") +
+                                " | Company: " + rs.getString("company_name") +
+                                " | Location: " + rs.getString("location") +
+                                " | Status: " + rs.getString("status") +
+                                " | Applied On: " + rs.getTimestamp("applied_date");
+
+                applications.add(record);
+            }
 
         } catch (SQLException e) {
-
-            // ORA-00001 → unique constraint (job_id, seeker_id)
-            if (e.getErrorCode() == 1) {
-                System.out.println("⚠️ You have already applied for this job.");
-            } else {
-                System.out.println("⚠️ Error adding application: " + e.getMessage());
-            }
+            e.printStackTrace();
         }
+
+        return applications;
     }
+
+
 
     // Get all applications
     public List<String> getAllApplications() {
@@ -100,4 +164,28 @@ public class ApplicationsDAO {
             System.out.println("⚠️ Error updating application status: " + e.getMessage());
         }
     }
+
+    public void withdrawApplication(int applicationId, String reason) {
+
+        String sql = """
+        UPDATE applications
+        SET status = 'WITHDRAWN',
+            withdraw_reason = ?
+        WHERE application_id = ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, reason);
+            ps.setInt(2, applicationId);
+            ps.executeUpdate();
+
+            System.out.println("✅ Application withdrawn successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
