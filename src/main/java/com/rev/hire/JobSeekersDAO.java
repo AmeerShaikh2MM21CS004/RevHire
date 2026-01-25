@@ -60,6 +60,67 @@ public class JobSeekersDAO {
         return seekers;
     }
 
+    public static void updateJobSeekerProfile(
+            int seekerId,
+            String fullName,
+            String phone,
+            String location,
+            Integer totalExperience) {
+
+        StringBuilder sql = new StringBuilder("UPDATE job_seekers SET ");
+        List<Object> params = new ArrayList<>();
+
+        if (fullName != null && !fullName.isBlank()) {
+            sql.append("full_name = ?, ");
+            params.add(fullName);
+        }
+
+        if (phone != null && !phone.isBlank()) {
+            sql.append("phone = ?, ");
+            params.add(phone);
+        }
+
+        if (location != null && !location.isBlank()) {
+            sql.append("location = ?, ");
+            params.add(location);
+        }
+
+        if (totalExperience != null) {
+            sql.append("total_experience = ?, ");
+            params.add(totalExperience);
+        }
+
+        if (params.isEmpty()) {
+            System.out.println("⚠️ Nothing to update.");
+            return;
+        }
+
+        // Remove last comma
+        sql.setLength(sql.length() - 2);
+
+        sql.append(" WHERE seeker_id = ?");
+        params.add(seekerId);
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("✅ Job seeker profile updated successfully.");
+            } else {
+                System.out.println("⚠️ Job seeker not found.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getUserIdBySeekerId(int seekerId) {
 
         String sql = "SELECT user_id FROM job_seekers WHERE seeker_id = ?";
@@ -80,6 +141,8 @@ public class JobSeekersDAO {
 
         return -1; // not found
     }
+
+
 
 }
 

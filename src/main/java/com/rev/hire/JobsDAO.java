@@ -95,9 +95,14 @@ public class JobsDAO {
         String sql = """
                     SELECT j.job_id,
                            j.title,
+                           j.description,
+                           j.skills_required,
+                           j.experience_required,
+                           j.education_required,
                            j.location,
                            j.salary,
                            j.job_type,
+                           j.deadline,
                            j.status,
                            j.posted_date
                     FROM jobs j
@@ -116,9 +121,14 @@ public class JobsDAO {
                     jobs.add(
                             rs.getInt("job_id") + " | " +
                                     rs.getString("title") + " | " +
+                                    rs.getString("description") + " | " +
+                                    rs.getString("skills_required") + " | " +
+                                    rs.getString("experience_required") + " | " +
+                                    rs.getString("education_required") + " | " +
                                     rs.getString("location") + " | " +
                                     rs.getString("salary") + " | " +
                                     rs.getString("job_type") + " | " +
+                                    rs.getString("deadline") + " | " +
                                     rs.getString("status") + " | " +
                                     rs.getTimestamp("posted_date")
                     );
@@ -224,28 +234,89 @@ public class JobsDAO {
         return jobs;
     }
 
-    public void updateJob(int jobId, int employerId, String title, String salary) {
+    public void updateJob(
+            int jobId,
+            int employerId,
+            String title,
+            String description,
+            String skills,
+            Integer experience,
+            String education,
+            String location,
+            String salary,
+            String jobType,
+            Date deadline
+    ) {
 
-        String sql = """
-                    UPDATE jobs
-                    SET title = ?, salary = ?
-                    WHERE job_id = ? AND employer_id = ?
-                """;
+        StringBuilder sql = new StringBuilder("UPDATE jobs SET ");
+        List<Object> params = new ArrayList<>();
+
+        if (title != null) {
+            sql.append("title = ?, ");
+            params.add(title);
+        }
+        if (description != null) {
+            sql.append("description = ?, ");
+            params.add(description);
+        }
+        if (skills != null) {
+            sql.append("skills_required = ?, ");
+            params.add(skills);
+        }
+        if (experience != null) {
+            sql.append("experience_required = ?, ");
+            params.add(experience);
+        }
+        if (education != null) {
+            sql.append("education_required = ?, ");
+            params.add(education);
+        }
+        if (location != null) {
+            sql.append("location = ?, ");
+            params.add(location);
+        }
+        if (salary != null) {
+            sql.append("salary = ?, ");
+            params.add(salary);
+        }
+        if (jobType != null) {
+            sql.append("job_type = ?, ");
+            params.add(jobType);
+        }
+        if (deadline != null) {
+            sql.append("deadline = ?, ");
+            params.add(deadline);
+        }
+
+        if (params.isEmpty()) {
+            System.out.println("⚠️ Nothing to update.");
+            return;
+        }
+
+        sql.setLength(sql.length() - 2); // remove last comma
+        sql.append(" WHERE job_id = ? AND employer_id = ?");
+        params.add(jobId);
+        params.add(employerId);
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
 
-            ps.setString(1, title);
-            ps.setString(2, salary);
-            ps.setInt(3, jobId);
-            ps.setInt(4, employerId);
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
 
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+
+            if (rows > 0)
+                System.out.println("✅ Job updated successfully.");
+            else
+                System.out.println("❌ Job not found or unauthorized.");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void updateJobStatus(int jobId, int employerId, String status) {
 
@@ -289,26 +360,4 @@ public class JobsDAO {
         }
     }
 
-    public void updateApplicationStatus(
-            int appId, String status, String comment) {
-
-        String sql = """
-                    UPDATE applications
-                    SET status = ?, comments = ?
-                    WHERE application_id = ?
-                """;
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, status);
-            ps.setString(2, comment);
-            ps.setInt(3, appId);
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

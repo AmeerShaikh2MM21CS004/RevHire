@@ -5,7 +5,7 @@
 -- Job Seeker User
 INSERT INTO users (email, password_hash, role)
 -- Job Seekers
-INSERT INTO users (email, password_hash, role) VALUES ('seeker1@gmail.com', 'hashed_pwd_1', 'JOB_SEEKER');
+    INSERT INTO users (email, password_hash, role) VALUES ('seeker1@gmail.com', 'hashed_pwd_1', 'JOB_SEEKER');
 INSERT INTO users (email, password_hash, role) VALUES ('seeker2@gmail.com', 'hashed_pwd_2', 'JOB_SEEKER');
 INSERT INTO users (email, password_hash, role) VALUES ('seeker3@gmail.com', 'hashed_pwd_3', 'JOB_SEEKER');
 INSERT INTO users (email, password_hash, role) VALUES ('seeker4@gmail.com', 'hashed_pwd_4', 'JOB_SEEKER');
@@ -24,7 +24,7 @@ INSERT INTO users (email, password_hash, role) VALUES ('employer4@company.com', 
 INSERT INTO users (email, password_hash, role) VALUES ('employer5@company.com', 'hashed_pwd_15', 'EMPLOYER');
 INSERT INTO users (email, password_hash, role) VALUES ('employer6@company.com', 'hashed_pwd_16', 'EMPLOYER');
 INSERT INTO users (email, password_hash, role) VALUES ('employer7@company.com', 'hashed_pwd_17', 'EMPLOYER');
-INSERT INTO users (email, password_hash, role) VALUES ('employer8@company.com', 'hashed_pwd_18', 'EMPLOYER');
+    INSERT INTO users (email, password_hash, role) VALUES ('employer8@company.com', 'hashed_pwd_18', 'EMPLOYER');
 INSERT INTO users (email, password_hash, role) VALUES ('employer9@company.com', 'hashed_pwd_19', 'EMPLOYER');
 INSERT INTO users (email, password_hash, role) VALUES ('employer10@company.com', 'hashed_pwd_20', 'EMPLOYER');
 
@@ -86,7 +86,7 @@ VALUES (9,'API Developer','MCA','3 years','Java, REST','Payment App');
 INSERT INTO resumes (seeker_id, objective, education, experience, skills, projects)
 VALUES (10,'Architect','B.Tech','6 years','Java, Cloud','SaaS');
 
-SELECT seeker_id, skills FROM resumes;
+SELECT * FROM resumes;
 
 
 --Insert Employer Profile
@@ -154,7 +154,7 @@ INSERT INTO employers (user_id, company_name, industry, company_size, descriptio
 VALUES (20,'NextInnovate','AI',360,'AI & ML innovations','https://nextinnovate.com','Delhi');
 
 
-SELECT employer_id, company_name FROM employers;
+SELECT * FROM employers;       
 
 
 --Job
@@ -188,7 +188,15 @@ VALUES (9,'Mobile App Developer','Android apps','Java, Kotlin',3,'B.Tech','Hyder
 INSERT INTO jobs (employer_id, title, description, skills_required, experience_required, education_required, location, salary, job_type, deadline)
 VALUES (10,'AI Engineer','ML models','Python, TensorFlow',5,'M.Tech','Delhi','10–12 LPA','Full Time',DATE '2026-05-15');
 
-SELECT job_id, title, status FROM jobs;
+SELECT * FROM jobs;
+SELECT job_id, title, status FROM jobs WHERE status = 'OPEN';
+
+
+SELECT j.job_id, j.title, e.company_name,j.employer_id,
+               j.location, j.salary, j.job_type, j.status
+        FROM jobs j
+        JOIN employers e ON j.employer_id = e.employer_id
+        WHERE j.status = 'OPEN'
 
 
 --Apply for Job
@@ -303,4 +311,7 @@ COMMIT;
 
 
 
+SHOW USER;
+
+--crevature@gmail.com
 

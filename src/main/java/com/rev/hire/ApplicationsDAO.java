@@ -92,6 +92,115 @@ public class ApplicationsDAO {
         return applications;
     }
 
+    public List<String> getApplicantsForJob(int jobId, int employerId) {
+
+        List<String> applicants = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            a.application_id,
+            s.seeker_id,
+            s.full_name,
+            s.phone,
+            s.location,
+            a.status,
+            a.applied_date
+        FROM applications a
+        JOIN job_seekers s ON a.seeker_id = s.seeker_id
+        JOIN jobs j ON a.job_id = j.job_id
+        WHERE a.job_id = ?
+          AND j.employer_id = ?
+        ORDER BY a.applied_date DESC
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, jobId);
+            ps.setInt(2, employerId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                applicants.add(
+                        "Application ID: " + rs.getInt("application_id") +
+                                " | Seeker ID: " + rs.getInt("seeker_id") +
+                                " | Name: " + rs.getString("full_name") +
+                                " | Phone: " + rs.getString("phone") +
+                                " | Location: " + rs.getString("location") +
+                                " | Status: " + rs.getString("status") +
+                                " | Applied On: " + rs.getTimestamp("applied_date")
+                );
+            }
+
+            if (applicants.isEmpty()) {
+                applicants.add("⚠️ No applications found for this job.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("⚠️ Error fetching applicants: " + e.getMessage());
+        }
+
+        return applicants;
+    }
+
+    public int getUserIdByApplicationId(int appId) {
+
+        String sql =
+                "SELECT u.user_id " +
+                        "FROM applications a " +
+                        "JOIN job_seekers js ON a.seeker_id = js.seeker_id " +
+                        "JOIN users u ON js.user_id = u.user_id " +
+                        "WHERE a.application_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, appId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+
+    public void updateApplicationStatus(int appId, String status, int userId) {
+
+        String sql =
+                "UPDATE applications SET status = ? WHERE application_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status);
+            ps.setInt(2, appId);
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+
+                new NotificationsDAO().addNotification(
+                        userId,
+                        "Your application #" + appId + " is now " + status
+                );
+
+                System.out.println("✅ Status updated successfully.");
+
+            } else {
+                System.out.println("❌ Invalid Application ID.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     // Get all applications

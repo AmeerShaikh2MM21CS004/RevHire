@@ -42,12 +42,19 @@ public class Main {
                     System.out.println("✅ Login successful!");
 
                     if (user.getRole().equals("JOB_SEEKER")) {
+
                         int seekerId = seekersDAO.getSeekerIdByUserId(user.getUserId());
                         jobSeekerMenu(sc, seekerId, jobsDAO, applicationsDAO);
-                    } else {
+
+                    } else if (user.getRole().equals("EMPLOYER")) {
+
                         int employerId = employersDAO.getEmployerIdByUserId(user.getUserId());
-                        employerMenu(sc, employerId, jobsDAO);
+
+                        // 🔥 IMPORTANT: correct method call
+                        employerMenu(sc, employerId, jobsDAO, applicationsDAO, employersDAO);
                     }
+
+
                     System.out.println();
                 }
 
@@ -103,9 +110,6 @@ public class Main {
         }
     }
 
-    private static void employerMenu(Scanner sc, int employerId, JobsDAO jobsDAO) {
-    }
-
     static void jobSeekerMenu(Scanner sc, int seekerId,
                               JobsDAO jobsDAO,
                               ApplicationsDAO applicationsDAO) {
@@ -113,12 +117,13 @@ public class Main {
         while (true) {
             System.out.println("\n--- Job Seeker Dashboard ---");
             System.out.println("1. Create / Update Resume");
-            System.out.println("2. View All Jobs");
-            System.out.println("3. Search Jobs with Filters");
-            System.out.println("4. Apply for Job");
-            System.out.println("5. View My Applications");
-            System.out.println("6. Withdraw Application");
-            System.out.println("7. Logout");
+            System.out.println("2. Manage Profile");
+            System.out.println("3. View All Jobs");
+            System.out.println("4. Search Jobs with Filters");
+            System.out.println("5. Apply for Job");
+            System.out.println("6. View My Applications");
+            System.out.println("7. Withdraw Application");
+            System.out.println("8. Logout");
             System.out.println();
             System.out.print("Choice: ");
 
@@ -127,6 +132,7 @@ public class Main {
             System.out.println();
 
             switch (ch) {
+
                 case 1 -> {
                     System.out.print("Objective: ");
                     String obj = sc.nextLine();
@@ -146,51 +152,78 @@ public class Main {
                     ResumesDAO.saveOrUpdateResume(seekerId, obj, edu, exp, skills, projects);
                 }
 
-                case 2 -> jobsDAO.getAllJobs().forEach(System.out::println);
+                case 2 -> {
+                    System.out.println("=== Update Profile ===");
 
-                case 3 -> {
-                    System.out.println("=== Job Search Filters ===");
-                    System.out.print("Job Title (leave empty for any): ");
-                    String title = sc.nextLine();
+                    System.out.print("Full Name (leave empty to skip): ");
+                    String name = sc.nextLine();
 
-                    System.out.print("Location (leave empty for any): ");
+                    System.out.print("Phone (leave empty to skip): ");
+                    String phone = sc.nextLine();
+
+                    System.out.print("Location (leave empty to skip): ");
                     String location = sc.nextLine();
 
-                    System.out.print("Max Experience Required (years, leave empty for any): ");
+                    System.out.print("Total Experience (years, leave empty to skip): ");
+                    String expInput = sc.nextLine();
+
+                    Integer totalExp = null;
+                    if (!expInput.isBlank()) {
+                        try {
+                            totalExp = Integer.parseInt(expInput);
+                        } catch (NumberFormatException e) {
+                            System.out.println("❌ Invalid number. Experience not updated.");
+                        }
+                    }
+
+                    JobSeekersDAO.updateJobSeekerProfile(seekerId, name, phone, location, totalExp);
+                }
+
+                case 3 -> jobsDAO.getAllJobs().forEach(System.out::println);
+
+                case 4 -> {
+                    System.out.println("=== Job Search Filters ===");
+                    System.out.print("Job Title: ");
+                    String title = sc.nextLine();
+
+                    System.out.print("Location: ");
+                    String location = sc.nextLine();
+
+                    System.out.print("Max Experience Required: ");
                     String expInput = sc.nextLine();
                     Integer maxExp = expInput.isBlank() ? null : Integer.parseInt(expInput);
 
-                    System.out.print("Company Name (leave empty for any): ");
+                    System.out.print("Company Name: ");
                     String company = sc.nextLine();
 
-                    System.out.print("Salary (leave empty for any): ");
+                    System.out.print("Salary: ");
                     String salary = sc.nextLine();
 
-                    System.out.print("Job Type (leave empty for any): ");
+                    System.out.print("Job Type: ");
                     String jobType = sc.nextLine();
 
-                    List<String> results = jobsDAO.searchJobs(title, location, maxExp, company, salary, jobType);
+                    List<String> results = jobsDAO.searchJobs(
+                            title, location, maxExp, company, salary, jobType);
 
                     if (results.isEmpty()) {
-                        System.out.println("⚠️ No jobs found matching filters.");
+                        System.out.println("⚠️ No jobs found.");
                     } else {
-                        System.out.println("✅ Jobs Found:");
                         results.forEach(System.out::println);
                     }
                 }
 
-                case 4 -> {
+                case 5 -> {
                     System.out.print("Job ID: ");
                     int jobId = sc.nextInt();
                     sc.nextLine();
                     applicationsDAO.addApplication(jobId, seekerId);
                 }
 
-                case 5 -> applicationsDAO
+                case 6 -> applicationsDAO
                         .getApplicationsBySeeker(seekerId)
                         .forEach(System.out::println);
 
-                case 6 -> {
+                case 7 -> {
                     System.out.print("Application ID: ");
                     int appId = sc.nextInt();
                     sc.nextLine();
@@ -201,7 +234,7 @@ public class Main {
                     applicationsDAO.withdrawApplication(appId, reason);
                 }
 
-                case 7 -> {
+                case 8 -> {
                     System.out.println("🔓 Logged out.");
                     return;
                 }
@@ -210,6 +243,7 @@ public class Main {
             }
         }
     }
+
 
 
     // ================= EMPLOYER DASHBOARD =================
@@ -286,14 +320,54 @@ public class Main {
                     int jobId = sc.nextInt();
                     sc.nextLine();
 
+                    System.out.println("⚠️ Leave any field empty to keep it unchanged");
+
                     System.out.print("New Title: ");
                     String title = sc.nextLine();
+
+                    System.out.print("New Description: ");
+                    String desc = sc.nextLine();
+
+                    System.out.print("New Skills Required: ");
+                    String skills = sc.nextLine();
+
+                    System.out.print("New Experience Required (years): ");
+                    String expInput = sc.nextLine();
+                    Integer exp = expInput.isBlank() ? null : Integer.parseInt(expInput);
+
+                    System.out.print("New Education Required: ");
+                    String edu = sc.nextLine();
+
+                    System.out.print("New Location: ");
+                    String location = sc.nextLine();
 
                     System.out.print("New Salary: ");
                     String salary = sc.nextLine();
 
-                    jobsDAO.updateJob(jobId, employerId, title, salary);
+                    System.out.print("New Job Type: ");
+                    String jobType = sc.nextLine();
+
+                    System.out.print("New Deadline (YYYY-MM-DD): ");
+                    String deadlineInput = sc.nextLine();
+                    Date deadline = deadlineInput.isBlank()
+                            ? null
+                            : Date.valueOf(deadlineInput);
+
+                    jobsDAO.updateJob(
+                            jobId,
+                            employerId,
+                            title.isBlank() ? null : title,
+                            desc.isBlank() ? null : desc,
+                            skills.isBlank() ? null : skills,
+                            exp,
+                            edu.isBlank() ? null : edu,
+                            location.isBlank() ? null : location,
+                            salary.isBlank() ? null : salary,
+                            jobType.isBlank() ? null : jobType,
+                            deadline
+                    );
                 }
+
 
                 // ---------------- CLOSE / REOPEN ----------------
                 case 4 -> {
@@ -334,24 +408,46 @@ public class Main {
                     sc.nextLine();
 
                     System.out.print("Status (SHORTLISTED / REJECTED): ");
-                    String status = sc.nextLine();
+                    String status = sc.nextLine().toUpperCase();
 
-                    System.out.print("Comment (optional): ");
-                    String comment = sc.nextLine();
+                    int userId = applicationsDAO.getUserIdByApplicationId(appId);
 
-                    applicationsDAO.updateApplicationStatus(appId, status, comment);
+                    applicationsDAO.updateApplicationStatus(appId, status, userId);
                 }
+
+
 
                 // ---------------- UPDATE COMPANY ----------------
                 case 8 -> {
+                    System.out.println("Leave blank to keep existing value");
+
+                    System.out.print("Industry: ");
+                    String industryInput = sc.nextLine();
+                    String industry = industryInput.isBlank() ? null : industryInput;
+
+                    System.out.print("Company Size: ");
+                    String sizeInput = sc.nextLine();
+                    Integer companySize = sizeInput.isBlank() ? null : Integer.parseInt(sizeInput);
+
                     System.out.print("Company Description: ");
-                    String desc = sc.nextLine();
+                    String descInput = sc.nextLine();
+                    String description = descInput.isBlank() ? null : descInput;
 
                     System.out.print("Website: ");
-                    String website = sc.nextLine();
+                    String websiteInput = sc.nextLine();
+                    String website = websiteInput.isBlank() ? null : websiteInput;
+
+                    System.out.print("Location: ");
+                    String locationInput = sc.nextLine();
+                    String location = locationInput.isBlank() ? null : locationInput;
 
                     employersDAO.updateCompanyProfile(
-                            employerId, desc, website
+                            employerId,
+                            industry,
+                            companySize,
+                            description,
+                            website,
+                            location
                     );
                 }
 

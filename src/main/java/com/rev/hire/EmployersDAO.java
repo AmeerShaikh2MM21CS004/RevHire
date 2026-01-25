@@ -26,57 +26,82 @@ public class EmployersDAO {
     }
 
     public int getEmployerIdByUserId(int userId) {
+
         String sql = "SELECT employer_id FROM employers WHERE user_id = ?";
-
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt("employer_id");
             }
-        } catch (SQLException e) {
-            System.out.println("⚠️ Error fetching employer ID: " + e.getMessage());
-        }
-        return -1;
-    }
 
-
-    public List<String> getAllEmployers() {
-        List<String> employers = new ArrayList<>();
-        String sql = "SELECT employer_id, user_id, company_name, industry, location FROM employers";
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                employers.add(rs.getInt("employer_id") + " | " + rs.getInt("user_id") + " | " + rs.getString("company_name") + " | " + rs.getString("industry") + " | " + rs.getString("location"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employers;
+
+        throw new RuntimeException("❌ Employer profile not found.");
     }
 
-    public void updateApplicationStatus(int appId, String status, int userId) {
+    public void updateCompanyProfile(
+            int employerId,
+            String industry,
+            Integer companySize, String description,
+            String website, String location) {
 
-        String sql = "UPDATE applications SET status=? WHERE application_id=?";
+        StringBuilder sql = new StringBuilder("UPDATE employers SET ");
+        List<Object> params = new ArrayList<>();
+
+        if (industry != null && !industry.isBlank()) {
+            sql.append("industry = ?, ");
+            params.add(industry);
+        }
+
+        if (companySize != null) {
+            sql.append("company_size = ?, ");
+            params.add(companySize);
+        }
+
+        if (description != null && !description.isBlank()) {
+            sql.append("description = ?, ");
+            params.add(description);
+        }
+
+        if (website != null && !website.isBlank()) {
+            sql.append("website = ?, ");
+            params.add(website);
+        }
+
+        if (location != null && !location.isBlank()) {
+            sql.append("location = ?, ");
+            params.add(location);
+        }
+
+        if (params.isEmpty()) {
+            System.out.println("⚠️ Nothing to update.");
+            return;
+        }
+
+        sql.setLength(sql.length() - 2); // remove last comma
+        sql.append(" WHERE employer_id = ?");
+        params.add(employerId);
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
 
-            ps.setString(1, status);
-            ps.setInt(2, appId);
-            ps.executeUpdate();
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
 
-            new NotificationsDAO()
-                    .addNotification(userId,
-                            "Your application #" + appId + " is now " + status);
+            int rows = ps.executeUpdate();
 
-            System.out.println("✅ Status updated.");
+            if (rows > 0) {
+                System.out.println("✅ Company profile updated successfully.");
+            } else {
+                System.out.println("⚠️ Employer not found.");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
