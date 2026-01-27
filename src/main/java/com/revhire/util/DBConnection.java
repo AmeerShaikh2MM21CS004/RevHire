@@ -1,4 +1,4 @@
-package com.rev.hire;
+package com.revhire.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

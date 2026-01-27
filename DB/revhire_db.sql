@@ -1,14 +1,21 @@
     --Users Table
-  CREATE TABLE users (
+CREATE TABLE users (
     user_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR2(100) UNIQUE NOT NULL,
     password_hash VARCHAR2(255) NOT NULL,
     role VARCHAR2(20) CHECK (role IN ('JOB_SEEKER', 'EMPLOYER')) NOT NULL,
+
+    -- 🔐 Forgot Password Support
+    security_question VARCHAR2(255) NOT NULL,
+    security_answer_hash VARCHAR2(255) NOT NULL,
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
     
     --job_seeker Table
- CREATE TABLE job_seekers (
+-- ================= JOB SEEKERS =================
+CREATE TABLE job_seekers (
     seeker_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id NUMBER UNIQUE NOT NULL,
     full_name VARCHAR2(100),
@@ -16,6 +23,7 @@
     location VARCHAR2(100),
     total_experience NUMBER,
     profile_completed CHAR(1) DEFAULT 'N' CHECK (profile_completed IN ('Y','N')),
+    profile_completion NUMBER(3,0) DEFAULT 0, -- profile completion in %
     CONSTRAINT fk_job_seekers_user
         FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
@@ -34,6 +42,8 @@ CREATE TABLE resumes (
     FOREIGN KEY (seeker_id) REFERENCES job_seekers(seeker_id)
 );
 
+ALTER TABLE resumes
+ADD last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
     
     --Employer
 CREATE TABLE employers (
@@ -45,6 +55,7 @@ CREATE TABLE employers (
     description CLOB,
     website VARCHAR2(150),
     location VARCHAR2(100),
+    profile_completion NUMBER(3,0) DEFAULT 0, -- profile completion in %
     CONSTRAINT fk_employers_user
         FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
@@ -54,19 +65,16 @@ CREATE TABLE jobs (
     job_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     employer_id NUMBER NOT NULL,
     title VARCHAR2(100) NOT NULL,
-    description CLOB,
-    skills_required CLOB,
+    description VARCHAR2(1000),
+    skills_required VARCHAR2(500),
     experience_required NUMBER,
-    education_required VARCHAR2(100),
-    location VARCHAR2(100),
-    salary VARCHAR2(50),
+    education_required VARCHAR2(200),
+    location VARCHAR2(200),
+    salary VARCHAR2(100),
     job_type VARCHAR2(50),
     deadline DATE,
-    status VARCHAR2(10) DEFAULT 'OPEN'
-        CHECK (status IN ('OPEN', 'CLOSED')),
-    posted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_jobs_employer
-        FOREIGN KEY (employer_id) REFERENCES employers(employer_id)
+    status VARCHAR2(20) DEFAULT 'OPEN',
+    FOREIGN KEY (employer_id) REFERENCES employers(employer_id)
 );
 
     
@@ -75,9 +83,10 @@ CREATE TABLE applications (
     application_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     job_id NUMBER NOT NULL,
     seeker_id NUMBER NOT NULL,
-    status VARCHAR2(15) DEFAULT 'APPLIED'
+    status VARCHAR2(15) DEFAULT 'APPLIED' 
         CHECK (status IN ('APPLIED', 'SHORTLISTED', 'REJECTED', 'WITHDRAWN')),
     applied_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    withdraw_reason VARCHAR2(255),
     CONSTRAINT uq_job_seeker UNIQUE (job_id, seeker_id),
     CONSTRAINT fk_applications_job
         FOREIGN KEY (job_id) REFERENCES jobs(job_id),
@@ -85,16 +94,14 @@ CREATE TABLE applications (
         FOREIGN KEY (seeker_id) REFERENCES job_seekers(seeker_id)
 );
 
-ALTER TABLE applications
-ADD withdraw_reason VARCHAR2(255);
 
     --notifications
 CREATE TABLE notifications (
     notification_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id NUMBER NOT NULL,
-    message CLOB NOT NULL,
+    message VARCHAR2(500) NOT NULL,
     is_read CHAR(1) DEFAULT 'N' CHECK (is_read IN ('Y','N')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_notifications_user
-        FOREIGN KEY (user_id) REFERENCES users(user_id)
-); //refer this table
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
