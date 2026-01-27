@@ -1,5 +1,6 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.ApplicationsDAOimpl;
 import com.revhire.model.Application;
 import com.revhire.util.DBConnection;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationsDAO {
+public class ApplicationsDAO implements ApplicationsDAOimpl {
 
     public void applyJob(int jobId, int seekerId) {
         String sql = """

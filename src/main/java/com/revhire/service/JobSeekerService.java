@@ -1,10 +1,11 @@
 package com.revhire.service;
 
 import com.revhire.dao.JobSeekersDAO;
+import com.revhire.service.impl.JobSeekerServiceimpl;
 
 import java.sql.SQLException;
 
-public class JobSeekerService {
+public class JobSeekerService implements JobSeekerServiceimpl {
 
     private final JobSeekersDAO jobSeekerDAO = new JobSeekersDAO();
 

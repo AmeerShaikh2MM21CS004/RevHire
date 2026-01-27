@@ -5,7 +5,7 @@ import com.revhire.dao.JobsDAO;
 import java.sql.Date;
 import java.util.List;
 
-public class JobService {
+public class JobService extends JobSeekerService {
 
     private final JobsDAO jobsDAO = new JobsDAO();
 

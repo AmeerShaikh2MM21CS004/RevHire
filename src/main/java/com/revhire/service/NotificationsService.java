@@ -2,12 +2,13 @@ package com.revhire.service;
 
 import com.revhire.dao.NotificationsDAO;
 import com.revhire.model.Notification;
+import com.revhire.service.impl.NotificationsServiceimpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsService {
+public class NotificationsService implements NotificationsServiceimpl {
 
     private final NotificationsDAO notificationsDAO = new NotificationsDAO();
 

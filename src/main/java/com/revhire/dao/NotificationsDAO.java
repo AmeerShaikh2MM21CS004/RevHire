@@ -1,5 +1,6 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.NotificationsDAOimpl;
 import com.revhire.model.Notification;
 import com.revhire.util.DBConnection;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsDAO {
+public class NotificationsDAO implements NotificationsDAOimpl {
 
     // Insert notification
     public void insertNotification(int userId, String message) throws SQLException {

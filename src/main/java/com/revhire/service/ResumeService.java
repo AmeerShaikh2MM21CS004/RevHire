@@ -1,10 +1,11 @@
 package com.revhire.service;
 
 import com.revhire.dao.ResumesDAO;
+import com.revhire.service.impl.ResumeServiceimpl;
 
 import java.sql.SQLException;
 
-public class ResumeService {
+public class ResumeService implements ResumeServiceimpl {
 
     private final ResumesDAO resumesDAO = new ResumesDAO();
 

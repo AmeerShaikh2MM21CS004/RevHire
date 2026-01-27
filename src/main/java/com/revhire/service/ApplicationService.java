@@ -2,10 +2,11 @@ package com.revhire.service;
 
 import com.revhire.dao.ApplicationsDAO;
 import com.revhire.model.Application;
+import com.revhire.service.impl.ApplicationServiceimpl;
 
 import java.util.List;
 
-public class ApplicationService {
+public class ApplicationService implements ApplicationServiceimpl {
 
     private final ApplicationsDAO applicationsDAO = new ApplicationsDAO();
 

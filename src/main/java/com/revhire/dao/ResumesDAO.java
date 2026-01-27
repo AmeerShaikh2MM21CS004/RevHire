@@ -1,5 +1,6 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.ResumesDAOimpl;
 import com.revhire.model.Resume;
 import com.revhire.util.DBConnection;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResumesDAO {
+public class ResumesDAO implements ResumesDAOimpl {
 
     public void upsertResume(
             int seekerId,

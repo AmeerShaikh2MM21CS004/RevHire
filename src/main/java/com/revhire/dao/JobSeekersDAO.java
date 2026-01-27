@@ -1,12 +1,13 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.JobSeekersDAOimpl;
 import com.revhire.util.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobSeekersDAO {
+public class JobSeekersDAO implements JobSeekersDAOimpl {
 
     public void insertJobSeeker(int userId, String fullName, String phone,
                                 String location, int totalExperience, char profileCompleted)

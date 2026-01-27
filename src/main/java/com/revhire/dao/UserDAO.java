@@ -1,10 +1,11 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.UserDAOimpl;
 import com.revhire.util.DBConnection;
 
 import java.sql.*;
 
-public class UserDAO {
+public class UserDAO implements UserDAOimpl {
 
     // ---------- FETCH USER FOR LOGIN ----------
     public ResultSet fetchLoginData(String email) throws SQLException {

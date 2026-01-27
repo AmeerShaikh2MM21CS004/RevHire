@@ -1,12 +1,13 @@
 package com.revhire.dao;
 
+import com.revhire.dao.impl.EmployersDAOimpl;
 import com.revhire.util.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployersDAO {
+public class EmployersDAO implements EmployersDAOimpl {
 
     public void addEmployer(
             int userId,

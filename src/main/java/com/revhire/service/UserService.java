@@ -2,12 +2,13 @@ package com.revhire.service;
 
 import com.revhire.dao.UserDAO;
 import com.revhire.model.User;
+import com.revhire.service.impl.UserServiceimpl;
 import com.revhire.util.HashUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserService {
+public class UserService implements UserServiceimpl {
 
     private final UserDAO userDAO = new UserDAO();
 

@@ -1,8 +1,9 @@
 package com.revhire.service;
 
 import com.revhire.dao.EmployersDAO;
+import com.revhire.service.impl.EmployersServiceimpl;
 
-public class EmployersService {
+public class EmployersService implements EmployersServiceimpl {
 
     private final EmployersDAO employersDAO = new EmployersDAO();
 
