@@ -15,7 +15,7 @@ CREATE TABLE users (
     
     --job_seeker Table
 -- ================= JOB SEEKERS =================
-CREATE TABLE job_seekers (
+    CREATE TABLE job_seekers (
     seeker_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id NUMBER UNIQUE NOT NULL,
     full_name VARCHAR2(100),

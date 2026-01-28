@@ -8,9 +8,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ApplicationsDAO implements ApplicationsDAOimpl {
 
+    private static final Logger logger =
+            LogManager.getLogger(ApplicationsDAO.class);
+
     public void applyJob(int jobId, int seekerId) {
+
+        logger.info("Applying job | jobId={}, seekerId={}", jobId, seekerId);
+
         String sql = """
                         INSERT INTO applications (job_id, seeker_id, status, applied_date)
                         VALUES (?, ?, 'APPLIED', CURRENT_TIMESTAMP)
