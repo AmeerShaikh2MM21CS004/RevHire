@@ -190,13 +190,12 @@ COMMIT;
 
 SHOW USER;
 
-SELECT u.user_id
-FROM jobs j
-JOIN employers e ON j.employer_id = e.employer_id
-JOIN users u ON e.user_id = u.user_id
-WHERE j.job_id = 1
 
-
+SELECT job_id, title, description, skills_required,
+                   experience_required, education_required,
+                   location, salary, job_type, deadline, status
+            FROM jobs
+            WHERE employer_id = 1;
 
 
 

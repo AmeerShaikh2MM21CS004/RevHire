@@ -2,12 +2,16 @@ package com.revhire.dao;
 
 import com.revhire.dao.impl.JobsDAOimpl;
 import com.revhire.util.DBConnection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobsDAO implements JobsDAOimpl {
+
+    private static final Logger logger = LogManager.getLogger(JobsDAO.class);
 
     public void addJob(
             int employerId,
@@ -45,16 +49,20 @@ public class JobsDAO implements JobsDAOimpl {
             ps.setDate(10, deadline);
 
             ps.executeUpdate();
+            logger.info("Job added | employerId={}, title={}", employerId, title);
+            System.out.println();
+            System.out.println("New Job added!!");
 
         } catch (SQLException e) {
+            logger.error("Failed to add job | employerId={}, title={}, error={}", employerId, title, e.getMessage());
+            System.out.println();
+            System.out.println("Failed to add job!!");
             throw new RuntimeException(e);
         }
     }
 
     public List<String> getAllOpenJobs() {
-
         List<String> jobs = new ArrayList<>();
-
         String sql = """
             SELECT j.job_id, j.title, e.company_name,
                    j.location, j.salary, j.job_type, j.status
@@ -78,24 +86,23 @@ public class JobsDAO implements JobsDAOimpl {
                                 rs.getString("status")
                 );
             }
+            logger.info("Fetched all open jobs | count={}", jobs.size());
 
         } catch (SQLException e) {
+            logger.error("Failed to fetch open jobs | error={}", e.getMessage());
             throw new RuntimeException(e);
         }
         return jobs;
     }
 
     public List<String> getJobsByEmployer(int employerId) {
-
         List<String> jobs = new ArrayList<>();
-
         String sql = """
             SELECT job_id, title, description, skills_required,
-                   experience_required, education_required,
-                   location, salary, job_type, deadline, status, posted_date
-            FROM jobs
-            WHERE employer_id = ?
-            ORDER BY posted_date DESC
+                                       experience_required, education_required,
+                                       location, salary, job_type, deadline, status
+                                FROM jobs
+                                WHERE employer_id = ?
         """;
 
         try (Connection conn = DBConnection.getConnection();
@@ -119,8 +126,10 @@ public class JobsDAO implements JobsDAOimpl {
                                 rs.getString("status")
                 );
             }
+            logger.info("Fetched jobs by employer | employerId={}, count={}", employerId, jobs.size());
 
         } catch (SQLException e) {
+            logger.error("Failed to fetch jobs by employer | employerId={}, error={}", employerId, e.getMessage());
             throw new RuntimeException(e);
         }
         return jobs;
@@ -188,8 +197,11 @@ public class JobsDAO implements JobsDAOimpl {
                                 rs.getString("job_type")
                 );
             }
+            logger.info("Searched jobs | filters=[title={}, location={}, maxExp={}, company={}, salary={}, type={}] results={}",
+                    title, location, maxExp, company, salary, type, jobs.size());
 
         } catch (SQLException e) {
+            logger.error("Failed to search jobs | error={}", e.getMessage());
             throw new RuntimeException(e);
         }
         return jobs;
@@ -234,20 +246,26 @@ public class JobsDAO implements JobsDAOimpl {
             for (int i = 0; i < params.size(); i++)
                 ps.setObject(i + 1, params.get(i));
 
-            return ps.executeUpdate();
+            int updated = ps.executeUpdate();
+            logger.info("Job updated | employerId={}, jobId={}, fieldsUpdated={}", employerId, jobId, params.size() - 2);
+            System.out.println();
+            System.out.println("Job updated!!");
+            return updated;
 
         } catch (SQLException e) {
+            logger.error("Failed to update job | employerId={}, jobId={}, error={}", employerId, jobId, e.getMessage());
+            System.out.println();
+            System.out.println("Failed to update job");
             throw new RuntimeException(e);
         }
     }
 
     public int updateJobStatus(int jobId, int employerId, String status) {
-
         String sql = """
         UPDATE jobs
         SET status = ?
         WHERE job_id = ? AND employer_id = ?
-    """;
+        """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -256,14 +274,19 @@ public class JobsDAO implements JobsDAOimpl {
             ps.setInt(2, jobId);
             ps.setInt(3, employerId);
 
-            return ps.executeUpdate(); // ✅ rows affected
+            int rows = ps.executeUpdate();
+            logger.info("Job status updated | employerId={}, jobId={}, status={}", employerId, jobId, status);
+            System.out.println();
+            System.out.println("Job Status updated!!");
+            return rows;
 
         } catch (SQLException e) {
+            logger.error("Failed to update job status | employerId={}, jobId={}, error={}", employerId, jobId, e.getMessage());
+            System.out.println();
+            System.out.println("Failed to update job status!!");
             throw new RuntimeException(e);
         }
     }
-
-
 
     public void deleteJob(int jobId, int employerId) {
         String deleteApps = "DELETE FROM applications WHERE job_id=?";
@@ -287,21 +310,26 @@ public class JobsDAO implements JobsDAOimpl {
                 }
 
                 conn.commit();
+                logger.info("Job deleted | employerId={}, jobId={}", employerId, jobId);
+                System.out.println();
+                System.out.println("Job deleted");
             }
         } catch (SQLException e) {
+            logger.error("Failed to delete job | employerId={}, jobId={}, error={}", employerId, jobId, e.getMessage());
+            System.out.println();
+            System.out.println("Failed to delete job");
             throw new RuntimeException("Cannot delete job with applications", e);
         }
     }
 
     public int fetchEmployerUserIdByJob(int jobId) {
-
         String sql = """
         SELECT u.user_id
         FROM jobs j
         JOIN employers e ON j.employer_id = e.employer_id
         JOIN users u ON e.user_id = u.user_id
         WHERE j.job_id = ?
-    """;
+        """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -310,11 +338,13 @@ public class JobsDAO implements JobsDAOimpl {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("user_id"); // ✅ EMPLOYER USER ID
+                int userId = rs.getInt("user_id");
+                logger.info("Fetched employer userId | jobId={}, userId={}", jobId, userId);
+                return userId;
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Failed to fetch employer userId | jobId={}, error={}", jobId, e.getMessage());
         }
 
         return -1;

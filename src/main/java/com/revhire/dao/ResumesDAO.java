@@ -3,6 +3,8 @@ package com.revhire.dao;
 import com.revhire.dao.impl.ResumesDAOimpl;
 import com.revhire.model.Resume;
 import com.revhire.util.DBConnection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +12,10 @@ import java.util.List;
 
 public class ResumesDAO implements ResumesDAOimpl {
 
+    private static final Logger logger =
+            LogManager.getLogger(ResumesDAO.class);
+
+    @Override
     public void upsertResume(
             int seekerId,
             String objective,
@@ -21,18 +27,18 @@ public class ResumesDAO implements ResumesDAOimpl {
 
         String sql = """
             MERGE INTO resumes r
-                                               USING dual
-                                               ON (r.seeker_id = ?)
-                                               WHEN MATCHED THEN
-                                                 UPDATE SET
-                                                   objective = ?,
-                                                   education = ?,
-                                                   experience = ?,
-                                                   skills = ?,
-                                                   projects = ?
-                                               WHEN NOT MATCHED THEN
-                                                 INSERT (seeker_id, objective, education, experience, skills, projects)
-                                                 VALUES (?, ?, ?, ?, ?, ?)
+            USING dual
+            ON (r.seeker_id = ?)
+            WHEN MATCHED THEN
+              UPDATE SET
+                objective = ?,
+                education = ?,
+                experience = ?,
+                skills = ?,
+                projects = ?
+            WHEN NOT MATCHED THEN
+              INSERT (seeker_id, objective, education, experience, skills, projects)
+              VALUES (?, ?, ?, ?, ?, ?)
         """;
 
         try (Connection conn = DBConnection.getConnection();
@@ -56,10 +62,22 @@ public class ResumesDAO implements ResumesDAOimpl {
             ps.setString(11, skills);
             ps.setString(12, projects);
 
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+
+            logger.info("Resume upsert completed for seekerId={}, rowsAffected={}",
+                    seekerId, rows);
+            System.out.println();
+            System.out.println("Resume upsert completed");
+
+        } catch (SQLException e) {
+            logger.error("Error upserting resume for seekerId={}", seekerId, e);
+            System.out.println();
+            System.out.println("Error upserting resume");
+            throw e;
         }
     }
 
+    @Override
     public Resume fetchResumeBySeekerId(int seekerId) throws SQLException {
 
         String sql = "SELECT * FROM resumes WHERE seeker_id = ?";
@@ -71,6 +89,8 @@ public class ResumesDAO implements ResumesDAOimpl {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                logger.info("Resume found for seekerId={}", seekerId);
+
                 return new Resume(
                         rs.getInt("resume_id"),
                         rs.getInt("seeker_id"),
@@ -82,14 +102,21 @@ public class ResumesDAO implements ResumesDAOimpl {
                         rs.getTimestamp("last_updated")
                 );
             }
+
+            logger.warn("No resume found for seekerId={}", seekerId);
+
+        } catch (SQLException e) {
+            logger.error("Error fetching resume for seekerId={}", seekerId, e);
+            throw e;
         }
+
         return null;
     }
 
+    @Override
     public List<Resume> fetchAllResumes() throws SQLException {
 
         List<Resume> list = new ArrayList<>();
-
         String sql = "SELECT resume_id, seeker_id, last_updated FROM resumes";
 
         try (Connection conn = DBConnection.getConnection();
@@ -104,7 +131,14 @@ public class ResumesDAO implements ResumesDAOimpl {
                         rs.getTimestamp("last_updated")
                 ));
             }
+
+            logger.info("Fetched {} resumes (summary view)", list.size());
+
+        } catch (SQLException e) {
+            logger.error("Error fetching all resumes", e);
+            throw e;
         }
+
         return list;
     }
 }

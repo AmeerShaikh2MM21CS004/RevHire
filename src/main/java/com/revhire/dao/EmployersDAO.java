@@ -7,8 +7,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class EmployersDAO implements EmployersDAOimpl {
 
+    private static final Logger logger =
+            LogManager.getLogger(EmployersDAO.class);
+
+    // ---------------- ADD EMPLOYER ----------------
     public void addEmployer(
             int userId,
             String companyName,
@@ -18,11 +25,13 @@ public class EmployersDAO implements EmployersDAOimpl {
             String website,
             String location) {
 
+        logger.info("Adding employer | userId={}, company={}", userId, companyName);
+
         String sql = """
-            INSERT INTO employers
-            (user_id, company_name, industry, company_size, description, website, location)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """;
+                INSERT INTO employers
+                (user_id, company_name, industry, company_size, description, website, location)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -36,13 +45,19 @@ public class EmployersDAO implements EmployersDAOimpl {
             ps.setString(7, location);
 
             ps.executeUpdate();
+            logger.info("Employer added successfully");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Error adding employer", e);
+            throw new RuntimeException("Failed to add employer", e);
         }
     }
 
-    public static Integer getEmployerIdByUserId(int userId) {
+    // ---------------- GET EMPLOYER ID BY USER ID ----------------
+    public Integer getEmployerIdByUserId(int userId) {
+
+        Logger staticLogger = LogManager.getLogger(EmployersDAO.class);
+        staticLogger.debug("Fetching employerId for userId={}", userId);
 
         String sql = "SELECT employer_id FROM employers WHERE user_id = ?";
 
@@ -53,15 +68,19 @@ public class EmployersDAO implements EmployersDAOimpl {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("employer_id");
+                Integer employerId = rs.getInt("employer_id");
+                staticLogger.info("EmployerId found: {}", employerId);
+                return employerId;
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            staticLogger.error("Error fetching employerId", e);
+            throw new RuntimeException("Failed to fetch employerId", e);
         }
         return null;
     }
 
+    // ---------------- UPDATE COMPANY PROFILE ----------------
     public int updateCompanyProfile(
             int employerId,
             String company,
@@ -71,10 +90,11 @@ public class EmployersDAO implements EmployersDAOimpl {
             String website,
             String location) {
 
+        logger.info("Updating company profile | employerId={}", employerId);
+
         StringBuilder sql = new StringBuilder("UPDATE employers SET ");
         List<Object> params = new ArrayList<>();
 
-        // ✅ FIXED: check company, not industry
         if (company != null && !company.isBlank()) {
             sql.append("company_name = ?, ");
             params.add(company);
@@ -106,11 +126,13 @@ public class EmployersDAO implements EmployersDAOimpl {
         }
 
         if (params.isEmpty()) {
+            logger.warn("No fields provided for update | employerId={}", employerId);
+            System.out.println();
+            System.out.println("No fields provided for update!!");
             return 0;
         }
 
-        // remove last comma
-        sql.setLength(sql.length() - 2);
+        sql.setLength(sql.length() - 2); // remove last comma
         sql.append(" WHERE employer_id = ?");
         params.add(employerId);
 
@@ -121,10 +143,15 @@ public class EmployersDAO implements EmployersDAOimpl {
                 ps.setObject(i + 1, params.get(i));
             }
 
-            return ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            logger.info("Company profile updated | rowsAffected={}", rows);
+            System.out.println();
+            System.out.println("Company profile updated!!");
+            return rows;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Error updating company profile", e);
+            throw new RuntimeException("Failed to update company profile", e);
         }
     }
 }
