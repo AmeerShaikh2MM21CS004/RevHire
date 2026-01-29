@@ -12,7 +12,17 @@ public class ResumeService implements ResumeServiceimpl {
 
     private static final Logger logger = LogManager.getLogger(ResumeService.class);
 
-    private final ResumesDAO resumesDAO = new ResumesDAO();
+    private final ResumesDAO resumesDAO;
+
+    // Default constructor
+    public ResumeService() {
+        this.resumesDAO = new ResumesDAO();
+    }
+
+    // Constructor for unit testing
+    public ResumeService(ResumesDAO resumesDAO) {
+        this.resumesDAO = resumesDAO;
+    }
 
     // ---------------- SAVE OR UPDATE RESUME ----------------
     @Override

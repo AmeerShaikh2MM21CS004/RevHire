@@ -13,7 +13,17 @@ public class ApplicationService implements ApplicationServiceimpl {
     private static final Logger logger =
             LogManager.getLogger(ApplicationService.class);
 
-    private final ApplicationsDAO applicationsDAO = new ApplicationsDAO();
+    private final ApplicationsDAO applicationsDAO;
+
+    // Default constructor
+    public ApplicationService() {
+        this.applicationsDAO = new ApplicationsDAO();
+    }
+
+    // Constructor for testing (dependency injection)
+    public ApplicationService(ApplicationsDAO applicationsDAO) {
+        this.applicationsDAO = applicationsDAO;
+    }
 
     @Override
     public void applyForJob(int jobId, int seekerId) {

@@ -12,7 +12,17 @@ public class JobService extends JobSeekerService {
     private static final Logger logger =
             LogManager.getLogger(JobService.class);
 
-    private final JobsDAO jobsDAO = new JobsDAO();
+    private final JobsDAO jobsDAO;
+
+    // Default constructor
+    public JobService() {
+        this.jobsDAO = new JobsDAO();
+    }
+
+    // Constructor for unit testing
+    public JobService(JobsDAO jobsDAO) {
+        this.jobsDAO = jobsDAO;
+    }
 
     // ---------------- ADD JOB ----------------
     public void addJob(

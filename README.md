@@ -149,8 +149,46 @@ RevHire
 │   │   │       │   ├── impl
 │   │   │       │   │   ├── ApplicationServiceImpl.java
 │   │   │       │   │   ├── EmployersServiceImpl.java
-│   │   │       │   │   ├── JobServi
-
+│   │   │       │   │   ├── JobSeekersImpl.java
+│   │   │       │   │   ├── JobServiceImpl.java
+│   │   │       │   │   ├── NotificationsServiceImpl.java
+│   │   │       │   │   ├── ResumeServiceImpl.java
+│   │   │       │   │   ├── UserServiceImpl.java
+│   │   │       │   ├── ApplicationsService.java
+│   │   │       │   ├── EmployersService.java
+│   │   │       │   ├── JobSeekersService.java
+│   │   │       │   ├── JobService.java
+│   │   │       │   ├── NotificationsService.java
+│   │   │       │   ├── ResumeService.java
+│   │   │       │   └── UserService.java
+│   │   │       │
+│   │   │       └── util
+│   │   │           ├── DBConnection.java
+│   │   │           ├── HashUtil.java
+│   │   │           └── ProfileUtil.java
+│   │   └── resource
+│   │         └── log4j2.xml
+│   └── test
+│        └── java
+│            └── com.revhare
+│                ├── model
+│                │   ├── Application.java
+│                │   ├── Employer.java
+│                │   ├── Job.java
+│                │   ├── JobSeeker.java
+│                │   ├── Notification.java
+│                │   ├── Resume.java
+│                │   └── User.java
+│                │
+│                └── service
+│                    ├── ApplicationsTest.java
+│                    ├── EmployersTest.java
+│                    ├── JobSeekersTest.java
+│                    ├── JobTest.java
+│                    ├── NotificationsTest.java
+│                    ├── ResumeTest.java
+│                    └── UserTest.java
+└──pom.xml
 
 ---
 

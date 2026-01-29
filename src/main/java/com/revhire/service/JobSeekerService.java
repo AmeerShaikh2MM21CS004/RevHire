@@ -13,7 +13,17 @@ public class JobSeekerService implements JobSeekerServiceimpl {
     private static final Logger logger =
             LogManager.getLogger(JobSeekerService.class);
 
-    private final JobSeekersDAO jobSeekerDAO = new JobSeekersDAO();
+    private final JobSeekersDAO jobSeekerDAO;
+
+    // Default constructor
+    public JobSeekerService() {
+        this.jobSeekerDAO = new JobSeekersDAO();
+    }
+
+    // Constructor for unit testing
+    public JobSeekerService(JobSeekersDAO jobSeekerDAO) {
+        this.jobSeekerDAO = jobSeekerDAO;
+    }
 
     @Override
     public void createProfile(

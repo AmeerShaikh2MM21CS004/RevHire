@@ -16,7 +16,17 @@ public class NotificationsService implements NotificationsServiceimpl {
     private static final Logger logger =
             LogManager.getLogger(NotificationsService.class);
 
-    private final NotificationsDAO notificationsDAO = new NotificationsDAO();
+    private final NotificationsDAO notificationsDAO;
+
+    // Default constructor
+    public NotificationsService() {
+        this.notificationsDAO = new NotificationsDAO();
+    }
+
+    // Constructor for unit testing
+    public NotificationsService(NotificationsDAO notificationsDAO) {
+        this.notificationsDAO = notificationsDAO;
+    }
 
     // ---------------- ADD NOTIFICATION ----------------
     @Override

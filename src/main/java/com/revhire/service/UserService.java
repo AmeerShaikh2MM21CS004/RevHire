@@ -14,7 +14,17 @@ import java.sql.SQLException;
 public class UserService implements UserServiceimpl {
 
     private static final Logger logger = LogManager.getLogger(UserService.class);
-    private final UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO;
+
+    // Default constructor
+    public UserService() {
+        this.userDAO = new UserDAO();
+    }
+
+    // Constructor for unit testing
+    public UserService(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     // ---------- REGISTER ----------
     @Override

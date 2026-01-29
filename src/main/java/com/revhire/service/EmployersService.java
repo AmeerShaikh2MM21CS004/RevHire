@@ -2,7 +2,6 @@ package com.revhire.service;
 
 import com.revhire.dao.EmployersDAO;
 import com.revhire.service.impl.EmployersServiceimpl;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +10,17 @@ public class EmployersService implements EmployersServiceimpl {
     private static final Logger logger =
             LogManager.getLogger(EmployersService.class);
 
-    private final EmployersDAO employersDAO = new EmployersDAO();
+    private final EmployersDAO employersDAO;
+
+    // Default constructor
+    public EmployersService() {
+        this.employersDAO = new EmployersDAO();
+    }
+
+    // Constructor for unit testing
+    public EmployersService(EmployersDAO employersDAO) {
+        this.employersDAO = employersDAO;
+    }
 
     @Override
     public int getEmployerIdByUserId(int userId) {
