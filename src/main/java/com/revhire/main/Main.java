@@ -2,21 +2,19 @@ package com.revhire.main;
 
 import com.revhire.model.Application;
 import com.revhire.model.Notification;
-import com.revhire.service.*;
 import com.revhire.model.User;
+import com.revhire.service.impl.*;
 import com.revhire.util.HashUtil;
 import com.revhire.util.ProfileUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.sql.*;
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-    private static final Logger logger = LogManager.getLogger(Main.class);
+import com.revhire.util.ValidationUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+public class Main {
     static final String[] SECURITY_QUESTIONS = {
             "What is your favorite color?",
             "What is your birth city?",
@@ -24,19 +22,19 @@ public class Main {
             "What was the name of your first pet?",
             "What is your favorite movie?"
     };
-
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         logger.info("RevHire Job Portal Application Started");
 
         try (Scanner sc = new Scanner(System.in)) {
-            ApplicationService applicationService = new ApplicationService();
-            EmployersService employerService = new EmployersService();
-            JobService jobService = new JobService();
-            JobSeekerService jobSeekerService = new JobSeekerService();
-            NotificationsService notificationService = new NotificationsService();
-            UserService userService = new UserService();
-            ResumeService resumeService = new ResumeService();
+            ApplicationServiceImpl applicationServiceImpl = new ApplicationServiceImpl();
+            EmployersServiceImpl employerService = new EmployersServiceImpl();
+            JobServiceImpl jobService = new JobServiceImpl();
+            JobSeekerServiceImpl jobSeekerServiceImpl = new JobSeekerServiceImpl();
+            NotificationsServiceImpl notificationService = new NotificationsServiceImpl();
+            UserServiceImpl userServiceImpl = new UserServiceImpl();
+            ResumeServiceImpl resumeServiceImpl = new ResumeServiceImpl();
             while (true) {
                 System.out.println("\n========= RevHire Job Portal =========");
                 System.out.println("1. Login");
@@ -61,10 +59,16 @@ public class Main {
                         System.out.print("Email: ");
                         String email = sc.nextLine();
 
+                        if (!ValidationUtil.isValidEmail(email)) {
+                            System.out.println("❌ Invalid email format.");
+                            logger.warn("Invalid email format entered: {}", email);
+                            continue;
+                        }
+
                         System.out.print("Password: ");
                         String password = sc.nextLine();
 
-                        User user = userService.login(email, password);
+                        User user = userServiceImpl.login(email, password);
                         if (user == null) {
                             System.out.println("❌ Invalid credentials.");
                             logger.warn("Failed login attempt | email={}", email);
@@ -75,29 +79,48 @@ public class Main {
                         logger.info("User logged in | userId={}, role={}", userId, user.getRole());
 
                         if (user.getRole().equals("JOB_SEEKER")) {
-                            int seekerId = jobSeekerService.getSeekerIdByUserId(userId);
+                            int seekerId = jobSeekerServiceImpl.getSeekerIdByUserId(userId);
                             logger.info("Redirecting to Job Seeker Dashboard | userId={}, seekerId={}", userId, seekerId);
                             jobSeekerMenu(sc, userId, seekerId,
-                                    jobService, applicationService,
-                                    notificationService, userService,
-                                    jobSeekerService, resumeService);
+                                    jobService, applicationServiceImpl,
+                                    notificationService, userServiceImpl,
+                                    jobSeekerServiceImpl, resumeServiceImpl);
                         } else {
                             int employerId = employerService.getEmployerIdByUserId(userId);
                             logger.info("Redirecting to Employer Dashboard | userId={}, employerId={}", userId, employerId);
                             employerMenu(sc, userId, employerId,
-                                    jobService, applicationService,
+                                    jobService, applicationServiceImpl,
                                     employerService, notificationService,
-                                    userService);
+                                    userServiceImpl);
                         }
                     }
 
                     // ================= REGISTER =================
                     case 2 -> {
-                        System.out.print("Email: ");
-                        String email = sc.nextLine();
+                        String email;
+                        do {
+                            System.out.print("Email: ");
+                            email = sc.nextLine();
+                            if (!ValidationUtil.isValidEmail(email)) {
+                                System.out.println("❌ Enter a valid email (user@example.com)");
+                            }
+                        } while (!ValidationUtil.isValidEmail(email));
 
-                        System.out.print("Password: ");
-                        String password = sc.nextLine();
+                        String password;
+                        do {
+                            System.out.print("Password: ");
+                            password = sc.nextLine();
+                            if (!ValidationUtil.isValidPassword(password)) {
+                                System.out.println("""
+                                                ❌ Password must have:
+                                                - 8+ characters
+                                                - Uppercase
+                                                - Lowercase
+                                                - Digit
+                                                - Special character (@$!%*?&)
+                                                """);
+                            }
+                        } while (!ValidationUtil.isValidPassword(password));
 
                         System.out.print("Role (JOB_SEEKER / EMPLOYER): ");
                         String role = sc.nextLine().toUpperCase();
@@ -111,7 +134,7 @@ public class Main {
                         System.out.print("Answer: ");
                         String ans = sc.nextLine();
 
-                        int userId = userService.addUserAndReturnId(
+                        int userId = userServiceImpl.addUserAndReturnId(
                                 email,
                                 HashUtil.hash(password),
                                 role,
@@ -119,8 +142,8 @@ public class Main {
                                 HashUtil.hash(ans)
                         );
 
-                        if (role.equals("JOB_SEEKER")) {
-                            jobSeekerService.createJobSeeker(userId);
+                        if ("JOB_SEEKER".equals(role)) {
+                            jobSeekerServiceImpl.createJobSeeker(userId);
                         } else {
                             employerService.createEmployer(userId);
                         }
@@ -134,7 +157,12 @@ public class Main {
                         System.out.print("Email: ");
                         String email = sc.nextLine();
 
-                        String question = userService.getSecurityQuestionByEmail(email);
+                        if (!ValidationUtil.isValidEmail(email)) {
+                            System.out.println("❌ Invalid email format.");
+                            continue;
+                        }
+
+                        String question = userServiceImpl.getSecurityQuestionByEmail(email);
                         if (question == null) {
                             System.out.println("❌ Email not found.");
                             logger.warn("Forgot password attempt failed | email={}", email);
@@ -145,15 +173,37 @@ public class Main {
                         System.out.print("Answer: ");
                         String ans = sc.nextLine();
 
-                        if (userService.verifySecurityAnswer(email, ans)) {
-                            System.out.print("New Password: ");
-                            userService.resetPassword(email, ans, sc.nextLine());
+                        if (userServiceImpl.verifySecurityAnswer(email, ans)) {
+
+                            String newPwd;
+                            do {
+                                System.out.print("New Password: ");
+                                newPwd = sc.nextLine();
+
+                                if (!ValidationUtil.isValidPassword(newPwd)) {
+                                    System.out.println("""
+                                                            ❌ Weak password.
+                                                            Password must contain:
+                                                            - At least 8 characters
+                                                            - One uppercase letter
+                                                            - One lowercase letter
+                                                            - One digit
+                                                            - One special character (@$!%*?&)
+                                                            """);
+                                    logger.warn("Weak password entered during reset | email={}", email);
+                                }
+
+                            } while (!ValidationUtil.isValidPassword(newPwd));
+
+                            userServiceImpl.resetPassword(email, ans, newPwd);
                             System.out.println("✅ Password reset successful.");
                             logger.info("Password reset successful | email={}", email);
+
                         } else {
                             System.out.println("❌ Incorrect answer.");
                             logger.warn("Password reset failed due to wrong answer | email={}", email);
                         }
+
                     }
 
                     case 4 -> {
@@ -180,12 +230,12 @@ public class Main {
             Scanner sc,
             int userId,
             int seekerId,
-            JobService jobService,
-            ApplicationService applicationService,
-            NotificationsService notificationService,
-            UserService userService,
-            JobSeekerService jobSeekerService,
-            ResumeService resumeService
+            JobServiceImpl jobService,
+            ApplicationServiceImpl applicationServiceImpl,
+            NotificationsServiceImpl notificationService,
+            UserServiceImpl userServiceImpl,
+            JobSeekerServiceImpl jobSeekerServiceImpl,
+            ResumeServiceImpl resumeServiceImpl
     ) {
         logger.info("Job Seeker Menu started | userId={}", userId);
 
@@ -254,7 +304,7 @@ public class Main {
                     String projects = sc.nextLine();
                     System.out.println();
 
-                    resumeService.saveOrUpdateResume(seekerId, obj, edu, exp, skills, projects);
+                    resumeServiceImpl.saveOrUpdateResume(seekerId, obj, edu, exp, skills, projects);
                     logger.info("Resume updated | seekerId={}", seekerId);
                 }
 
@@ -279,7 +329,7 @@ public class Main {
                         }
                     }
 
-                    jobSeekerService.updateJobSeekerProfile(seekerId, name, phone, location, totalExp);
+                    jobSeekerServiceImpl.updateJobSeekerProfile(seekerId, name, phone, location, totalExp);
                     logger.info("Profile updated | seekerId={}", seekerId);
                 }
 
@@ -318,7 +368,7 @@ public class Main {
                     System.out.print("Job ID: ");
                     int jobId = sc.nextInt();
                     sc.nextLine();
-                    applicationService.applyForJob(jobId, seekerId);
+                    applicationServiceImpl.applyForJob(jobId, seekerId);
 
                     int employerUserId = jobService.getEmployerUserIdByJob(jobId);
                     if (employerUserId != -1) {
@@ -332,7 +382,7 @@ public class Main {
                 }
 
                 case 7 -> {
-                    List<String> applications = applicationService.viewMyApplications(seekerId);
+                    List<String> applications = applicationServiceImpl.viewMyApplications(seekerId);
                     logger.info("Viewed applications | seekerId={}, count={}", seekerId, applications.size());
                     applications.forEach(System.out::println);
                 }
@@ -345,23 +395,68 @@ public class Main {
                     String reason = sc.nextLine();
                     if (reason.isBlank()) reason = "Withdrawn by candidate";
 
-                    applicationService.withdrawApplication(applicationId, "WITHDRAWN", reason);
+                    applicationServiceImpl.withdrawApplication(applicationId, "WITHDRAWN", reason);
                     logger.info("Application withdrawn | applicationId={}, seekerId={}", applicationId, seekerId);
                 }
 
                 case 9 -> {
-                    System.out.print("Current Password: ");
-                    String current = sc.nextLine();
-                    System.out.print("New Password: ");
-                    String newPwd = sc.nextLine();
+                    try {
+                        System.out.print("Enter Current Password: ");
+                        String currentPassword = sc.nextLine().trim();
 
-                    boolean changed = userService.changePassword(userId, current, newPwd);
-                    if (changed) {
-                        logger.info("Password changed successfully | userId={}", userId);
-                        System.out.println("\n✅ Password changed successfully.\n");
-                    } else {
-                        logger.warn("Password change failed (incorrect current) | userId={}", userId);
-                        System.out.println("\n❌ Current password incorrect.\n");
+                        if (currentPassword.isEmpty()) {
+                            logger.warn("Password change failed due to empty current password | userId={}", userId);
+                            System.out.println("\n❌ Current password cannot be empty.\n");
+                            break;
+                        }
+
+                        String newPassword;
+                        while (true) {
+                            System.out.print("Enter New Password: ");
+                            newPassword = sc.nextLine().trim();
+
+                            if (newPassword.isEmpty()) {
+                                System.out.println("\n❌ New password cannot be empty.\n");
+                                continue;
+                            }
+
+                            if (currentPassword.equals(newPassword)) {
+                                logger.warn("Password change failed (same password entered) | userId={}", userId);
+                                System.out.println("\n❌ New password cannot be the same as current password.\n");
+                                continue;
+                            }
+
+                            if (!ValidationUtil.isValidPassword(newPassword)) {
+                                logger.warn("Weak new password entered during change | userId={}", userId);
+                                System.out.println("""
+                                                    ❌ Weak password.
+                                                    Password must contain:
+                                                    - At least 8 characters
+                                                    - One uppercase letter
+                                                    - One lowercase letter
+                                                    - One digit
+                                                    - One special character (@$!%*?&)
+                                                    """);
+                                continue;
+                            }
+
+                            // All validations passed
+                            break;
+                        }
+
+                        boolean isChanged = userServiceImpl.changePassword(userId, currentPassword, newPassword);
+
+                        if (isChanged) {
+                            logger.info("Password changed successfully | userId={}", userId);
+                            System.out.println("\n✅ Password changed successfully.\n");
+                        } else {
+                            logger.warn("Password change failed (incorrect current password) | userId={}", userId);
+                            System.out.println("\n❌ Current password is incorrect.\n");
+                        }
+
+                    } catch (Exception e) {
+                        logger.error("Exception while changing password | userId={}", userId, e);
+                        System.out.println("\n⚠️ Something went wrong while changing the password. Please try again later.\n");
                     }
                 }
 
@@ -379,16 +474,16 @@ public class Main {
         }
     }
 
-// ==============EMPLOYER MENU==============
+    // ==============EMPLOYER MENU==============
     static void employerMenu(
             Scanner sc,
             int userId,
             int employerId,
-            JobService jobService,
-            ApplicationService applicationService,
-            EmployersService employerService,
-            NotificationsService notificationService,
-            UserService userService
+            JobServiceImpl jobService,
+            ApplicationServiceImpl applicationServiceImpl,
+            EmployersServiceImpl employerService,
+            NotificationsServiceImpl notificationService,
+            UserServiceImpl userServiceImpl
     ) {
         logger.info("Employer Menu started | userId={}, employerId={}", userId, employerId);
 
@@ -541,7 +636,7 @@ public class Main {
                     System.out.print("Job ID: ");
                     int jobId = sc.nextInt();
                     sc.nextLine();
-                    List<Application> applicants = applicationService.getApplicantsForJob(jobId);
+                    List<Application> applicants = applicationServiceImpl.getApplicantsForJob(jobId);
                     logger.info("Viewing applicants | employerId={}, jobId={}, count={}", employerId, jobId, applicants.size());
                     applicants.forEach(System.out::println);
                     System.out.println();
@@ -553,10 +648,10 @@ public class Main {
                     sc.nextLine();
                     System.out.print("Status (SHORTLISTED / REJECTED): ");
                     String status = sc.nextLine().toUpperCase();
-                    applicationService.updateApplicationStatus(appId, status);
+                    applicationServiceImpl.updateApplicationStatus(appId, status);
 
-                    int seekerUserId = applicationService.getSeekerUserIdByApplicationId(appId);
-                    int jobId = applicationService.getJobIdByApplicationId(appId);
+                    int seekerUserId = applicationServiceImpl.getSeekerUserIdByApplicationId(appId);
+                    int jobId = applicationServiceImpl.getJobIdByApplicationId(appId);
 
                     if (seekerUserId != -1) {
                         notificationService.addNotification(
@@ -595,20 +690,42 @@ public class Main {
                 }
 
                 case 10 -> {
-                    System.out.print("Current Password: ");
-                    String current = sc.nextLine();
-                    System.out.print("New Password: ");
-                    String newPwd = sc.nextLine();
+                    try {
+                        System.out.print("Enter Current Password: ");
+                        String currentPassword = sc.nextLine().trim();
 
-                    boolean changed = userService.changePassword(userId, current, newPwd);
-                    if (changed) {
-                        logger.info("Password changed successfully | userId={}", userId);
-                        System.out.println("\n✅ Password changed successfully.\n");
-                    } else {
-                        logger.warn("Password change failed (incorrect current) | userId={}", userId);
-                        System.out.println("\n❌ Current password incorrect.\n");
+                        System.out.print("Enter New Password: ");
+                        String newPassword = sc.nextLine().trim();
+
+                        // Basic validation
+                        if (currentPassword.isEmpty() || newPassword.isEmpty()) {
+                            logger.warn("Password change failed due to empty input | userId={}", userId);
+                            System.out.println("\n❌ Password fields cannot be empty.\n");
+                            break;
+                        }
+
+                        if (currentPassword.equals(newPassword)) {
+                            logger.warn("Password change failed (same password entered) | userId={}", userId);
+                            System.out.println("\n❌ New password cannot be the same as current password.\n");
+                            break;
+                        }
+
+                        boolean isChanged = userServiceImpl.changePassword(userId, currentPassword, newPassword);
+
+                        if (isChanged) {
+                            logger.info("Password changed successfully | userId={}", userId);
+                            System.out.println("\n✅ Password changed successfully.\n");
+                        } else {
+                            logger.warn("Password change failed (incorrect current password) | userId={}", userId);
+                            System.out.println("\n❌ Current password is incorrect.\n");
+                        }
+
+                    } catch (Exception e) {
+                        logger.error("Exception while changing password | userId={}", userId, e);
+                        System.out.println("\n⚠️ Something went wrong while changing the password. Please try again later.\n");
                     }
                 }
+
 
                 case 11 -> {
                     logger.info("User logged out | userId={}", userId);

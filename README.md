@@ -112,7 +112,7 @@ Database (JDBC)
 ---
 
 ## 📂 Project Structure
-
+``````
 RevHire
 │
 ├── src
@@ -189,7 +189,7 @@ RevHire
 │                    ├── ResumeTest.java
 │                    └── UserTest.java
 └──pom.xml
-
+```
 ---
 
 ## 🗃️ ER Diagram (Database Design)

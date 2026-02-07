@@ -1,7 +1,8 @@
 package com.revhire.service;
 
-import com.revhire.dao.ApplicationsDAO;
+import com.revhire.dao.impl.ApplicationsDAOImpl;
 import com.revhire.model.Application;
+import com.revhire.service.impl.ApplicationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,15 +13,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ApplicationServiceTest {
+class ApplicationServiceImplTest {
 
-    private ApplicationsDAO applicationsDAO;
-    private ApplicationService applicationService;
+    private ApplicationsDAOImpl applicationsDAOImpl;
+    private ApplicationServiceImpl applicationServiceImpl;
 
     @BeforeEach
     void setup() {
-        applicationsDAO = Mockito.mock(ApplicationsDAO.class);
-        applicationService = new ApplicationService(applicationsDAO);
+        applicationsDAOImpl = Mockito.mock(ApplicationsDAOImpl.class);
+        applicationServiceImpl = new ApplicationServiceImpl(applicationsDAOImpl);
     }
 
     // ---------------- applyForJob ----------------
@@ -31,14 +32,14 @@ class ApplicationServiceTest {
         int jobId = 101;
         int seekerId = 201;
 
-        when(applicationsDAO.hasAlreadyApplied(jobId, seekerId))
+        when(applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId))
                 .thenReturn(false);
 
         // Act
-        applicationService.applyForJob(jobId, seekerId);
+        applicationServiceImpl.applyForJob(jobId, seekerId);
 
         // Assert
-        verify(applicationsDAO).applyJob(jobId, seekerId);
+        verify(applicationsDAOImpl).applyJob(jobId, seekerId);
     }
 
     @Test
@@ -47,14 +48,14 @@ class ApplicationServiceTest {
         int jobId = 101;
         int seekerId = 201;
 
-        when(applicationsDAO.hasAlreadyApplied(jobId, seekerId))
+        when(applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId))
                 .thenReturn(true);
 
         // Act
-        applicationService.applyForJob(jobId, seekerId);
+        applicationServiceImpl.applyForJob(jobId, seekerId);
 
         // Assert
-        verify(applicationsDAO, never()).applyJob(anyInt(), anyInt());
+        verify(applicationsDAOImpl, never()).applyJob(anyInt(), anyInt());
     }
 
     // ---------------- withdrawApplication ----------------
@@ -62,10 +63,10 @@ class ApplicationServiceTest {
     @Test
     void withdrawApplication_shouldUpdateStatus() {
         // Act
-        applicationService.withdrawApplication(1, "WITHDRAWN", "Not interested");
+        applicationServiceImpl.withdrawApplication(1, "WITHDRAWN", "Not interested");
 
         // Assert
-        verify(applicationsDAO)
+        verify(applicationsDAOImpl)
                 .updateStatus(1, "WITHDRAWN", "Not interested");
     }
 
@@ -77,11 +78,11 @@ class ApplicationServiceTest {
         int seekerId = 201;
         List<String> applications = List.of("Job A", "Job B");
 
-        when(applicationsDAO.getApplicationsBySeeker(seekerId))
+        when(applicationsDAOImpl.getApplicationsBySeeker(seekerId))
                 .thenReturn(applications);
 
         // Act
-        List<String> result = applicationService.viewMyApplications(seekerId);
+        List<String> result = applicationServiceImpl.viewMyApplications(seekerId);
 
         // Assert
         assertEquals(2, result.size());
@@ -96,11 +97,11 @@ class ApplicationServiceTest {
         int jobId = 101;
         List<Application> list = List.of(mock(Application.class));
 
-        when(applicationsDAO.fetchApplicationsByJobId(jobId))
+        when(applicationsDAOImpl.fetchApplicationsByJobId(jobId))
                 .thenReturn(list);
 
         // Act
-        List<Application> result = applicationService.getApplicantsForJob(jobId);
+        List<Application> result = applicationServiceImpl.getApplicantsForJob(jobId);
 
         // Assert
         assertEquals(1, result.size());
@@ -109,11 +110,11 @@ class ApplicationServiceTest {
     @Test
     void getApplicantsForJob_shouldReturnEmptyListOnException() throws Exception {
         // Arrange
-        when(applicationsDAO.fetchApplicationsByJobId(anyInt()))
+        when(applicationsDAOImpl.fetchApplicationsByJobId(anyInt()))
                 .thenThrow(new RuntimeException("DB error"));
 
         // Act
-        List<Application> result = applicationService.getApplicantsForJob(101);
+        List<Application> result = applicationServiceImpl.getApplicantsForJob(101);
 
         // Assert
         assertTrue(result.isEmpty());
@@ -124,10 +125,10 @@ class ApplicationServiceTest {
     @Test
     void updateApplicationStatus_shouldUpdateStatus() throws SQLException {
         // Act
-        applicationService.updateApplicationStatus(1, "APPROVED");
+        applicationServiceImpl.updateApplicationStatus(1, "APPROVED");
 
         // Assert
-        verify(applicationsDAO)
+        verify(applicationsDAOImpl)
                 .updateStatusByApplicationId(1, "APPROVED");
     }
 
@@ -135,34 +136,34 @@ class ApplicationServiceTest {
     void updateApplicationStatus_shouldHandleExceptionGracefully() throws SQLException {
         // Arrange
         doThrow(new RuntimeException("DB error"))
-                .when(applicationsDAO)
+                .when(applicationsDAOImpl)
                 .updateStatusByApplicationId(anyInt(), anyString());
 
         // Act (should NOT throw)
         assertDoesNotThrow(() ->
-                applicationService.updateApplicationStatus(1, "REJECTED"));
+                applicationServiceImpl.updateApplicationStatus(1, "REJECTED"));
     }
 
     // ---------------- getSeekerUserIdByApplicationId ----------------
 
     @Test
     void getSeekerUserIdByApplicationId_shouldReturnUserId() throws SQLException {
-        when(applicationsDAO.fetchSeekerUserIdByApplicationId(1))
+        when(applicationsDAOImpl.fetchSeekerUserIdByApplicationId(1))
                 .thenReturn(5001);
 
         int result =
-                applicationService.getSeekerUserIdByApplicationId(1);
+                applicationServiceImpl.getSeekerUserIdByApplicationId(1);
 
         assertEquals(5001, result);
     }
 
     @Test
     void getSeekerUserIdByApplicationId_shouldReturnMinusOneOnException() throws SQLException {
-        when(applicationsDAO.fetchSeekerUserIdByApplicationId(anyInt()))
+        when(applicationsDAOImpl.fetchSeekerUserIdByApplicationId(anyInt()))
                 .thenThrow(new RuntimeException());
 
         int result =
-                applicationService.getSeekerUserIdByApplicationId(1);
+                applicationServiceImpl.getSeekerUserIdByApplicationId(1);
 
         assertEquals(-1, result);
     }
@@ -171,22 +172,22 @@ class ApplicationServiceTest {
 
     @Test
     void getJobIdByApplicationId_shouldReturnJobId() throws SQLException {
-        when(applicationsDAO.fetchJobIdByApplicationId(1))
+        when(applicationsDAOImpl.fetchJobIdByApplicationId(1))
                 .thenReturn(3001);
 
         int result =
-                applicationService.getJobIdByApplicationId(1);
+                applicationServiceImpl.getJobIdByApplicationId(1);
 
         assertEquals(3001, result);
     }
 
     @Test
     void getJobIdByApplicationId_shouldReturnMinusOneOnException() throws SQLException {
-        when(applicationsDAO.fetchJobIdByApplicationId(anyInt()))
+        when(applicationsDAOImpl.fetchJobIdByApplicationId(anyInt()))
                 .thenThrow(new RuntimeException());
 
         int result =
-                applicationService.getJobIdByApplicationId(1);
+                applicationServiceImpl.getJobIdByApplicationId(1);
 
         assertEquals(-1, result);
     }

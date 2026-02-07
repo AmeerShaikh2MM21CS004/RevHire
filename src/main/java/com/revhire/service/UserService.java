@@ -1,173 +1,29 @@
 package com.revhire.service;
 
-import com.revhire.dao.UserDAO;
 import com.revhire.model.User;
-import com.revhire.service.impl.UserServiceimpl;
-import com.revhire.util.HashUtil;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class UserService implements UserServiceimpl {
-
-    private static final Logger logger = LogManager.getLogger(UserService.class);
-    private final UserDAO userDAO;
-
-    // Default constructor
-    public UserService() {
-        this.userDAO = new UserDAO();
-    }
-
-    // Constructor for unit testing
-    public UserService(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
+public interface UserService {
 
     // ---------- REGISTER ----------
-    @Override
-    public int addUserAndReturnId(
+    int addUserAndReturnId(
             String email,
             String passwordHash,
             String role,
             String securityQuestion,
-            String securityAnswerHash) {
-
-        logger.info("Registering new user | email={}, role={}", email, role);
-
-        int userId = userDAO.insertUserAndReturnId(
-                email, passwordHash, role, securityQuestion, securityAnswerHash
-        );
-        logger.info("User registered successfully | userId={}", userId);
-        return userId;
-
-    }
+            String securityAnswerHash
+    );
 
     // ---------- LOGIN ----------
-    @Override
-    public User login(String email, String password) {
-        logger.info("User login attempt | email={}", email);
-
-        try (ResultSet rs = userDAO.fetchLoginData(email)) {
-
-            if (!rs.next()) {
-                logger.warn("Login failed: no user found | email={}", email);
-                return null;
-            }
-
-            String dbHash = rs.getString("password_hash");
-            if (!dbHash.equals(HashUtil.hash(password))) {
-                logger.warn("Login failed: invalid password | email={}", email);
-                return null;
-            }
-
-            User user = new User(rs.getInt("user_id"), email, rs.getString("role"));
-            logger.info("Login successful | userId={}", user.getUserId());
-            return user;
-
-        } catch (SQLException e) {
-            logger.error("Login failed due to SQL error | email={}", email, e);
-            return null;
-        }
-    }
+    User login(String email, String password);
 
     // ---------- CHANGE PASSWORD ----------
-    @Override
-    public boolean changePassword(int userId, String currentPwd, String newPwd) {
-        logger.info("Change password request | userId={}", userId);
-
-        try (ResultSet rs = userDAO.fetchLoginDataById(userId)) {
-
-            if (!rs.next()) {
-                logger.warn("Change password failed: user not found | userId={}", userId);
-                return false;
-            }
-
-            if (!rs.getString("password_hash").equals(HashUtil.hash(currentPwd))) {
-                logger.warn("Change password failed: incorrect current password | userId={}", userId);
-                return false;
-            }
-
-            boolean success = userDAO.updatePasswordByUserId(userId, HashUtil.hash(newPwd));
-            if (success) {
-                logger.info("Password changed successfully | userId={}", userId);
-            } else {
-                logger.error("Password change failed | userId={}", userId);
-            }
-            return success;
-
-        } catch (SQLException e) {
-            logger.error("Change password failed due to SQL error | userId={}", userId, e);
-            return false;
-        }
-    }
+    boolean changePassword(int userId, String currentPwd, String newPwd);
 
     // ---------- FORGOT PASSWORD ----------
-    @Override
-    public String getSecurityQuestionByEmail(String email) {
-        logger.info("Fetching security question | email={}", email);
+    String getSecurityQuestionByEmail(String email);
 
-        try {
-            String question = userDAO.fetchSecurityQuestion(email);
-            if (question != null) {
-                logger.info("Security question fetched successfully | email={}", email);
-            } else {
-                logger.warn("No security question found | email={}", email);
-            }
-            return question;
+    void resetPassword(String email, String answer, String newPassword);
 
-        } catch (SQLException e) {
-            logger.error("Failed to fetch security question | email={}", email, e);
-            return null;
-        }
-    }
+    boolean verifySecurityAnswer(String email, String answer);
 
-    @Override
-    public void resetPassword(String email, String answer, String newPassword) {
-        logger.info("Reset password request | email={}", email);
-
-        try {
-            String dbHash = userDAO.fetchSecurityAnswerHash(email);
-            if (dbHash == null) {
-                logger.warn("Reset password failed: no security answer found | email={}", email);
-                return;
-            }
-
-            if (!dbHash.equals(HashUtil.hash(answer.trim().toLowerCase()))) {
-                logger.warn("Reset password failed: incorrect security answer | email={}", email);
-                return;
-            }
-
-            userDAO.updatePasswordByEmail(email, HashUtil.hash(newPassword));
-            logger.info("Password reset successfully | email={}", email);
-
-        } catch (SQLException e) {
-            logger.error("Failed to reset password | email={}", email, e);
-            throw new RuntimeException("Password reset failed for email=" + email, e);
-        }
-    }
-
-    // ---------- VERIFY SECURITY ANSWER ----------
-    @Override
-    public boolean verifySecurityAnswer(String email, String answer) {
-        logger.info("Verifying security answer | email={}", email);
-
-        try {
-            String dbHash = userDAO.fetchSecurityAnswerHash(email);
-            if (dbHash == null) {
-                logger.warn("Verification failed: no security answer found | email={}", email);
-                return false;
-            }
-
-            boolean isCorrect = dbHash.equals(HashUtil.hash(answer.trim().toLowerCase()));
-            logger.info("Security answer verification result | email={}, result={}", email, isCorrect);
-            return isCorrect;
-
-        } catch (SQLException e) {
-            logger.error("Security answer verification failed | email={}", email, e);
-            return false;
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package com.revhire.service;
 
-import com.revhire.dao.EmployersDAO;
+import com.revhire.dao.impl.EmployersDAOImpl;
+import com.revhire.service.impl.EmployersServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,15 +9,15 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class EmployersServiceTest {
+class EmployersServiceImplTest {
 
-    private EmployersDAO employersDAO;
-    private EmployersService employersService;
+    private EmployersDAOImpl employersDAOImpl;
+    private EmployersServiceImpl employersServiceImpl;
 
     @BeforeEach
     void setup() {
-        employersDAO = Mockito.mock(EmployersDAO.class);
-        employersService = new EmployersService(employersDAO);
+        employersDAOImpl = Mockito.mock(EmployersDAOImpl.class);
+        employersServiceImpl = new EmployersServiceImpl(employersDAOImpl);
     }
 
     // ---------------- getEmployerIdByUserId ----------------
@@ -25,11 +26,11 @@ class EmployersServiceTest {
     void getEmployerIdByUserId_shouldReturnEmployerId() {
         // Arrange
         int userId = 10;
-        when(employersDAO.getEmployerIdByUserId(userId))
+        when(employersDAOImpl.getEmployerIdByUserId(userId))
                 .thenReturn(1001);
 
         // Act
-        int result = employersService.getEmployerIdByUserId(userId);
+        int result = employersServiceImpl.getEmployerIdByUserId(userId);
 
         // Assert
         assertEquals(1001, result);
@@ -39,13 +40,13 @@ class EmployersServiceTest {
     void getEmployerIdByUserId_shouldThrowExceptionWhenNotFound() {
         // Arrange
         int userId = 10;
-        when(employersDAO.getEmployerIdByUserId(userId))
+        when(employersDAOImpl.getEmployerIdByUserId(userId))
                 .thenReturn(null);
 
         // Act + Assert
         RuntimeException ex = assertThrows(
                 RuntimeException.class,
-                () -> employersService.getEmployerIdByUserId(userId)
+                () -> employersServiceImpl.getEmployerIdByUserId(userId)
         );
 
         assertEquals("Employer profile not found", ex.getMessage());
@@ -56,7 +57,7 @@ class EmployersServiceTest {
     @Test
     void updateCompanyProfile_shouldLogSuccessWhenRowsUpdated() {
         // Arrange
-        when(employersDAO.updateCompanyProfile(
+        when(employersDAOImpl.updateCompanyProfile(
                 anyInt(),
                 anyString(),
                 anyString(),
@@ -67,7 +68,7 @@ class EmployersServiceTest {
         )).thenReturn(1);
 
         // Act
-        employersService.updateCompanyProfile(
+        employersServiceImpl.updateCompanyProfile(
                 1,
                 "RevHire",
                 "IT",
@@ -78,7 +79,7 @@ class EmployersServiceTest {
         );
 
         // Assert
-        verify(employersDAO).updateCompanyProfile(
+        verify(employersDAOImpl).updateCompanyProfile(
                 eq(1),
                 eq("RevHire"),
                 eq("IT"),
@@ -92,7 +93,7 @@ class EmployersServiceTest {
     @Test
     void updateCompanyProfile_shouldHandleNoRowsUpdated() {
         // Arrange
-        when(employersDAO.updateCompanyProfile(
+        when(employersDAOImpl.updateCompanyProfile(
                 anyInt(),
                 any(),
                 any(),
@@ -104,7 +105,7 @@ class EmployersServiceTest {
 
         // Act (should NOT throw)
         assertDoesNotThrow(() ->
-                employersService.updateCompanyProfile(
+                employersServiceImpl.updateCompanyProfile(
                         1,
                         "RevHire",
                         "IT",
@@ -121,10 +122,10 @@ class EmployersServiceTest {
     @Test
     void createEmployer_shouldCreateEmployerWithDefaults() {
         // Act
-        employersService.createEmployer(5);
+        employersServiceImpl.createEmployer(5);
 
         // Assert
-        verify(employersDAO).addEmployer(
+        verify(employersDAOImpl).addEmployer(
                 eq(5),
                 eq("Not Provided"),
                 isNull(),
