@@ -1,5 +1,6 @@
 package com.revhire.dao.impl;
 
+import com.revhire.dao.NotificationsDAO;
 import com.revhire.model.Notification;
 import com.revhire.util.DBConnection;
 import org.apache.logging.log4j.LogManager;
@@ -9,10 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsDAOImpl implements com.revhire.dao.NotificationsDAO {
+public class NotificationsDAOImpl implements NotificationsDAO {
 
-    private static final Logger logger =
-            LogManager.getLogger(NotificationsDAOImpl.class);
+    private static final Logger logger =  LogManager.getLogger(NotificationsDAOImpl.class);
 
     // Insert notification
     @Override

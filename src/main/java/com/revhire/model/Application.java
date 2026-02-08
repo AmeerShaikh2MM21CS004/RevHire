@@ -1,6 +1,6 @@
 package com.revhire.model;
 
-import java.sql.Timestamp; // ✅ Correct
+import java.sql.Timestamp;
 
 public class Application {
     private int applicationId;

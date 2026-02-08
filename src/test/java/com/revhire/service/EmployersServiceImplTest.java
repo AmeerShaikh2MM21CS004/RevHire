@@ -2,48 +2,47 @@ package com.revhire.service;
 
 import com.revhire.dao.impl.EmployersDAOImpl;
 import com.revhire.service.impl.EmployersServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class EmployersServiceImplTest {
 
+    @Mock
     private EmployersDAOImpl employersDAOImpl;
-    private EmployersServiceImpl employersServiceImpl;
 
-    @BeforeEach
-    void setup() {
-        employersDAOImpl = Mockito.mock(EmployersDAOImpl.class);
-        employersServiceImpl = new EmployersServiceImpl(employersDAOImpl);
-    }
+    @InjectMocks
+    private EmployersServiceImpl employersServiceImpl;
 
     // ---------------- getEmployerIdByUserId ----------------
 
     @Test
     void getEmployerIdByUserId_shouldReturnEmployerId() {
-        // Arrange
         int userId = 10;
+
         when(employersDAOImpl.getEmployerIdByUserId(userId))
                 .thenReturn(1001);
 
-        // Act
-        int result = employersServiceImpl.getEmployerIdByUserId(userId);
+        int result =
+                employersServiceImpl.getEmployerIdByUserId(userId);
 
-        // Assert
         assertEquals(1001, result);
     }
 
     @Test
     void getEmployerIdByUserId_shouldThrowExceptionWhenNotFound() {
-        // Arrange
         int userId = 10;
+
         when(employersDAOImpl.getEmployerIdByUserId(userId))
                 .thenReturn(null);
 
-        // Act + Assert
         RuntimeException ex = assertThrows(
                 RuntimeException.class,
                 () -> employersServiceImpl.getEmployerIdByUserId(userId)
@@ -56,7 +55,6 @@ class EmployersServiceImplTest {
 
     @Test
     void updateCompanyProfile_shouldLogSuccessWhenRowsUpdated() {
-        // Arrange
         when(employersDAOImpl.updateCompanyProfile(
                 anyInt(),
                 anyString(),
@@ -67,7 +65,6 @@ class EmployersServiceImplTest {
                 anyString()
         )).thenReturn(1);
 
-        // Act
         employersServiceImpl.updateCompanyProfile(
                 1,
                 "RevHire",
@@ -78,7 +75,6 @@ class EmployersServiceImplTest {
                 "India"
         );
 
-        // Assert
         verify(employersDAOImpl).updateCompanyProfile(
                 eq(1),
                 eq("RevHire"),
@@ -92,7 +88,6 @@ class EmployersServiceImplTest {
 
     @Test
     void updateCompanyProfile_shouldHandleNoRowsUpdated() {
-        // Arrange
         when(employersDAOImpl.updateCompanyProfile(
                 anyInt(),
                 any(),
@@ -103,7 +98,6 @@ class EmployersServiceImplTest {
                 any()
         )).thenReturn(0);
 
-        // Act (should NOT throw)
         assertDoesNotThrow(() ->
                 employersServiceImpl.updateCompanyProfile(
                         1,
@@ -121,10 +115,8 @@ class EmployersServiceImplTest {
 
     @Test
     void createEmployer_shouldCreateEmployerWithDefaults() {
-        // Act
         employersServiceImpl.createEmployer(5);
 
-        // Assert
         verify(employersDAOImpl).addEmployer(
                 eq(5),
                 eq("Not Provided"),

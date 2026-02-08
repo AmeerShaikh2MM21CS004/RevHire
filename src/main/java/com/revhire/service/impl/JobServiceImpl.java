@@ -10,8 +10,7 @@ import java.util.List;
 
 public class JobServiceImpl extends JobSeekerServiceImpl {
 
-    private static final Logger logger =
-            LogManager.getLogger(JobServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(JobServiceImpl.class);
 
     private final JobsDAOImpl jobsDAOImpl;
     private final NotificationsService notificationsService = new NotificationsServiceImpl();
@@ -47,7 +46,7 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
                 salary, type, deadline
         );
 
-        // 🔔 Proper service call (NO ERROR now)
+        //  Proper service call (NO ERROR now)
         notificationsService.notifyMatchingJobSeekers(
                 title, skills, experience, location
         );

@@ -1,15 +1,15 @@
 package com.revhire.dao.impl;
 
+import com.revhire.dao.UserDAO;
 import com.revhire.util.DBConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
-public class UserDAOImpl implements com.revhire.dao.UserDAO {
+public class UserDAOImpl implements UserDAO {
 
-    private static final Logger logger =
-            LogManager.getLogger(UserDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
     // ---------- FETCH USER FOR LOGIN ----------
     @Override

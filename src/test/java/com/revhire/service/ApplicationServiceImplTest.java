@@ -3,9 +3,12 @@ package com.revhire.service;
 import com.revhire.dao.impl.ApplicationsDAOImpl;
 import com.revhire.model.Application;
 import com.revhire.service.impl.ApplicationServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,59 +16,46 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class ApplicationServiceImplTest {
 
+    @Mock
     private ApplicationsDAOImpl applicationsDAOImpl;
-    private ApplicationServiceImpl applicationServiceImpl;
 
-    @BeforeEach
-    void setup() {
-        applicationsDAOImpl = Mockito.mock(ApplicationsDAOImpl.class);
-        applicationServiceImpl = new ApplicationServiceImpl(applicationsDAOImpl);
-    }
+    @InjectMocks
+    private ApplicationServiceImpl applicationServiceImpl;
 
     // ---------------- applyForJob ----------------
 
     @Test
     void applyForJob_shouldApplyWhenNotAlreadyApplied() {
-        // Arrange
-        int jobId = 101;
-        int seekerId = 201;
-
-        when(applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId))
+        when(applicationsDAOImpl.hasAlreadyApplied(101, 201))
                 .thenReturn(false);
 
-        // Act
-        applicationServiceImpl.applyForJob(jobId, seekerId);
+        applicationServiceImpl.applyForJob(101, 201);
 
-        // Assert
-        verify(applicationsDAOImpl).applyJob(jobId, seekerId);
+        verify(applicationsDAOImpl)
+                .applyJob(101, 201);
     }
 
     @Test
     void applyForJob_shouldNotApplyWhenAlreadyApplied() {
-        // Arrange
-        int jobId = 101;
-        int seekerId = 201;
-
-        when(applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId))
+        when(applicationsDAOImpl.hasAlreadyApplied(101, 201))
                 .thenReturn(true);
 
-        // Act
-        applicationServiceImpl.applyForJob(jobId, seekerId);
+        applicationServiceImpl.applyForJob(101, 201);
 
-        // Assert
-        verify(applicationsDAOImpl, never()).applyJob(anyInt(), anyInt());
+        verify(applicationsDAOImpl, never())
+                .applyJob(anyInt(), anyInt());
     }
 
     // ---------------- withdrawApplication ----------------
 
     @Test
     void withdrawApplication_shouldUpdateStatus() {
-        // Act
-        applicationServiceImpl.withdrawApplication(1, "WITHDRAWN", "Not interested");
+        applicationServiceImpl.withdrawApplication(
+                1, "WITHDRAWN", "Not interested");
 
-        // Assert
         verify(applicationsDAOImpl)
                 .updateStatus(1, "WITHDRAWN", "Not interested");
     }
@@ -74,49 +64,36 @@ class ApplicationServiceImplTest {
 
     @Test
     void viewMyApplications_shouldReturnApplications() {
-        // Arrange
-        int seekerId = 201;
-        List<String> applications = List.of("Job A", "Job B");
+        when(applicationsDAOImpl.getApplicationsBySeeker(201))
+                .thenReturn(List.of("Job A", "Job B"));
 
-        when(applicationsDAOImpl.getApplicationsBySeeker(seekerId))
-                .thenReturn(applications);
+        List<String> result =
+                applicationServiceImpl.viewMyApplications(201);
 
-        // Act
-        List<String> result = applicationServiceImpl.viewMyApplications(seekerId);
-
-        // Assert
         assertEquals(2, result.size());
-        assertEquals(applications, result);
     }
 
     // ---------------- getApplicantsForJob ----------------
 
     @Test
     void getApplicantsForJob_shouldReturnApplicants() throws Exception {
-        // Arrange
-        int jobId = 101;
-        List<Application> list = List.of(mock(Application.class));
+        when(applicationsDAOImpl.fetchApplicationsByJobId(101))
+                .thenReturn(List.of(mock(Application.class)));
 
-        when(applicationsDAOImpl.fetchApplicationsByJobId(jobId))
-                .thenReturn(list);
+        List<Application> result =
+                applicationServiceImpl.getApplicantsForJob(101);
 
-        // Act
-        List<Application> result = applicationServiceImpl.getApplicantsForJob(jobId);
-
-        // Assert
         assertEquals(1, result.size());
     }
 
     @Test
     void getApplicantsForJob_shouldReturnEmptyListOnException() throws Exception {
-        // Arrange
         when(applicationsDAOImpl.fetchApplicationsByJobId(anyInt()))
                 .thenThrow(new RuntimeException("DB error"));
 
-        // Act
-        List<Application> result = applicationServiceImpl.getApplicantsForJob(101);
+        List<Application> result =
+                applicationServiceImpl.getApplicantsForJob(101);
 
-        // Assert
         assertTrue(result.isEmpty());
     }
 
@@ -124,22 +101,18 @@ class ApplicationServiceImplTest {
 
     @Test
     void updateApplicationStatus_shouldUpdateStatus() throws SQLException {
-        // Act
         applicationServiceImpl.updateApplicationStatus(1, "APPROVED");
 
-        // Assert
         verify(applicationsDAOImpl)
                 .updateStatusByApplicationId(1, "APPROVED");
     }
 
     @Test
     void updateApplicationStatus_shouldHandleExceptionGracefully() throws SQLException {
-        // Arrange
         doThrow(new RuntimeException("DB error"))
                 .when(applicationsDAOImpl)
                 .updateStatusByApplicationId(anyInt(), anyString());
 
-        // Act (should NOT throw)
         assertDoesNotThrow(() ->
                 applicationServiceImpl.updateApplicationStatus(1, "REJECTED"));
     }

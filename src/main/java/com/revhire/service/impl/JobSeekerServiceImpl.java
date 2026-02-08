@@ -9,8 +9,7 @@ import java.sql.SQLException;
 
 public class JobSeekerServiceImpl implements com.revhire.service.JobSeekerService {
 
-    private static final Logger logger =
-            LogManager.getLogger(JobSeekerServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(JobSeekerServiceImpl.class);
 
     private final JobSeekersDAOImpl jobSeekerDAO;
 

@@ -1,5 +1,6 @@
 package com.revhire.service.impl;
 
+import com.revhire.service.ApplicationService;
 import com.revhire.dao.impl.ApplicationsDAOImpl;
 import com.revhire.model.Application;
 import org.apache.logging.log4j.LogManager;
@@ -7,10 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class ApplicationServiceImpl implements com.revhire.service.ApplicationService {
+public class ApplicationServiceImpl implements ApplicationService {
 
-    private static final Logger logger =
-            LogManager.getLogger(ApplicationServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(ApplicationServiceImpl.class);
 
     private final ApplicationsDAOImpl applicationsDAOImpl;
 

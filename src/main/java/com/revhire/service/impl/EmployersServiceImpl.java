@@ -6,8 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class EmployersServiceImpl implements com.revhire.service.EmployersService {
 
-    private static final Logger logger =
-            LogManager.getLogger(EmployersServiceImpl.class);
+    private static final Logger logger =  LogManager.getLogger(EmployersServiceImpl.class);
 
     private final EmployersDAOImpl employersDAOImpl;
 

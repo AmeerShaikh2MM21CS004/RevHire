@@ -1,5 +1,6 @@
 package com.revhire.dao.impl;
 
+import com.revhire.dao.ResumesDAO;
 import com.revhire.model.Resume;
 import com.revhire.util.DBConnection;
 import org.apache.logging.log4j.LogManager;
@@ -9,10 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResumesDAOImpl implements com.revhire.dao.ResumesDAO {
+public class ResumesDAOImpl implements ResumesDAO {
 
-    private static final Logger logger =
-            LogManager.getLogger(ResumesDAOImpl.class);
+    private static final Logger logger =  LogManager.getLogger(ResumesDAOImpl.class);
 
     @Override
     public void upsertResume(

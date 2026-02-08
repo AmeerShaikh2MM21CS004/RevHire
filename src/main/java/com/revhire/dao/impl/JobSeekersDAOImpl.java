@@ -4,11 +4,13 @@ import com.revhire.util.DBConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revhire.dao.JobSeekersDAO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobSeekersDAOImpl implements com.revhire.dao.JobSeekersDAO {
+public class JobSeekersDAOImpl implements JobSeekersDAO {
 
     private static final Logger logger = LogManager.getLogger(JobSeekersDAOImpl.class);
 

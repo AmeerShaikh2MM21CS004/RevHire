@@ -1,5 +1,6 @@
 package com.revhire.dao.impl;
 
+import com.revhire.dao.ApplicationsDAO;
 import com.revhire.model.Application;
 import com.revhire.util.DBConnection;
 import java.sql.*;
@@ -8,7 +9,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ApplicationsDAOImpl implements com.revhire.dao.ApplicationsDAO {
+public class ApplicationsDAOImpl implements ApplicationsDAO {
 
   private static final Logger logger = LogManager.getLogger(ApplicationsDAOImpl.class);
 
@@ -47,7 +48,7 @@ public class ApplicationsDAOImpl implements com.revhire.dao.ApplicationsDAO {
     logger.debug("Checking application | jobId={}, seekerId={}", jobId, seekerId);
 
     String sql = """
-        SELECT COUNT(*) 
+        SELECT COUNT(*)
         FROM applications
         WHERE job_id = ? AND seeker_id = ?
         """;
@@ -76,7 +77,6 @@ public class ApplicationsDAOImpl implements com.revhire.dao.ApplicationsDAO {
 
     return false;
   }
-
 
   // ---------------- UPDATE STATUS WITH REASON ----------------
   public void updateStatus(int applicationId, String status, String reason) {

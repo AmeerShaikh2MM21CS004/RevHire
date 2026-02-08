@@ -191,11 +191,5 @@ COMMIT;
 SHOW USER;
 
 
-SELECT job_id, title, description, skills_required,
-                   experience_required, education_required,
-                   location, salary, job_type, deadline, status
-            FROM jobs
-            WHERE employer_id = 1;
-
 
 
