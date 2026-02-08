@@ -192,6 +192,12 @@ RevHire
 ```
 ---
 
+![Scipt flow](Images/RevHire_ERD_Diagram.png)
+---
+
+![Scipt flow](Images/RevHire_Application.png)
+---
+
 ## 🗃️ ER Diagram (Database Design)
 
 ![Scipt flow](Images/RevHire_ERD_Diagram.png)
