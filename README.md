@@ -189,10 +189,10 @@ RevHire
 │                    ├── ResumeTest.java
 │                    └── UserTest.java
 └──pom.xml
-```
+``````
 ---
 
-![Scipt flow](Images/RevHire_ERD_Diagram.png)
+![Scipt flow](Images/RevHireFLow.png)
 ---
 
 ![Scipt flow](Images/RevHire_Application.png)
