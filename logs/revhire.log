@@ -10489,3 +10489,1079 @@ java.sql.SQLException
 2026-02-08 00:22:26 [main] INFO  UserServiceImpl - Security answer verification result | email=test@example.com, result=true
 2026-02-08 00:22:26 [main] INFO  UserServiceImpl - User login attempt | email=test@example.com
 2026-02-08 00:22:26 [main] INFO  UserServiceImpl - Login successful | userId=1
+2026-02-08 17:13:03 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 17:13:30 [main] INFO  UserServiceImpl - Registering new user | email=Employer1@gmail.com, role=EMPLOYER
+2026-02-08 17:13:31 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:31 [main] INFO  UserDAOImpl - User created successfully, userId=4, email=Employer1@gmail.com
+2026-02-08 17:13:31 [main] INFO  UserServiceImpl - User registered successfully | userId=4
+2026-02-08 17:13:31 [main] INFO  EmployersServiceImpl - Creating employer profile | userId=4
+2026-02-08 17:13:31 [main] INFO  EmployersDAOImpl - Adding employer | userId=4, company=Not Provided
+2026-02-08 17:13:31 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:31 [main] INFO  EmployersDAOImpl - Employer added successfully
+2026-02-08 17:13:31 [main] INFO  EmployersServiceImpl - Employer profile created successfully | userId=4
+2026-02-08 17:13:31 [main] INFO  Main - New user registered | userId=4, role=EMPLOYER
+2026-02-08 17:13:55 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 17:13:55 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 17:13:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:55 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 17:13:55 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 17:13:55 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 17:13:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:55 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 17:13:55 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 17:13:55 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 17:13:55 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 17:13:55 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:13:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:55 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:13:55 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:13:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:13:56 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:13:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:23 [main] INFO  JobServiceImpl - Adding job | employerId=2, title=SDET
+2026-02-08 17:14:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:23 [main] INFO  JobsDAOImpl - Job added | employerId=2, title=SDET
+2026-02-08 17:14:23 [main] INFO  JobServiceImpl - Job posted successfully | employerId=2, title=SDET
+2026-02-08 17:14:23 [main] INFO  Main - Job posted | employerId=2, title=SDET
+2026-02-08 17:14:23 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:14:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:23 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:14:23 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:14:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:23 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:14:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:28 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 17:14:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:28 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=1
+2026-02-08 17:14:28 [main] INFO  Main - Viewing all jobs | employerId=2, count=1
+2026-02-08 17:14:28 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:14:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:28 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:14:28 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:14:29 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:14:29 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:14:29 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:01 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 17:18:15 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 17:18:15 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 17:18:17 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:17 [main] WARN  UserServiceImpl - Login failed: invalid password | email=Employer1@gmail.com
+2026-02-08 17:18:17 [main] WARN  Main - Failed login attempt | email=Employer1@gmail.com
+2026-02-08 17:18:41 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 17:18:41 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 17:18:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:42 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 17:18:42 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 17:18:42 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 17:18:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:42 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 17:18:42 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 17:18:42 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 17:18:42 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 17:18:42 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:18:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:42 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:18:42 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:18:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:42 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:18:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:47 [main] INFO  NotificationsServiceImpl - Preparing unread notification messages | userId=4
+2026-02-08 17:18:47 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:18:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:47 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:18:47 [main] INFO  NotificationsServiceImpl - Unread notifications prepared | count=0
+2026-02-08 17:18:47 [main] INFO  Main - No new notifications | userId=4
+2026-02-08 17:18:50 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:18:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:50 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:18:50 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:18:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:50 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:18:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:54 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 17:18:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:54 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=1
+2026-02-08 17:18:54 [main] INFO  Main - Viewing all jobs | employerId=2, count=1
+2026-02-08 17:18:58 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:18:58 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:58 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:18:58 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:18:58 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:18:58 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:18:58 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:19:40 [main] ERROR Main - Unexpected error in main execution
+java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:947)
+	at java.base/java.util.Scanner.next(Scanner.java:1602)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2267)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2221)
+	at com.revhire.main.Main.employerMenu(Main.java:517)
+	at com.revhire.main.Main.main(Main.java:91)
+2026-02-08 17:19:40 [main] INFO  Main - Scanner closed, application ended
+2026-02-08 17:19:58 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 17:20:06 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 17:20:06 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 17:20:07 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:07 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 17:20:07 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 17:20:07 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 17:20:07 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:07 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 17:20:07 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 17:20:07 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 17:20:07 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 17:20:07 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:20:07 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:07 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:20:08 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:20:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:08 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:20:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:10 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 17:20:10 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:10 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=1
+2026-02-08 17:20:10 [main] INFO  Main - Viewing all jobs | employerId=2, count=1
+2026-02-08 17:20:11 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:20:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:12 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:20:12 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:20:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:20:12 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:20:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:22:09 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 17:22:22 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 17:22:22 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 17:22:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:22:23 [main] WARN  UserServiceImpl - Login failed: no user found | email=User1@gmail.com
+2026-02-08 17:22:23 [main] WARN  Main - Failed login attempt | email=User1@gmail.com
+2026-02-08 17:22:49 [main] INFO  UserServiceImpl - Registering new user | email=User1@gmail.com, role=JOB_SEEKER
+2026-02-08 17:22:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:22:49 [main] INFO  UserDAOImpl - User created successfully, userId=5, email=User1@gmail.com
+2026-02-08 17:22:49 [main] INFO  UserServiceImpl - User registered successfully | userId=5
+2026-02-08 17:22:49 [main] INFO  JobSeekerServiceImpl - Creating default job seeker profile | userId=5
+2026-02-08 17:22:49 [main] INFO  JobSeekerServiceImpl - Creating job seeker profile | userId=5
+2026-02-08 17:22:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:22:49 [main] INFO  JobSeekersDAOImpl - Job seeker profile created for userId=5
+2026-02-08 17:22:49 [main] INFO  JobSeekerServiceImpl - Job seeker profile created successfully | userId=5
+2026-02-08 17:22:49 [main] INFO  Main - New user registered | userId=5, role=JOB_SEEKER
+2026-02-08 17:23:03 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 17:23:03 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 17:23:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:03 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 17:23:03 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 17:23:03 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 17:23:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:03 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 17:23:03 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 17:23:03 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 17:23:03 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 17:23:03 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 17:23:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:03 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=11
+2026-02-08 17:23:03 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 17:23:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:03 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=11
+2026-02-08 17:23:07 [main] INFO  Main - Viewing all jobs | userId=5
+2026-02-08 17:23:07 [main] INFO  JobServiceImpl - Fetching all open jobs
+2026-02-08 17:23:07 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:07 [main] INFO  JobsDAOImpl - Fetched all open jobs | count=2
+2026-02-08 17:23:10 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 17:23:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:11 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=11
+2026-02-08 17:23:11 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 17:23:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:11 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=11
+2026-02-08 17:23:19 [main] INFO  ApplicationServiceImpl - Applying for jobId=2 by seekerId=3
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  ApplicationsDAOImpl - Already applied: false
+2026-02-08 17:23:19 [main] INFO  ApplicationsDAOImpl - Applying job | jobId=2, seekerId=3
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  ApplicationsDAOImpl - Job applied successfully
+2026-02-08 17:23:19 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=2, seekerId=3
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=2, userId=4
+2026-02-08 17:23:19 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 2
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 17:23:19 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 17:23:19 [main] INFO  Main - Applied for job | seekerId=3, jobId=2
+2026-02-08 17:23:19 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=11
+2026-02-08 17:23:19 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 17:23:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:19 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=11
+2026-02-08 17:23:22 [main] INFO  Main - User logged out | userId=5
+2026-02-08 17:23:32 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 17:23:32 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 17:23:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:32 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 17:23:32 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 17:23:32 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 17:23:33 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:33 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 17:23:33 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 17:23:33 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 17:23:33 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 17:23:33 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:23:33 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:33 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:23:33 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:23:33 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:33 [main] INFO  NotificationsDAOImpl - Fetched 1 unread notifications for userId=4
+2026-02-08 17:23:33 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:23:33 [main] INFO  Main - User has 1 unread notifications | userId=4
+2026-02-08 17:24:35 [main] INFO  NotificationsServiceImpl - Preparing unread notification messages | userId=4
+2026-02-08 17:24:35 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:24:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:35 [main] INFO  NotificationsDAOImpl - Fetched 1 unread notifications for userId=4
+2026-02-08 17:24:35 [main] INFO  NotificationsServiceImpl - Unread notifications prepared | count=1
+2026-02-08 17:24:35 [main] INFO  Main - Showing 1 notifications | userId=4
+2026-02-08 17:24:35 [main] INFO  NotificationsServiceImpl - Marking all notifications as read | userId=4
+2026-02-08 17:24:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:35 [main] INFO  NotificationsDAOImpl - Marked 1 notifications as read for userId=4
+2026-02-08 17:24:35 [main] INFO  NotificationsServiceImpl - All notifications marked as read | userId=4
+2026-02-08 17:24:35 [main] INFO  Main - Marked all notifications as read | userId=4
+2026-02-08 17:24:41 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:24:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:41 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:24:41 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:24:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:41 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:24:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:51 [main] INFO  NotificationsServiceImpl - Preparing unread notification messages | userId=4
+2026-02-08 17:24:51 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:24:51 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:51 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:24:51 [main] INFO  NotificationsServiceImpl - Unread notifications prepared | count=0
+2026-02-08 17:24:51 [main] INFO  Main - No new notifications | userId=4
+2026-02-08 17:24:57 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 17:24:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:57 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 17:24:57 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 17:24:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 17:24:57 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 17:24:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:20:29 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 18:20:46 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 18:20:48 [main] WARN  Main - Invalid main menu choice entered: 11
+2026-02-08 18:21:04 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:21:04 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:21:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:06 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:21:06 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:21:06 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:21:06 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:06 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:21:06 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:21:06 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:21:06 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:21:06 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:21:06 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:06 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=11
+2026-02-08 18:21:06 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:21:06 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:06 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=11
+2026-02-08 18:21:10 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=5
+2026-02-08 18:21:10 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:10 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=5
+2026-02-08 18:21:10 [main] INFO  Main - No new notifications | userId=5
+2026-02-08 18:21:13 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:21:13 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:13 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=11
+2026-02-08 18:21:13 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:21:13 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:13 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=11
+2026-02-08 18:21:28 [main] INFO  ResumeServiceImpl - Saving/updating resume | seekerId=3
+2026-02-08 18:21:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:28 [main] INFO  ResumesDAOImpl - Resume upsert completed for seekerId=3, rowsAffected=1
+2026-02-08 18:21:28 [main] INFO  ResumeServiceImpl - ✅ Resume saved successfully | seekerId=3
+2026-02-08 18:21:28 [main] INFO  Main - Resume updated | seekerId=3
+2026-02-08 18:21:28 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:21:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:28 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=66
+2026-02-08 18:21:28 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:21:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:28 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=66
+2026-02-08 18:21:53 [main] INFO  JobSeekerServiceImpl - Updating job seeker profile | seekerId=3
+2026-02-08 18:21:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:53 [main] INFO  JobSeekersDAOImpl - Updated job seeker seekerId=3, rowsAffected=1
+2026-02-08 18:21:53 [main] INFO  JobSeekerServiceImpl - Job seeker profile updated | seekerId=3
+2026-02-08 18:21:53 [main] INFO  Main - Profile updated | seekerId=3
+2026-02-08 18:21:53 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:21:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:53 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:21:53 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:21:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:21:53 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:21:59 [main] INFO  Main - User logged out | userId=5
+2026-02-08 18:22:12 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 18:22:12 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 18:22:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:12 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 18:22:12 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 18:22:12 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 18:22:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:12 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 18:22:12 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 18:22:12 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 18:22:12 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 18:22:12 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:22:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:12 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:22:12 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:22:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:12 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:22:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:41 [main] INFO  JobServiceImpl - Adding job | employerId=2, title=SDET
+2026-02-08 18:22:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:41 [main] INFO  JobsDAOImpl - Job added | employerId=2, title=SDET
+2026-02-08 18:22:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:41 [main] INFO  JobSeekersDAOImpl - Matched 0 job seekers for notification
+2026-02-08 18:22:41 [main] INFO  NotificationsServiceImpl - Job match notifications sent | count=0
+2026-02-08 18:22:41 [main] INFO  JobServiceImpl - Job posted & notifications sent | title=SDET
+2026-02-08 18:22:41 [main] INFO  Main - Job posted | employerId=2, title=SDET
+2026-02-08 18:22:41 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:22:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:41 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:22:41 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:22:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:41 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:22:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:44 [main] INFO  Main - User logged out | userId=4
+2026-02-08 18:22:56 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:22:56 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:22:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:56 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:22:56 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:22:56 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:22:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:56 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:22:56 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:22:56 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:22:56 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:22:56 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:22:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:56 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:22:56 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:22:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:22:56 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:23:00 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=5
+2026-02-08 18:23:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:23:00 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=5
+2026-02-08 18:23:00 [main] INFO  Main - No new notifications | userId=5
+2026-02-08 18:23:05 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:23:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:23:05 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:23:05 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:23:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:23:05 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:23:09 [main] INFO  Main - Viewing all jobs | userId=5
+2026-02-08 18:23:09 [main] INFO  JobServiceImpl - Fetching all open jobs
+2026-02-08 18:23:09 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:23:09 [main] INFO  JobsDAOImpl - Fetched all open jobs | count=3
+2026-02-08 18:37:38 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:37:38 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:38 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:37:38 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:37:38 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:38 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:37:41 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=5
+2026-02-08 18:37:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:41 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=5
+2026-02-08 18:37:41 [main] INFO  Main - No new notifications | userId=5
+2026-02-08 18:37:42 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:37:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:42 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:37:42 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:37:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:42 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:37:57 [main] INFO  ResumeServiceImpl - Saving/updating resume | seekerId=3
+2026-02-08 18:37:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:57 [main] INFO  ResumesDAOImpl - Resume upsert completed for seekerId=3, rowsAffected=1
+2026-02-08 18:37:57 [main] INFO  ResumeServiceImpl - ✅ Resume saved successfully | seekerId=3
+2026-02-08 18:37:57 [main] INFO  Main - Resume updated | seekerId=3
+2026-02-08 18:37:57 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:37:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:57 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:37:57 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:37:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:37:57 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:38:16 [main] INFO  JobSeekerServiceImpl - Updating job seeker profile | seekerId=3
+2026-02-08 18:38:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:16 [main] INFO  JobSeekersDAOImpl - Updated job seeker seekerId=3, rowsAffected=1
+2026-02-08 18:38:16 [main] INFO  JobSeekerServiceImpl - Job seeker profile updated | seekerId=3
+2026-02-08 18:38:16 [main] INFO  Main - Profile updated | seekerId=3
+2026-02-08 18:38:16 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:38:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:16 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:38:16 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:38:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:16 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:38:19 [main] INFO  Main - Viewing all jobs | userId=5
+2026-02-08 18:38:19 [main] INFO  JobServiceImpl - Fetching all open jobs
+2026-02-08 18:38:19 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:19 [main] INFO  JobsDAOImpl - Fetched all open jobs | count=3
+2026-02-08 18:38:21 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:38:21 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:21 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:38:21 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:38:21 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:21 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:38:37 [main] INFO  JobServiceImpl - Searching jobs | title=SDET, location=, maxExp=null, company=, type=
+2026-02-08 18:38:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:37 [main] INFO  JobsDAOImpl - Searched jobs | filters=[title=SDET, location=, maxExp=null, company=, salary=, type=] results=3
+2026-02-08 18:38:37 [main] INFO  Main - Job search performed | userId=5, results=3
+2026-02-08 18:38:37 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:38:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:37 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:38:37 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:38:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:37 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:38:54 [main] INFO  ApplicationServiceImpl - Applying for jobId=3 by seekerId=3
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  ApplicationsDAOImpl - Already applied: false
+2026-02-08 18:38:54 [main] INFO  ApplicationsDAOImpl - Applying job | jobId=3, seekerId=3
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  ApplicationsDAOImpl - Job applied successfully
+2026-02-08 18:38:54 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=3, seekerId=3
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=3, userId=4
+2026-02-08 18:38:54 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 3
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 18:38:54 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 18:38:54 [main] INFO  Main - Applied for job | seekerId=3, jobId=3
+2026-02-08 18:38:54 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:38:54 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:38:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:38:54 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:39:00 [main] INFO  ApplicationServiceImpl - Applying for jobId=2 by seekerId=3
+2026-02-08 18:39:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:00 [main] INFO  ApplicationsDAOImpl - Already applied: true
+2026-02-08 18:39:00 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=2, seekerId=3
+2026-02-08 18:39:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:00 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=2, userId=4
+2026-02-08 18:39:00 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 2
+2026-02-08 18:39:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:00 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 18:39:00 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 18:39:00 [main] INFO  Main - Applied for job | seekerId=3, jobId=2
+2026-02-08 18:39:00 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:39:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:01 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:39:01 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:39:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:01 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:39:05 [main] INFO  ApplicationServiceImpl - Applying for jobId=1 by seekerId=3
+2026-02-08 18:39:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:05 [main] INFO  ApplicationsDAOImpl - Already applied: false
+2026-02-08 18:39:05 [main] INFO  ApplicationsDAOImpl - Applying job | jobId=1, seekerId=3
+2026-02-08 18:39:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:05 [main] INFO  ApplicationsDAOImpl - Job applied successfully
+2026-02-08 18:39:05 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=1, seekerId=3
+2026-02-08 18:39:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:05 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=1, userId=2
+2026-02-08 18:39:05 [main] INFO  NotificationsServiceImpl - Adding notification | userId=2, message=New application received for Job ID: 1
+2026-02-08 18:39:05 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:05 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=2
+2026-02-08 18:39:05 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=2
+2026-02-08 18:39:05 [main] INFO  Main - Applied for job | seekerId=3, jobId=1
+2026-02-08 18:39:05 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:39:06 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:06 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:39:06 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:39:06 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:06 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:39:15 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-08 18:39:15 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-08 18:39:15 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:15 [main] INFO  ApplicationsDAOImpl - Total applications fetched: 3
+2026-02-08 18:39:15 [main] INFO  Main - Viewed applications | seekerId=3, count=3
+2026-02-08 18:39:22 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:39:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:22 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:39:22 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:39:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:22 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:39:39 [main] INFO  ApplicationServiceImpl - Withdrawing applicationId=1, status=WITHDRAWN, reason=got other offer
+2026-02-08 18:39:39 [main] INFO  ApplicationsDAOImpl - Updating application status | appId=1, status=WITHDRAWN
+2026-02-08 18:39:39 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:39 [main] INFO  ApplicationsDAOImpl - Application status updated successfully
+2026-02-08 18:39:39 [main] INFO  ApplicationServiceImpl - Application withdrawn successfully: applicationId=1
+2026-02-08 18:39:39 [main] INFO  Main - Application withdrawn | applicationId=1, seekerId=3
+2026-02-08 18:39:39 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:39:39 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:39 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:39:39 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:39:39 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:39 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:39:41 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-08 18:39:41 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-08 18:39:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:41 [main] INFO  ApplicationsDAOImpl - Total applications fetched: 3
+2026-02-08 18:39:41 [main] INFO  Main - Viewed applications | seekerId=3, count=3
+2026-02-08 18:39:45 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:39:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:46 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:39:46 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:39:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:39:46 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:40:01 [main] WARN  Main - Password change failed (same password entered) | userId=5
+2026-02-08 18:40:05 [main] WARN  Main - Weak new password entered during change | userId=5
+2026-02-08 18:40:11 [main] INFO  UserServiceImpl - Change password request | userId=5
+2026-02-08 18:40:11 [main] INFO  UserDAOImpl - Fetching login data for userId=5
+2026-02-08 18:40:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:11 [main] INFO  UserDAOImpl - Password updated by userId=5, rowsAffected=1
+2026-02-08 18:40:11 [main] INFO  UserServiceImpl - Password changed successfully | userId=5
+2026-02-08 18:40:11 [main] INFO  Main - Password changed successfully | userId=5
+2026-02-08 18:40:11 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:40:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:11 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:40:11 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:40:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:11 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:40:24 [main] INFO  UserServiceImpl - Change password request | userId=5
+2026-02-08 18:40:24 [main] INFO  UserDAOImpl - Fetching login data for userId=5
+2026-02-08 18:40:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:24 [main] INFO  UserDAOImpl - Password updated by userId=5, rowsAffected=1
+2026-02-08 18:40:24 [main] INFO  UserServiceImpl - Password changed successfully | userId=5
+2026-02-08 18:40:24 [main] INFO  Main - Password changed successfully | userId=5
+2026-02-08 18:40:24 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:40:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:24 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:40:24 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:40:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:24 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:40:26 [main] INFO  Main - User logged out | userId=5
+2026-02-08 18:40:45 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 18:40:45 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 18:40:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:45 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 18:40:45 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 18:40:45 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 18:40:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:45 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 18:40:45 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 18:40:45 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 18:40:45 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 18:40:45 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:40:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:45 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:40:45 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:40:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:45 [main] INFO  NotificationsDAOImpl - Fetched 2 unread notifications for userId=4
+2026-02-08 18:40:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:45 [main] INFO  Main - User has 2 unread notifications | userId=4
+2026-02-08 18:40:49 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:40:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:49 [main] INFO  NotificationsDAOImpl - Fetched 2 unread notifications for userId=4
+2026-02-08 18:40:49 [main] INFO  Main - Showing 2 notifications | userId=4
+2026-02-08 18:40:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:49 [main] INFO  NotificationsDAOImpl - Marked 2 notifications as read for userId=4
+2026-02-08 18:40:49 [main] INFO  NotificationsServiceImpl - All notifications marked as read | userId=4
+2026-02-08 18:40:49 [main] INFO  Main - Marked all notifications as read | userId=4
+2026-02-08 18:40:54 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:40:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:54 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:40:54 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:40:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:40:54 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:40:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:35 [main] INFO  JobServiceImpl - Adding job | employerId=2, title=devops
+2026-02-08 18:41:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:35 [main] INFO  JobsDAOImpl - Job added | employerId=2, title=devops
+2026-02-08 18:41:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:35 [main] INFO  JobSeekersDAOImpl - Matched 0 job seekers for notification
+2026-02-08 18:41:35 [main] INFO  NotificationsServiceImpl - Job match notifications sent | count=0
+2026-02-08 18:41:35 [main] INFO  JobServiceImpl - Job posted & notifications sent | title=devops
+2026-02-08 18:41:35 [main] INFO  Main - Job posted | employerId=2, title=devops
+2026-02-08 18:41:35 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:41:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:35 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:41:35 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:41:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:35 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:41:35 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:44 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:41:44 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:44 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=3
+2026-02-08 18:41:44 [main] INFO  Main - Viewing all jobs | employerId=2, count=3
+2026-02-08 18:41:48 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:41:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:48 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:41:48 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:41:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:41:49 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:41:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:22 [main] INFO  JobServiceImpl - Updating job | jobId=4, employerId=2
+2026-02-08 18:42:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:22 [main] INFO  JobsDAOImpl - Job updated | employerId=2, jobId=4, fieldsUpdated=1
+2026-02-08 18:42:22 [main] INFO  JobServiceImpl - Job updated successfully | jobId=4
+2026-02-08 18:42:22 [main] INFO  Main - Job updated | employerId=2, jobId=4
+2026-02-08 18:42:22 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:42:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:22 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:42:22 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:42:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:22 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:42:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:28 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:42:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:28 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=3
+2026-02-08 18:42:28 [main] INFO  Main - Viewing all jobs | employerId=2, count=3
+2026-02-08 18:42:31 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:42:31 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:31 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:42:31 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:42:31 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:31 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:42:31 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:41 [main] INFO  JobServiceImpl - Updating job status | jobId=2, employerId=2, status=CLOSED
+2026-02-08 18:42:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:41 [main] INFO  JobsDAOImpl - Job status updated | employerId=2, jobId=2, status=CLOSED
+2026-02-08 18:42:41 [main] INFO  JobServiceImpl - Job status updated successfully | jobId=2, status=CLOSED
+2026-02-08 18:42:41 [main] INFO  Main - Job status updated | employerId=2, jobId=2, status=CLOSED
+2026-02-08 18:42:41 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:42:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:41 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:42:41 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:42:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:41 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:42:41 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:45 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:42:45 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:45 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=3
+2026-02-08 18:42:45 [main] INFO  Main - Viewing all jobs | employerId=2, count=3
+2026-02-08 18:42:47 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:42:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:47 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:42:47 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:42:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:47 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:42:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:56 [main] INFO  JobServiceImpl - Updating job status | jobId=2, employerId=2, status=OP
+2026-02-08 18:42:56 [main] WARN  JobServiceImpl - Invalid job status provided | status=OP
+2026-02-08 18:42:56 [main] INFO  Main - Job status updated | employerId=2, jobId=2, status=OP
+2026-02-08 18:42:56 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:42:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:57 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:42:57 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:42:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:42:57 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:42:57 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:02 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:43:02 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:02 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=3
+2026-02-08 18:43:02 [main] INFO  Main - Viewing all jobs | employerId=2, count=3
+2026-02-08 18:43:09 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:09 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:09 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:09 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:09 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:09 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:09 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:20 [main] INFO  JobServiceImpl - Updating job status | jobId=2, employerId=2, status=HOLD
+2026-02-08 18:43:20 [main] WARN  JobServiceImpl - Invalid job status provided | status=HOLD
+2026-02-08 18:43:20 [main] INFO  Main - Job status updated | employerId=2, jobId=2, status=HOLD
+2026-02-08 18:43:20 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:20 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:20 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:20 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:20 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:20 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:21 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:23 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:43:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:23 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=3
+2026-02-08 18:43:23 [main] INFO  Main - Viewing all jobs | employerId=2, count=3
+2026-02-08 18:43:26 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:26 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:26 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:26 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:36 [main] INFO  JobServiceImpl - Deleting job | jobId=2, employerId=2
+2026-02-08 18:43:36 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:36 [main] INFO  JobsDAOImpl - Job deleted | employerId=2, jobId=2
+2026-02-08 18:43:36 [main] INFO  JobServiceImpl - Job deleted successfully | jobId=2
+2026-02-08 18:43:36 [main] INFO  Main - Job deleted | employerId=2, jobId=2
+2026-02-08 18:43:36 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:36 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:36 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:36 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:37 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:44 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=3
+2026-02-08 18:43:44 [main] INFO  ApplicationsDAOImpl - Fetching applications for jobId=3
+2026-02-08 18:43:44 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:44 [main] INFO  ApplicationsDAOImpl - Applications fetched: 1
+2026-02-08 18:43:44 [main] INFO  Main - Viewing applicants | employerId=2, jobId=3, count=1
+2026-02-08 18:43:47 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:47 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:47 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:47 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:54 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=4
+2026-02-08 18:43:54 [main] INFO  ApplicationsDAOImpl - Fetching applications for jobId=4
+2026-02-08 18:43:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:54 [main] INFO  ApplicationsDAOImpl - Applications fetched: 0
+2026-02-08 18:43:54 [main] INFO  Main - Viewing applicants | employerId=2, jobId=4, count=0
+2026-02-08 18:43:55 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:43:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:55 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:43:55 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:43:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:43:55 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:43:55 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:02 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=3
+2026-02-08 18:44:02 [main] INFO  ApplicationsDAOImpl - Fetching applications for jobId=3
+2026-02-08 18:44:02 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:02 [main] INFO  ApplicationsDAOImpl - Applications fetched: 1
+2026-02-08 18:44:02 [main] INFO  Main - Viewing applicants | employerId=2, jobId=3, count=1
+2026-02-08 18:44:08 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:44:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:08 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:44:08 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:44:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:08 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:44:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:11 [main] INFO  JobServiceImpl - Fetching jobs for employerId=2
+2026-02-08 18:44:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:11 [main] INFO  JobsDAOImpl - Fetched jobs by employer | employerId=2, count=2
+2026-02-08 18:44:11 [main] INFO  Main - Viewing all jobs | employerId=2, count=2
+2026-02-08 18:44:47 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:44:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:47 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:44:47 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:44:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:47 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:44:47 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:52 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=4
+2026-02-08 18:44:52 [main] INFO  ApplicationsDAOImpl - Fetching applications for jobId=4
+2026-02-08 18:44:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:52 [main] INFO  ApplicationsDAOImpl - Applications fetched: 0
+2026-02-08 18:44:52 [main] INFO  Main - Viewing applicants | employerId=2, jobId=4, count=0
+2026-02-08 18:44:53 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:44:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:53 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:44:53 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:44:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:44:53 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:44:53 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  ApplicationServiceImpl - Updating application status: applicationId=4, status=
+2026-02-08 18:45:00 [main] INFO  ApplicationsDAOImpl - Updating status | appId=4, status=
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  ApplicationsDAOImpl - Status update success: false
+2026-02-08 18:45:00 [main] INFO  ApplicationServiceImpl - Application status updated successfully: applicationId=4
+2026-02-08 18:45:00 [main] INFO  ApplicationServiceImpl - Fetching seeker userId for applicationId=4
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  ApplicationServiceImpl - Fetching jobId for applicationId=4
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  Main - Application status updated | employerId=2, appId=4, status=
+2026-02-08 18:45:00 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:45:00 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:00 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:45:00 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:24 [main] INFO  EmployersServiceImpl - Updating company profile | employerId=2
+2026-02-08 18:45:24 [main] INFO  EmployersDAOImpl - Updating company profile | employerId=2
+2026-02-08 18:45:24 [main] WARN  EmployersDAOImpl - No fields provided for update | employerId=2
+2026-02-08 18:45:24 [main] WARN  EmployersServiceImpl - No fields updated | employerId=2
+2026-02-08 18:45:24 [main] INFO  Main - Company profile updated | employerId=2
+2026-02-08 18:45:24 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:45:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:24 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=16
+2026-02-08 18:45:24 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:45:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:24 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:45:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:52 [main] INFO  EmployersServiceImpl - Updating company profile | employerId=2
+2026-02-08 18:45:52 [main] INFO  EmployersDAOImpl - Updating company profile | employerId=2
+2026-02-08 18:45:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:52 [main] INFO  EmployersDAOImpl - Company profile updated | rowsAffected=1
+2026-02-08 18:45:52 [main] INFO  EmployersServiceImpl - Company profile updated successfully | employerId=2
+2026-02-08 18:45:52 [main] INFO  Main - Company profile updated | employerId=2
+2026-02-08 18:45:52 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:45:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:52 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:45:52 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:45:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:52 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:45:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:45:59 [main] INFO  Main - User logged out | userId=4
+2026-02-08 18:46:08 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:46:08 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:46:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:08 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:46:08 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:46:08 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:46:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:08 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:46:08 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:46:08 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:46:08 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:46:08 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:46:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:08 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:46:08 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:46:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:08 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:46:40 [main] INFO  Main - Viewing all jobs | userId=5
+2026-02-08 18:46:40 [main] INFO  JobServiceImpl - Fetching all open jobs
+2026-02-08 18:46:40 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:40 [main] INFO  JobsDAOImpl - Fetched all open jobs | count=3
+2026-02-08 18:46:42 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:46:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:42 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:46:42 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:46:42 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:42 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:46:46 [main] INFO  ApplicationServiceImpl - Applying for jobId=4 by seekerId=3
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  ApplicationsDAOImpl - Already applied: false
+2026-02-08 18:46:46 [main] INFO  ApplicationsDAOImpl - Applying job | jobId=4, seekerId=3
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  ApplicationsDAOImpl - Job applied successfully
+2026-02-08 18:46:46 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=4, seekerId=3
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=4, userId=4
+2026-02-08 18:46:46 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 4
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 18:46:46 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 18:46:46 [main] INFO  Main - Applied for job | seekerId=3, jobId=4
+2026-02-08 18:46:46 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:46:46 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:46:46 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:46:46 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:50:54 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 18:51:10 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:51:10 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:51:10 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:11 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:51:11 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:51:11 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:51:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:11 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:51:11 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:51:11 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:51:11 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:51:11 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:51:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:11 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:51:11 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:51:11 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:11 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:51:15 [main] INFO  Main - User logged out | userId=5
+2026-02-08 18:51:32 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:51:32 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:51:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:32 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:51:32 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:51:32 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:51:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:32 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:51:32 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:51:32 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:51:32 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:51:32 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:51:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:32 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:51:32 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:51:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:32 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:51:50 [main] INFO  ApplicationServiceImpl - Applying for jobId=4 by seekerId=3
+2026-02-08 18:51:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:50 [main] INFO  ApplicationsDAOImpl - Application exists check | jobId=4, seekerId=3, exists=true
+2026-02-08 18:51:50 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=4, seekerId=3
+2026-02-08 18:51:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:50 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=4, userId=4
+2026-02-08 18:51:50 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 4
+2026-02-08 18:51:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:50 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 18:51:50 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 18:51:50 [main] INFO  Main - Applied for job | seekerId=3, jobId=4
+2026-02-08 18:51:50 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:51:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:50 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:51:50 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:51:50 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:51:50 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:51:55 [main] INFO  Main - User logged out | userId=5
+2026-02-08 18:52:17 [main] ERROR Main - Unexpected error in main execution
+java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:672)
+	at java.base/java.lang.Integer.parseInt(Integer.java:778)
+	at com.revhire.main.Main.main(Main.java:133)
+2026-02-08 18:52:17 [main] INFO  Main - Scanner closed, application ended
+2026-02-08 18:52:21 [main] INFO  Main - RevHire Job Portal Application Started
+2026-02-08 18:52:36 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 18:52:36 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 18:52:36 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:37 [main] WARN  UserServiceImpl - Login failed: invalid password | email=Employer1@gmail.com
+2026-02-08 18:52:37 [main] WARN  Main - Failed login attempt | email=Employer1@gmail.com
+2026-02-08 18:52:49 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 18:52:49 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 18:52:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:49 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 18:52:49 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 18:52:49 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 18:52:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:49 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 18:52:49 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 18:52:49 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 18:52:49 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 18:52:49 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:52:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:49 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:52:49 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:52:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:49 [main] INFO  NotificationsDAOImpl - Fetched 2 unread notifications for userId=4
+2026-02-08 18:52:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:49 [main] INFO  Main - User has 2 unread notifications | userId=4
+2026-02-08 18:52:52 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:52:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:52 [main] INFO  NotificationsDAOImpl - Fetched 2 unread notifications for userId=4
+2026-02-08 18:52:52 [main] INFO  Main - Showing 2 notifications | userId=4
+2026-02-08 18:52:52 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:52:52 [main] INFO  NotificationsDAOImpl - Marked 2 notifications as read for userId=4
+2026-02-08 18:52:52 [main] INFO  NotificationsServiceImpl - All notifications marked as read | userId=4
+2026-02-08 18:52:52 [main] INFO  Main - Marked all notifications as read | userId=4
+2026-02-08 18:53:04 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:53:04 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:04 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:53:04 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:53:04 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:04 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:53:04 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:37 [main] INFO  JobServiceImpl - Adding job | employerId=2, title=AWS
+2026-02-08 18:53:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:37 [main] INFO  JobsDAOImpl - Job added | employerId=2, title=AWS
+2026-02-08 18:53:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:37 [main] INFO  JobSeekersDAOImpl - Matched 0 job seekers for notification
+2026-02-08 18:53:37 [main] INFO  NotificationsServiceImpl - Job match notifications sent | count=0
+2026-02-08 18:53:37 [main] INFO  JobServiceImpl - Job posted & notifications sent | title=AWS
+2026-02-08 18:53:37 [main] INFO  Main - Job posted | employerId=2, title=AWS
+2026-02-08 18:53:37 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:53:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:37 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:53:37 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:53:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:37 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:53:37 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:53:43 [main] INFO  Main - User logged out | userId=4
+2026-02-08 18:53:51 [main] WARN  Main - Invalid email format entered: 1
+2026-02-08 18:54:03 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-08 18:54:03 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-08 18:54:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:03 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-08 18:54:03 [main] INFO  Main - User logged in | userId=5, role=JOB_SEEKER
+2026-02-08 18:54:03 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-08 18:54:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:03 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-08 18:54:03 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-08 18:54:03 [main] INFO  Main - Redirecting to Job Seeker Dashboard | userId=5, seekerId=3
+2026-02-08 18:54:03 [main] INFO  Main - Job Seeker Menu started | userId=5
+2026-02-08 18:54:03 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:54:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:03 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:54:03 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:54:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:03 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:54:22 [main] INFO  Main - Viewing all jobs | userId=5
+2026-02-08 18:54:22 [main] INFO  JobServiceImpl - Fetching all open jobs
+2026-02-08 18:54:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:22 [main] INFO  JobsDAOImpl - Fetched all open jobs | count=4
+2026-02-08 18:54:24 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:54:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:24 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:54:24 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:54:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:54:24 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:55:32 [main] INFO  ApplicationServiceImpl - Applying for jobId=5 by seekerId=3
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  ApplicationsDAOImpl - Application exists check | jobId=5, seekerId=3, exists=false
+2026-02-08 18:55:32 [main] INFO  ApplicationsDAOImpl - Applying job | jobId=5, seekerId=3
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  ApplicationsDAOImpl - Job applied successfully
+2026-02-08 18:55:32 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=5, seekerId=3
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=5, userId=4
+2026-02-08 18:55:32 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 5
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-08 18:55:32 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-08 18:55:32 [main] INFO  Main - Applied for job | seekerId=3, jobId=5
+2026-02-08 18:55:32 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=100
+2026-02-08 18:55:32 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-08 18:55:32 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:55:32 [main] INFO  Main - Displaying Job Seeker Dashboard | userId=5, profileCompletion=100
+2026-02-08 18:55:35 [main] INFO  Main - User logged out | userId=5
+2026-02-08 18:55:44 [main] WARN  Main - Invalid input in main menu
+java.lang.NumberFormatException: For input string: "Employer1@gmail.com"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:662)
+	at java.base/java.lang.Integer.parseInt(Integer.java:778)
+	at com.revhire.main.Main.main(Main.java:48)
+2026-02-08 18:56:01 [main] INFO  UserServiceImpl - User login attempt | email=Employer1@gmail.com
+2026-02-08 18:56:01 [main] INFO  UserDAOImpl - Fetching login data for email=Employer1@gmail.com
+2026-02-08 18:56:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:01 [main] INFO  UserServiceImpl - Login successful | userId=4
+2026-02-08 18:56:01 [main] INFO  Main - User logged in | userId=4, role=EMPLOYER
+2026-02-08 18:56:01 [main] INFO  EmployersServiceImpl - Fetching employerId for userId=4
+2026-02-08 18:56:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:01 [main] INFO  EmployersDAOImpl - EmployerId found: 2
+2026-02-08 18:56:01 [main] INFO  EmployersServiceImpl - EmployerId retrieved | userId=4, employerId=2
+2026-02-08 18:56:01 [main] INFO  Main - Redirecting to Employer Dashboard | userId=4, employerId=2
+2026-02-08 18:56:01 [main] INFO  Main - Employer Menu started | userId=4, employerId=2
+2026-02-08 18:56:01 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:56:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:01 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:56:01 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:56:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:01 [main] INFO  NotificationsDAOImpl - Fetched 1 unread notifications for userId=4
+2026-02-08 18:56:01 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:01 [main] INFO  Main - User has 1 unread notifications | userId=4
+2026-02-08 18:56:03 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:56:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:03 [main] INFO  NotificationsDAOImpl - Fetched 1 unread notifications for userId=4
+2026-02-08 18:56:03 [main] INFO  Main - Showing 1 notifications | userId=4
+2026-02-08 18:56:03 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:03 [main] INFO  NotificationsDAOImpl - Marked 1 notifications as read for userId=4
+2026-02-08 18:56:03 [main] INFO  NotificationsServiceImpl - All notifications marked as read | userId=4
+2026-02-08 18:56:03 [main] INFO  Main - Marked all notifications as read | userId=4
+2026-02-08 18:56:08 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:56:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:08 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:56:08 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:56:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:08 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:56:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:13 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=5
+2026-02-08 18:56:13 [main] INFO  ApplicationsDAOImpl - Fetching applications for jobId=5
+2026-02-08 18:56:13 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:13 [main] INFO  ApplicationsDAOImpl - Applications fetched: 1
+2026-02-08 18:56:13 [main] INFO  Main - Viewing applicants | employerId=2, jobId=5, count=1
+2026-02-08 18:56:16 [main] INFO  ProfileUtil - Calculating employer profile completion | employerId=2
+2026-02-08 18:56:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:16 [main] INFO  ProfileUtil - Employer profile completion calculated | employerId=2, percentage=100
+2026-02-08 18:56:16 [main] INFO  NotificationsServiceImpl - Fetching unread notifications | userId=4
+2026-02-08 18:56:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-08 18:56:16 [main] INFO  NotificationsDAOImpl - Fetched 0 unread notifications for userId=4
+2026-02-08 18:56:16 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE

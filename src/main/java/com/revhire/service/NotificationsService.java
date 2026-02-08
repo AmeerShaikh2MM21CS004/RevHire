@@ -16,4 +16,10 @@ public interface NotificationsService {
 
     int getUnreadNotificationCount(int userId);
 
+    void notifyMatchingJobSeekers(
+            String jobTitle,
+            String skills,
+            int experience,
+            String location
+    );
 }

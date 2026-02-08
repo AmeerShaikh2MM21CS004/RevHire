@@ -348,4 +348,5 @@ public class JobsDAOImpl implements com.revhire.dao.JobsDAO {
 
         return -1;
     }
+
 }

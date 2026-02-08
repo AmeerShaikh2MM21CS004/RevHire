@@ -336,6 +336,8 @@ public class Main {
                 case 4 -> {
                     logger.info("Viewing all jobs | userId={}", userId);
                     jobService.getAllJobs().forEach(System.out::println);
+                    System.out.println("\nPress Enter to return to dashboard...");
+                    sc.nextLine();
                 }
 
                 case 5 -> {
@@ -385,6 +387,8 @@ public class Main {
                     List<String> applications = applicationServiceImpl.viewMyApplications(seekerId);
                     logger.info("Viewed applications | seekerId={}, count={}", seekerId, applications.size());
                     applications.forEach(System.out::println);
+                    System.out.println("\nPress Enter to return to dashboard...");
+                    sc.nextLine();
                 }
 
                 case 8 -> {
@@ -567,6 +571,8 @@ public class Main {
                     logger.info("Viewing all jobs | employerId={}, count={}", employerId, jobs.size());
                     jobs.forEach(System.out::println);
                     System.out.println();
+                    System.out.println("\nPress Enter to return to dashboard...");
+                    sc.nextLine();
                 }
 
                 case 4 -> {
@@ -640,6 +646,8 @@ public class Main {
                     logger.info("Viewing applicants | employerId={}, jobId={}, count={}", employerId, jobId, applicants.size());
                     applicants.forEach(System.out::println);
                     System.out.println();
+                    System.out.println("\nPress Enter to return to dashboard...");
+                    sc.nextLine();
                 }
 
                 case 8 -> {

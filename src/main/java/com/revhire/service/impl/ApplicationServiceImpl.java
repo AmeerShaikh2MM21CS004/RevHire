@@ -31,8 +31,10 @@ public class ApplicationServiceImpl implements com.revhire.service.ApplicationSe
 
         if (applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId)) {
             logger.warn("Duplicate application attempt: jobId={}, seekerId={}", jobId, seekerId);
+            System.out.println("\n❌ You have already applied for this job.\n");
             return;
         }
+
 
         applicationsDAOImpl.applyJob(jobId, seekerId);
         logger.info("Job application submitted successfully: jobId={}, seekerId={}", jobId, seekerId);

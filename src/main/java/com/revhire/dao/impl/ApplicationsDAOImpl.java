@@ -46,34 +46,37 @@ public class ApplicationsDAOImpl implements com.revhire.dao.ApplicationsDAO {
 
     logger.debug("Checking application | jobId={}, seekerId={}", jobId, seekerId);
 
-    String sql =
-        """
-                SELECT COUNT(*) FROM applications
-                WHERE job_id = ? AND seeker_id = ?
-                """;
+    String sql = """
+        SELECT COUNT(*) 
+        FROM applications
+        WHERE job_id = ? AND seeker_id = ?
+        """;
 
     try (Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
       ps.setInt(1, jobId);
       ps.setInt(2, seekerId);
 
-      ResultSet rs = ps.executeQuery();
-      if (rs.next()) {
-        boolean exists = rs.getInt(1) > 0;
-        logger.info("Already applied: {}", exists);
-        System.out.println();
-        System.out.println("Already applied for this job!!");
-        return exists;
+      try (ResultSet rs = ps.executeQuery()) {
+        if (rs.next()) {
+          boolean exists = rs.getInt(1) > 0;
+          logger.info(
+                  "Application exists check | jobId={}, seekerId={}, exists={}",
+                  jobId, seekerId, exists
+          );
+          return exists;
+        }
       }
 
     } catch (SQLException e) {
-      logger.error("Error checking application existence", e);
-      System.out.println();
-      System.out.println("Something Went Wrong!!");
+      logger.error("Error checking application existence | jobId={}, seekerId={}",
+              jobId, seekerId, e);
     }
+
     return false;
   }
+
 
   // ---------------- UPDATE STATUS WITH REASON ----------------
   public void updateStatus(int applicationId, String status, String reason) {

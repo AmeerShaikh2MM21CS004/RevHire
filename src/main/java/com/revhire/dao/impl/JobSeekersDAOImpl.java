@@ -134,4 +134,44 @@ public class JobSeekersDAOImpl implements com.revhire.dao.JobSeekersDAO {
             throw e;
         }
     }
+
+    @Override
+    public List<Integer> findMatchingSeekerUserIds(
+            String skills,
+            Integer experience,
+            String location
+    ) throws SQLException {
+
+        String sql = """
+        SELECT DISTINCT js.user_id
+        FROM job_seekers js
+        JOIN resumes r ON js.seeker_id = r.seeker_id
+        WHERE LOWER(r.skills) LIKE ?
+          AND js.total_experience >= ?
+          AND LOWER(js.location) LIKE ?
+    """;
+
+        List<Integer> userIds = new ArrayList<>();
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + skills.toLowerCase() + "%");
+            ps.setInt(2, experience);
+            ps.setString(3, "%" + location.toLowerCase() + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    userIds.add(rs.getInt("user_id"));
+                }
+            }
+
+            logger.info("Matched {} job seekers for notification", userIds.size());
+        }
+
+        return userIds;
+    }
+
+
+
 }

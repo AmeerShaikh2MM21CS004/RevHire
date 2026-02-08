@@ -1,6 +1,7 @@
 package com.revhire.service.impl;
 
 import com.revhire.dao.impl.JobsDAOImpl;
+import com.revhire.service.NotificationsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +14,7 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
             LogManager.getLogger(JobServiceImpl.class);
 
     private final JobsDAOImpl jobsDAOImpl;
+    private final NotificationsService notificationsService = new NotificationsServiceImpl();
 
     // Default constructor
     public JobServiceImpl() {
@@ -45,7 +47,12 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
                 salary, type, deadline
         );
 
-        logger.info("Job posted successfully | employerId={}, title={}", employerId, title);
+        // 🔔 Proper service call (NO ERROR now)
+        notificationsService.notifyMatchingJobSeekers(
+                title, skills, experience, location
+        );
+
+        logger.info("Job posted & notifications sent | title={}", title);
     }
 
     // ---------------- GET ALL JOBS ----------------

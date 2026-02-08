@@ -1,6 +1,7 @@
 package com.revhire.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface JobSeekersDAO {
 
@@ -22,5 +23,12 @@ public interface JobSeekersDAO {
             String location,
             Integer totalExperience
     ) throws SQLException;
+
+    List<Integer> findMatchingSeekerUserIds(
+            String skills,
+            Integer experience,
+            String location
+    ) throws SQLException;
+
 
 }

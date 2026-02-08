@@ -1,7 +1,9 @@
 package com.revhire.service.impl;
 
+import com.revhire.dao.impl.JobSeekersDAOImpl;
 import com.revhire.dao.impl.NotificationsDAOImpl;
 import com.revhire.model.Notification;
+import com.revhire.service.NotificationsService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,21 +12,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsServiceImpl implements com.revhire.service.NotificationsService {
+public class NotificationsServiceImpl implements NotificationsService {
 
     private static final Logger logger =
             LogManager.getLogger(NotificationsServiceImpl.class);
 
     private final NotificationsDAOImpl notificationsDAOImpl;
+    private final JobSeekersDAOImpl jobSeekersDAO;
 
     // Default constructor
     public NotificationsServiceImpl() {
         this.notificationsDAOImpl = new NotificationsDAOImpl();
+        this.jobSeekersDAO = new JobSeekersDAOImpl();
     }
 
     // Constructor for unit testing
-    public NotificationsServiceImpl(NotificationsDAOImpl notificationsDAOImpl) {
+    public NotificationsServiceImpl(
+            NotificationsDAOImpl notificationsDAOImpl,
+            JobSeekersDAOImpl jobSeekersDAO) {
+
         this.notificationsDAOImpl = notificationsDAOImpl;
+        this.jobSeekersDAO = jobSeekersDAO;
     }
 
     // ---------------- ADD NOTIFICATION ----------------
@@ -51,18 +59,15 @@ public class NotificationsServiceImpl implements com.revhire.service.Notificatio
 
         try {
             return notificationsDAOImpl.fetchUnreadNotifications(userId);
-
         } catch (SQLException e) {
             logger.error("Unable to fetch unread notifications | userId={}", userId, e);
-            return List.of(); // safe fallback
+            return List.of();
         }
     }
 
     // ---------------- SHOW UNREAD NOTIFICATIONS ----------------
     @Override
     public List<String> showUnreadNotifications(int userId) {
-
-        logger.info("Preparing unread notification messages | userId={}", userId);
 
         List<Notification> notes = fetchUnreadNotifications(userId);
         List<String> messages = new ArrayList<>();
@@ -71,7 +76,6 @@ public class NotificationsServiceImpl implements com.revhire.service.Notificatio
             messages.add("🔔 " + n.getMessage() + " (" + n.getCreatedAt() + ")");
         }
 
-        logger.info("Unread notifications prepared | count={}", messages.size());
         return messages;
     }
 
@@ -79,34 +83,50 @@ public class NotificationsServiceImpl implements com.revhire.service.Notificatio
     @Override
     public void markAllAsRead(int userId) {
 
-        logger.info("Marking all notifications as read | userId={}", userId);
-
         try {
-            int rows = notificationsDAOImpl.markAllRead(userId);
-
-            if (rows > 0) {
-                logger.info("All notifications marked as read | userId={}", userId);
-            } else {
-                logger.warn("No unread notifications found | userId={}", userId);
-            }
+            notificationsDAOImpl.markAllRead(userId);
+            logger.info("All notifications marked as read | userId={}", userId);
 
         } catch (SQLException e) {
             logger.error("Failed to mark notifications as read | userId={}", userId, e);
-            throw new RuntimeException("Failed to update notifications", e);
+            throw new RuntimeException(e);
         }
     }
 
-    // ---------------- COUNT UNREAD NOTIFICATIONS ----------------
+    // ---------------- COUNT UNREAD ----------------
     @Override
     public int getUnreadNotificationCount(int userId) {
-
-        logger.debug("Counting unread notifications | userId={}", userId);
 
         try {
             return notificationsDAOImpl.countUnreadNotifications(userId);
         } catch (SQLException e) {
             logger.error("Failed to count unread notifications | userId={}", userId, e);
             return 0;
+        }
+    }
+
+    // 🔔 JOB MATCH NOTIFICATIONS (FIXED)
+    @Override
+    public void notifyMatchingJobSeekers(
+            String jobTitle,
+            String skills,
+            int experience,
+            String location) {
+
+        try {
+            List<Integer> userIds =
+                    jobSeekersDAO.findMatchingSeekerUserIds(skills, experience, location);
+
+            for (int userId : userIds) {
+                String message =
+                        "New job match: " + jobTitle + " in " + location;
+                addNotification(userId, message);
+            }
+
+            logger.info("Job match notifications sent | count={}", userIds.size());
+
+        } catch (Exception e) {
+            logger.error("Failed to notify matching job seekers", e);
         }
     }
 }
