@@ -224,13 +224,6 @@ RevHire
 
 ---
 
-## 🎥 Demo Video
-
-📺 **YouTube Demo:**  
-[Watch Here](Link_Here)
-
----
-
 ## 📌 Future Enhancements
 
 - Web-based UI (Spring Boot)
