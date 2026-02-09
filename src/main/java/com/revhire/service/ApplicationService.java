@@ -9,7 +9,7 @@ public interface ApplicationService {
 
     void withdrawApplication(int applicationId, String status, String reason);
 
-    List<String> viewMyApplications(int seekerId);
+    List<Application> viewMyApplications(int seekerId);
 
     List<Application> getApplicantsForJob(int jobId);
 

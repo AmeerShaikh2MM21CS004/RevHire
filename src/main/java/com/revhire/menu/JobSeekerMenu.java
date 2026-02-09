@@ -1,5 +1,6 @@
 package com.revhire.menu;
 
+import com.revhire.model.Application;
 import com.revhire.model.Job;
 import com.revhire.service.impl.*;
 import com.revhire.util.ProfileUtil;
@@ -201,15 +202,34 @@ public class JobSeekerMenu {
 
                 // ================= VIEW APPLICATIONS =================
                 case 6 -> {
-                    List<String> apps =
-                            applicationService.viewMyApplications(seekerId);
+                    List<Application> apps = applicationService.viewMyApplications(seekerId);
 
+                    // Original logging preserved
                     logger.info(
                             "Viewed applications | seekerId={}, count={}",
                             seekerId, apps.size()
                     );
 
-                    apps.forEach(System.out::println);
+                    if (apps.isEmpty()) {
+                        System.out.println("\n[!] No applications found.");
+                    } else {
+                        // Professional Formatting Logic
+                        System.out.println("\n" + "=".repeat(90));
+                        System.out.printf("║ %-10s │ %-10s │ %-15s │ %-30s%n",
+                                "APP ID", "JOB ID", "STATUS", "APPLIED DATE");
+                        System.out.println("╟" + "─".repeat(12) + "┼" + "─".repeat(12) + "┼" + "─".repeat(17) + "┼" + "─".repeat(32) + "╢");
+
+                        apps.forEach(app -> {
+                            System.out.printf("║ %-10d │ %-10d │ %-15s │ %-30s ║%n",
+                                    app.getApplicationId(),
+                                    app.getJobId(),
+                                    app.getStatus(),
+                                    app.getAppliedAt()
+                            );
+                        });
+                        System.out.println("=".repeat(90));
+                    }
+
                     System.out.println("\nPress Enter to return to dashboard...");
                     sc.nextLine();
                 }

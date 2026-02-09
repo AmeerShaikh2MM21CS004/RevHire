@@ -18825,3 +18825,919 @@ java.lang.RuntimeException
 2026-02-09 20:32:10 [main] INFO  JobServiceImpl - Updating job | jobId=10, employerId=1
 2026-02-09 20:32:10 [main] INFO  JobServiceImpl - Job updated successfully | jobId=10
 2026-02-09 20:32:10 [main] INFO  JobServiceImpl - Searching jobs | title=Dev, location=Mumbai, maxExp=3, company=ABC, type=Full-Time
+2026-02-09 20:32:15 [main] INFO  MainMenu - RevHire Application Started
+2026-02-09 20:32:25 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-09 20:32:25 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-09 20:32:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:26 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-09 20:32:26 [main] INFO  MainMenu - User logged in | userId=5, role=JOB_SEEKER
+2026-02-09 20:32:26 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-09 20:32:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:26 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-09 20:32:26 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-09 20:32:26 [main] INFO  MainMenu - Redirecting to Job Seeker Menu | seekerId=3
+2026-02-09 20:32:26 [main] INFO  JobSeekerMenu - Job Seeker Menu started | userId=5
+2026-02-09 20:32:26 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:32:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:26 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:32:26 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:32:26 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:26 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:32:40 [main] INFO  JobServiceImpl - Searching jobs | title=SDET, location=, maxExp=null, company=, type=
+2026-02-09 20:32:40 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:40 [main] INFO  JobsDAOImpl - Searched jobs | filters=[title=SDET, location=, maxExp=null, company=, salary=, type=] results=2
+2026-02-09 20:32:50 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:32:51 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:51 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:32:51 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:32:51 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:32:51 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:37:08 [main] INFO  ApplicationServiceImpl - Applying for jobId=1 by seekerId=3
+2026-02-09 20:37:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:08 [main] INFO  ApplicationsDAOImpl - Application exists check | jobId=1, seekerId=3, exists=true
+2026-02-09 20:37:08 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=1, seekerId=3
+2026-02-09 20:37:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:08 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=1, userId=2
+2026-02-09 20:37:08 [main] INFO  NotificationsServiceImpl - Adding notification | userId=2, message=New application received for Job ID: 1
+2026-02-09 20:37:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:08 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=2
+2026-02-09 20:37:08 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=2
+2026-02-09 20:37:08 [main] INFO  JobSeekerMenu - Applied for job | seekerId=3, jobId=1
+2026-02-09 20:37:08 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:37:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:08 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:37:08 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:37:08 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:08 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:37:12 [main] INFO  ApplicationServiceImpl - Applying for jobId=3 by seekerId=3
+2026-02-09 20:37:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:12 [main] INFO  ApplicationsDAOImpl - Application exists check | jobId=3, seekerId=3, exists=true
+2026-02-09 20:37:12 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=3, seekerId=3
+2026-02-09 20:37:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:12 [main] INFO  JobsDAOImpl - Fetched employer userId | jobId=3, userId=4
+2026-02-09 20:37:12 [main] INFO  NotificationsServiceImpl - Adding notification | userId=4, message=New application received for Job ID: 3
+2026-02-09 20:37:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:12 [main] INFO  NotificationsDAOImpl - Notification inserted for userId=4
+2026-02-09 20:37:12 [main] INFO  NotificationsServiceImpl - Notification sent successfully | userId=4
+2026-02-09 20:37:12 [main] INFO  JobSeekerMenu - Applied for job | seekerId=3, jobId=3
+2026-02-09 20:37:12 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:37:12 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:12 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:37:12 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:37:13 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:37:13 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:38:04 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-09 20:38:04 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-09 20:38:04 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:38:04 [main] INFO  ApplicationsDAOImpl - Total applications fetched: 4
+2026-02-09 20:38:04 [main] INFO  JobSeekerMenu - Viewed applications | seekerId=3, count=4
+2026-02-09 20:41:35 [main] INFO  MainMenu - RevHire Application Started
+2026-02-09 20:41:46 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-09 20:41:46 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-09 20:41:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:41:48 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-09 20:41:48 [main] INFO  MainMenu - User logged in | userId=5, role=JOB_SEEKER
+2026-02-09 20:41:48 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-09 20:41:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:41:48 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-09 20:41:48 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-09 20:41:48 [main] INFO  MainMenu - Redirecting to Job Seeker Menu | seekerId=3
+2026-02-09 20:41:48 [main] INFO  JobSeekerMenu - Job Seeker Menu started | userId=5
+2026-02-09 20:41:48 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:41:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:41:48 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:41:48 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:41:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:41:48 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:42:02 [main] INFO  ApplicationServiceImpl - Withdrawing applicationId=1, status=WITHDRAWN, reason=Withdrawn by candidate
+2026-02-09 20:42:02 [main] INFO  ApplicationsDAOImpl - Updating application status | appId=1, status=WITHDRAWN
+2026-02-09 20:42:02 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:42:02 [main] INFO  ApplicationsDAOImpl - Application status updated successfully
+2026-02-09 20:42:02 [main] INFO  ApplicationServiceImpl - Application withdrawn successfully: applicationId=1
+2026-02-09 20:42:02 [main] INFO  JobSeekerMenu - Application withdrawn | applicationId=1, seekerId=3
+2026-02-09 20:42:02 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:42:02 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:42:02 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:42:02 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:42:02 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:42:02 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:42:09 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-09 20:42:09 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-09 20:42:09 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:42:09 [main] ERROR ApplicationsDAOImpl - Error fetching applications by seeker
+java.sql.SQLException: ORA-17006: Invalid column name
+https://docs.oracle.com/error-help/db/ora-17006/
+	at oracle.jdbc.driver.OracleStatement.getColumnIndexPrimitive(OracleStatement.java:4566)
+	at oracle.jdbc.driver.OracleStatement.getColumnIndex(OracleStatement.java:4524)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.findColumn(InsensitiveScrollableResultSet.java:308)
+	at oracle.jdbc.driver.GeneratedResultSet.getTimestamp(GeneratedResultSet.java:661)
+	at com.revhire.dao.impl.ApplicationsDAOImpl.getApplicationsBySeeker(ApplicationsDAOImpl.java:146)
+	at com.revhire.service.impl.ApplicationServiceImpl.viewMyApplications(ApplicationServiceImpl.java:59)
+	at com.revhire.menu.JobSeekerMenu.start(JobSeekerMenu.java:205)
+	at com.revhire.menu.MainMenu.handleLogin(MainMenu.java:129)
+	at com.revhire.menu.MainMenu.start(MainMenu.java:60)
+	at com.revhire.main.Main.main(Main.java:7)
+2026-02-09 20:42:09 [main] INFO  JobSeekerMenu - Viewed applications | seekerId=3, count=0
+2026-02-09 20:44:26 [main] INFO  MainMenu - RevHire Application Started
+2026-02-09 20:44:32 [main] WARN  MainMenu - Invalid email during login: User12gmail.com
+2026-02-09 20:44:47 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-09 20:44:47 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-09 20:44:48 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:49 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-09 20:44:49 [main] INFO  MainMenu - User logged in | userId=5, role=JOB_SEEKER
+2026-02-09 20:44:49 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-09 20:44:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:49 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-09 20:44:49 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-09 20:44:49 [main] INFO  MainMenu - Redirecting to Job Seeker Menu | seekerId=3
+2026-02-09 20:44:49 [main] INFO  JobSeekerMenu - Job Seeker Menu started | userId=5
+2026-02-09 20:44:49 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:44:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:49 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:44:49 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:44:49 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:49 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:44:54 [main] INFO  ApplicationServiceImpl - Withdrawing applicationId=5, status=WITHDRAWN, reason=Withdrawn by candidate
+2026-02-09 20:44:54 [main] INFO  ApplicationsDAOImpl - Updating application status | appId=5, status=WITHDRAWN
+2026-02-09 20:44:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:54 [main] INFO  ApplicationsDAOImpl - Application status updated successfully
+2026-02-09 20:44:54 [main] INFO  ApplicationServiceImpl - Application withdrawn successfully: applicationId=5
+2026-02-09 20:44:54 [main] INFO  JobSeekerMenu - Application withdrawn | applicationId=5, seekerId=3
+2026-02-09 20:44:54 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:44:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:54 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:44:54 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:44:54 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:54 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:44:56 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-09 20:44:56 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-09 20:44:56 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:44:56 [main] ERROR ApplicationsDAOImpl - Error fetching applications: ORA-00904: "A"."APPLIED_AT": invalid identifier
+
+https://docs.oracle.com/error-help/db/ora-00904/
+java.sql.SQLSyntaxErrorException: ORA-00904: "A"."APPLIED_AT": invalid identifier
+
+https://docs.oracle.com/error-help/db/ora-00904/
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:715)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:615)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1315)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:975)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:237)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:508)
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:285)
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:1147)
+	at oracle.jdbc.driver.OracleStatement.prepareDefineBufferAndExecute(OracleStatement.java:1311)
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:1236)
+	at oracle.jdbc.driver.OracleStatement.executeSQLSelect(OracleStatement.java:1604)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1454)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3950)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:4054)
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1116)
+	at com.revhire.dao.impl.ApplicationsDAOImpl.getApplicationsBySeeker(ApplicationsDAOImpl.java:136)
+	at com.revhire.service.impl.ApplicationServiceImpl.viewMyApplications(ApplicationServiceImpl.java:59)
+	at com.revhire.menu.JobSeekerMenu.start(JobSeekerMenu.java:205)
+	at com.revhire.menu.MainMenu.handleLogin(MainMenu.java:129)
+	at com.revhire.menu.MainMenu.start(MainMenu.java:60)
+	at com.revhire.main.Main.main(Main.java:7)
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00904: "A"."APPLIED_AT": invalid identifier
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:723)
+	... 20 more
+2026-02-09 20:44:56 [main] INFO  JobSeekerMenu - Viewed applications | seekerId=3, count=0
+2026-02-09 20:46:09 [main] INFO  MainMenu - RevHire Application Started
+2026-02-09 20:46:10 [main] WARN  MainMenu - Invalid main menu choice: 11
+2026-02-09 20:46:21 [main] INFO  UserServiceImpl - User login attempt | email=User1@gmail.com
+2026-02-09 20:46:21 [main] INFO  UserDAOImpl - Fetching login data for email=User1@gmail.com
+2026-02-09 20:46:22 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:46:23 [main] INFO  UserServiceImpl - Login successful | userId=5
+2026-02-09 20:46:23 [main] INFO  MainMenu - User logged in | userId=5, role=JOB_SEEKER
+2026-02-09 20:46:23 [main] INFO  JobSeekerServiceImpl - Fetching seekerId for userId=5
+2026-02-09 20:46:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:46:23 [main] INFO  JobSeekersDAOImpl - Found seekerId=3 for userId=5
+2026-02-09 20:46:23 [main] INFO  JobSeekerServiceImpl - SeekerId retrieved | userId=5, seekerId=3
+2026-02-09 20:46:23 [main] INFO  MainMenu - Redirecting to Job Seeker Menu | seekerId=3
+2026-02-09 20:46:23 [main] INFO  JobSeekerMenu - Job Seeker Menu started | userId=5
+2026-02-09 20:46:23 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:46:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:46:23 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:46:23 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:46:23 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:46:23 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:46:24 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=3
+2026-02-09 20:46:24 [main] INFO  ApplicationsDAOImpl - Fetching applications for seekerId=3
+2026-02-09 20:46:24 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:46:24 [main] INFO  ApplicationsDAOImpl - Total applications fetched: 4
+2026-02-09 20:46:24 [main] INFO  JobSeekerMenu - Viewed applications | seekerId=3, count=4
+2026-02-09 20:48:27 [main] INFO  ProfileUtil - Calculating job seeker profile completion | seekerId=3
+2026-02-09 20:48:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:48:28 [main] INFO  ProfileUtil - Profile completion calculated | seekerId=3, percentage=55
+2026-02-09 20:48:28 [main] INFO  ProfileUtil - Profile completion updated | seekerId=3, rowsAffected=1
+2026-02-09 20:48:28 [main] INFO  DBConnection - Database connection established successfully | URL=jdbc:oracle:thin:@localhost:1521:XE
+2026-02-09 20:48:28 [main] INFO  JobSeekerMenu - Displaying Job Seeker Dashboard | userId=5, profileCompletion=55
+2026-02-09 20:48:28 [main] ERROR MainMenu - Unexpected error in MainMenu
+java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:947)
+	at java.base/java.util.Scanner.next(Scanner.java:1602)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2267)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2221)
+	at com.revhire.menu.JobSeekerMenu.start(JobSeekerMenu.java:67)
+	at com.revhire.menu.MainMenu.handleLogin(MainMenu.java:129)
+	at com.revhire.menu.MainMenu.start(MainMenu.java:60)
+	at com.revhire.main.Main.main(Main.java:7)
+2026-02-09 20:48:28 [main] INFO  MainMenu - Application shutdown complete
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching seeker userId for applicationId=1
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Updating application status: applicationId=1, status=REJECTED
+2026-02-09 20:49:04 [main] ERROR ApplicationServiceImpl - Error updating application status: applicationId=1
+java.lang.RuntimeException: DB error
+	at com.revhire.dao.impl.ApplicationsDAOImpl.updateStatusByApplicationId(ApplicationsDAOImpl.java:196)
+	at com.revhire.service.impl.ApplicationServiceImpl.updateApplicationStatus(ApplicationServiceImpl.java:81)
+	at com.revhire.service.ApplicationServiceImplTest.lambda$updateApplicationStatus_shouldHandleExceptionGracefully$1(ApplicationServiceImplTest.java:129)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:52)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:39)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3295)
+	at com.revhire.service.ApplicationServiceImplTest.updateApplicationStatus_shouldHandleExceptionGracefully(ApplicationServiceImplTest.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching seeker userId for applicationId=1
+2026-02-09 20:49:04 [main] ERROR ApplicationServiceImpl - Error fetching seeker userId for applicationId=1
+java.lang.RuntimeException
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchSeekerUserIdByApplicationId(ApplicationsDAOImpl.java:217)
+	at com.revhire.service.impl.ApplicationServiceImpl.getSeekerUserIdByApplicationId(ApplicationServiceImpl.java:95)
+	at com.revhire.service.ApplicationServiceImplTest.getSeekerUserIdByApplicationId_shouldReturnMinusOneOnException(ApplicationServiceImplTest.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching jobId for applicationId=1
+2026-02-09 20:49:04 [main] ERROR ApplicationServiceImpl - Error fetching jobId for applicationId=1
+java.lang.RuntimeException
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchJobIdByApplicationId(ApplicationsDAOImpl.java:233)
+	at com.revhire.service.impl.ApplicationServiceImpl.getJobIdByApplicationId(ApplicationServiceImpl.java:109)
+	at com.revhire.service.ApplicationServiceImplTest.getJobIdByApplicationId_shouldReturnMinusOneOnException(ApplicationServiceImplTest.java:175)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=201
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Updating application status: applicationId=1, status=APPROVED
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Application status updated successfully: applicationId=1
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=101
+2026-02-09 20:49:04 [main] ERROR ApplicationServiceImpl - Error fetching applicants for jobId=101
+java.lang.RuntimeException: DB error
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchApplicationsByJobId(ApplicationsDAOImpl.java:160)
+	at com.revhire.service.impl.ApplicationServiceImpl.getApplicantsForJob(ApplicationServiceImpl.java:68)
+	at com.revhire.service.ApplicationServiceImplTest.getApplicantsForJob_shouldReturnEmptyListOnException(ApplicationServiceImplTest.java:106)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching jobId for applicationId=1
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Applying for jobId=101 by seekerId=201
+2026-02-09 20:49:04 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=101, seekerId=201
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=101
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Applying for jobId=101 by seekerId=201
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=101, seekerId=201
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Withdrawing applicationId=1, status=WITHDRAWN, reason=Not interested
+2026-02-09 20:49:04 [main] INFO  ApplicationServiceImpl - Application withdrawn successfully: applicationId=1
+2026-02-09 20:49:08 [main] INFO  ApplicationServiceImpl - Fetching seeker userId for applicationId=1
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Updating application status: applicationId=1, status=REJECTED
+2026-02-09 20:49:09 [main] ERROR ApplicationServiceImpl - Error updating application status: applicationId=1
+java.lang.RuntimeException: DB error
+	at com.revhire.dao.impl.ApplicationsDAOImpl.updateStatusByApplicationId(ApplicationsDAOImpl.java:196)
+	at com.revhire.service.impl.ApplicationServiceImpl.updateApplicationStatus(ApplicationServiceImpl.java:81)
+	at com.revhire.service.ApplicationServiceImplTest.lambda$updateApplicationStatus_shouldHandleExceptionGracefully$1(ApplicationServiceImplTest.java:129)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:52)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:39)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3295)
+	at com.revhire.service.ApplicationServiceImplTest.updateApplicationStatus_shouldHandleExceptionGracefully(ApplicationServiceImplTest.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching seeker userId for applicationId=1
+2026-02-09 20:49:09 [main] ERROR ApplicationServiceImpl - Error fetching seeker userId for applicationId=1
+java.lang.RuntimeException
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchSeekerUserIdByApplicationId(ApplicationsDAOImpl.java:217)
+	at com.revhire.service.impl.ApplicationServiceImpl.getSeekerUserIdByApplicationId(ApplicationServiceImpl.java:95)
+	at com.revhire.service.ApplicationServiceImplTest.getSeekerUserIdByApplicationId_shouldReturnMinusOneOnException(ApplicationServiceImplTest.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching jobId for applicationId=1
+2026-02-09 20:49:09 [main] ERROR ApplicationServiceImpl - Error fetching jobId for applicationId=1
+java.lang.RuntimeException
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchJobIdByApplicationId(ApplicationsDAOImpl.java:233)
+	at com.revhire.service.impl.ApplicationServiceImpl.getJobIdByApplicationId(ApplicationServiceImpl.java:109)
+	at com.revhire.service.ApplicationServiceImplTest.getJobIdByApplicationId_shouldReturnMinusOneOnException(ApplicationServiceImplTest.java:175)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching applications for seekerId=201
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Updating application status: applicationId=1, status=APPROVED
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Application status updated successfully: applicationId=1
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=101
+2026-02-09 20:49:09 [main] ERROR ApplicationServiceImpl - Error fetching applicants for jobId=101
+java.lang.RuntimeException: DB error
+	at com.revhire.dao.impl.ApplicationsDAOImpl.fetchApplicationsByJobId(ApplicationsDAOImpl.java:160)
+	at com.revhire.service.impl.ApplicationServiceImpl.getApplicantsForJob(ApplicationServiceImpl.java:68)
+	at com.revhire.service.ApplicationServiceImplTest.getApplicantsForJob_shouldReturnEmptyListOnException(ApplicationServiceImplTest.java:106)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching jobId for applicationId=1
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Applying for jobId=101 by seekerId=201
+2026-02-09 20:49:09 [main] WARN  ApplicationServiceImpl - Duplicate application attempt: jobId=101, seekerId=201
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Fetching applicants for jobId=101
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Applying for jobId=101 by seekerId=201
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Job application submitted successfully: jobId=101, seekerId=201
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Withdrawing applicationId=1, status=WITHDRAWN, reason=Not interested
+2026-02-09 20:49:09 [main] INFO  ApplicationServiceImpl - Application withdrawn successfully: applicationId=1

@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,13 +64,24 @@ class ApplicationServiceImplTest {
 
     @Test
     void viewMyApplications_shouldReturnApplications() {
+        // Arrange: Create mock Application objects
+        Application app1 = new Application(1, 101, 201, "PENDING", new Timestamp(System.currentTimeMillis()));
+        Application app2 = new Application(2, 102, 201, "ACCEPTED", new Timestamp(System.currentTimeMillis()));
+
+        // Mock the DAO to return the list of objects
         when(applicationsDAOImpl.getApplicationsBySeeker(201))
-                .thenReturn(List.of("App1", "App2"));
+                .thenReturn(List.of(app1, app2));
 
-        List<String> result =
-                applicationService.viewMyApplications(201);
+        // Act: Call the service method
+        List<Application> result = applicationService.viewMyApplications(201);
 
-        assertEquals(2, result.size());
+        // Assert: Verify size and content
+        assertEquals(2, result.size(), "Should return exactly 2 applications");
+        assertEquals("PENDING", result.get(0).getStatus());
+        assertEquals(102, result.get(1).getJobId());
+
+        // Verification: Ensure the DAO was called exactly once with the right ID
+        verify(applicationsDAOImpl, times(1)).getApplicationsBySeeker(201);
     }
 
     // ---------------- getApplicantsForJob ----------------

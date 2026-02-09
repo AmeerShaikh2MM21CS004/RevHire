@@ -117,45 +117,39 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
   }
 
   // ---------------- GET APPLICATIONS BY SEEKER ----------------
-  public List<String> getApplicationsBySeeker(int seekerId) {
-
+  public List<Application> getApplicationsBySeeker(int seekerId) {
     logger.info("Fetching applications for seekerId={}", seekerId);
+    List<Application> list = new ArrayList<>();
 
-    List<String> list = new ArrayList<>();
-
-    String sql =
-        """
-                SELECT *
-                FROM applications a
-                JOIN jobs j ON a.job_id = j.job_id
-                WHERE a.seeker_id = ?
-                """;
+    // Corrected SQL: changed applied_at to applied_date
+    String sql = """
+            SELECT a.application_id, a.job_id, a.seeker_id, a.status, a.applied_date 
+            FROM applications a
+            JOIN jobs j ON a.job_id = j.job_id
+            WHERE a.seeker_id = ?
+            """;
 
     try (Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
       ps.setInt(1, seekerId);
-      ResultSet rs = ps.executeQuery();
-
-      while (rs.next()) {
-        list.add(
-            rs.getInt("application_id")
-                + " | "
-                + rs.getString("job_id")
-                + " | "
-                + rs.getString("status")
-                + " | "
-                + rs.getString("applied_date")
-                + " | "
-                + rs.getString("withdraw_reason"));
+      try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+          Application app = new Application(
+                  rs.getInt("application_id"),
+                  rs.getInt("job_id"),
+                  rs.getInt("seeker_id"),
+                  rs.getString("status"),
+                  rs.getTimestamp("applied_date") // Updated to match your DB column
+          );
+          list.add(app);
+        }
       }
-
       logger.info("Total applications fetched: {}", list.size());
 
     } catch (SQLException e) {
       logger.error("Error fetching applications by seeker", e);
-      System.out.println();
-      System.out.println("Something Went Wrong!!");
+      System.out.println("\n[!] Database Error: " + e.getMessage());
     }
     return list;
   }

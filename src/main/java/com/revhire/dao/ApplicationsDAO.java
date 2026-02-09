@@ -13,7 +13,7 @@ public interface ApplicationsDAO {
 
     void updateStatus(int applicationId, String status, String reason);
 
-    List<String> getApplicationsBySeeker(int seekerId);
+    List<Application> getApplicationsBySeeker(int seekerId);
 
     List<Application> fetchApplicationsByJobId(int jobId) throws SQLException;
 

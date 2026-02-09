@@ -53,8 +53,8 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public List<String> viewMyApplications(int seekerId) {
-
+    public List<Application> viewMyApplications(int seekerId) {
+        // Original logging preserved
         logger.info("Fetching applications for seekerId={}", seekerId);
         return applicationsDAOImpl.getApplicationsBySeeker(seekerId);
     }
