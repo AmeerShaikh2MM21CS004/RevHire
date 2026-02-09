@@ -13,17 +13,22 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
     private static final Logger logger = LogManager.getLogger(JobServiceImpl.class);
 
     private final JobsDAOImpl jobsDAOImpl;
-    private final NotificationsService notificationsService = new NotificationsServiceImpl();
+
+    private final NotificationsService notificationsService;
 
     // Default constructor
     public JobServiceImpl() {
         this.jobsDAOImpl = new JobsDAOImpl();
+        this.notificationsService = new NotificationsServiceImpl();
     }
 
     // Constructor for unit testing
-    public JobServiceImpl(JobsDAOImpl jobsDAOImpl) {
+    public JobServiceImpl(JobsDAOImpl jobsDAOImpl,
+                          NotificationsService notificationsService) {
         this.jobsDAOImpl = jobsDAOImpl;
+        this.notificationsService = notificationsService;
     }
+
 
     // ---------------- ADD JOB ----------------
     public void addJob(

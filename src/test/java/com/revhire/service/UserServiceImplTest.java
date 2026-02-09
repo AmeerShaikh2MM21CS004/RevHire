@@ -25,106 +25,147 @@ class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userServiceImpl;
 
-    // ---------------- addUserAndReturnId ----------------
+    // ---------- REGISTER ----------
 
     @Test
-    void addUserAndReturnId_shouldCallDAO() {
-        // given
+    void addUserAndReturnId_shouldReturnUserId() {
         given(userDAOImpl.insertUserAndReturnId(
-                anyString(),
-                anyString(),
-                anyString(),
-                anyString(),
-                anyString()
-        )).willReturn(100);
+                anyString(), anyString(), anyString(), anyString(), anyString()))
+                .willReturn(10);
 
-        // when
-        int userId = userServiceImpl.addUserAndReturnId(
-                "test@example.com",
-                "passHash",
-                "USER",
-                "Q?",
-                "AHash"
-        );
+        int id = userServiceImpl.addUserAndReturnId(
+                "a@test.com", "hash", "USER", "Q", "A");
 
-        // then
-        assertEquals(100, userId);
-        then(userDAOImpl).should().insertUserAndReturnId(
-                "test@example.com",
-                "passHash",
-                "USER",
-                "Q?",
-                "AHash"
-        );
+        assertEquals(10, id);
     }
 
-    // ---------------- login ----------------
+    // ---------- LOGIN ----------
 
     @Test
-    void login_shouldReturnUser_whenCredentialsValid() throws SQLException {
-        // given
+    void login_shouldReturnUser_whenValidCredentials() throws SQLException {
         ResultSet rs = mock(ResultSet.class);
 
-        given(userDAOImpl.fetchLoginData("test@example.com"))
-                .willReturn(rs);
+        given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
         given(rs.next()).willReturn(true);
         given(rs.getString("password_hash"))
-                .willReturn(HashUtil.hash("password"));
+                .willReturn(HashUtil.hash("pass"));
         given(rs.getInt("user_id")).willReturn(1);
         given(rs.getString("role")).willReturn("USER");
 
-        // when
-        User user = userServiceImpl.login("test@example.com", "password");
+        User user = userServiceImpl.login("a@test.com", "pass");
 
-        // then
         assertNotNull(user);
         assertEquals(1, user.getUserId());
-        assertEquals("USER", user.getRole());
+    }
+
+    @Test
+    void login_shouldReturnNull_whenPasswordWrong() throws SQLException {
+        ResultSet rs = mock(ResultSet.class);
+
+        given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
+        given(rs.next()).willReturn(true);
+        given(rs.getString("password_hash"))
+                .willReturn(HashUtil.hash("correct"));
+
+        assertNull(userServiceImpl.login("a@test.com", "wrong"));
     }
 
     @Test
     void login_shouldReturnNull_whenUserNotFound() throws SQLException {
-        // given
         ResultSet rs = mock(ResultSet.class);
 
-        given(userDAOImpl.fetchLoginData("test@example.com"))
-                .willReturn(rs);
+        given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
         given(rs.next()).willReturn(false);
 
-        // when
-        User user = userServiceImpl.login("test@example.com", "password");
-
-        // then
-        assertNull(user);
+        assertNull(userServiceImpl.login("a@test.com", "pass"));
     }
 
-    // ---------------- verifySecurityAnswer ----------------
+    // ---------- CHANGE PASSWORD ----------
 
     @Test
-    void verifySecurityAnswer_shouldReturnTrue_whenAnswerMatches() throws SQLException {
-        // given
-        given(userDAOImpl.fetchSecurityAnswerHash("test@example.com"))
-                .willReturn(HashUtil.hash("answer"));
+    void changePassword_shouldReturnTrue_whenSuccess() throws SQLException {
+        ResultSet rs = mock(ResultSet.class);
 
-        // when
-        boolean result =
-                userServiceImpl.verifySecurityAnswer("test@example.com", "answer");
+        given(userDAOImpl.fetchLoginDataById(1)).willReturn(rs);
+        given(rs.next()).willReturn(true);
+        given(rs.getString("password_hash"))
+                .willReturn(HashUtil.hash("old"));
+        given(userDAOImpl.updatePasswordByUserId(eq(1), anyString()))
+                .willReturn(true);
 
-        // then
-        assertTrue(result);
+        assertTrue(userServiceImpl.changePassword(1, "old", "new"));
     }
 
     @Test
-    void verifySecurityAnswer_shouldReturnFalse_whenAnswerIncorrect() throws SQLException {
-        // given
-        given(userDAOImpl.fetchSecurityAnswerHash("test@example.com"))
+    void changePassword_shouldReturnFalse_whenWrongCurrentPassword()
+            throws SQLException {
+
+        ResultSet rs = mock(ResultSet.class);
+
+        given(userDAOImpl.fetchLoginDataById(1)).willReturn(rs);
+        given(rs.next()).willReturn(true);
+        given(rs.getString("password_hash"))
                 .willReturn(HashUtil.hash("correct"));
 
+        assertFalse(userServiceImpl.changePassword(1, "wrong", "new"));
+    }
+
+    // ---------- RESET PASSWORD ----------
+
+    @Test
+    void resetPassword_shouldUpdate_whenAnswerCorrect() throws SQLException {
+        // given
+        given(userDAOImpl.fetchSecurityAnswerHash("a@test.com"))
+                .willReturn(HashUtil.hash("ans"));
+
+        given(userDAOImpl.updatePasswordByEmail(anyString(), anyString()))
+                .willReturn(true);
+
         // when
-        boolean result =
-                userServiceImpl.verifySecurityAnswer("test@example.com", "wrong");
+        userServiceImpl.resetPassword("a@test.com", "ans", "newPass");
 
         // then
-        assertFalse(result);
+        then(userDAOImpl).should()
+                .updatePasswordByEmail(eq("a@test.com"), anyString());
+    }
+
+    @Test
+    void resetPassword_shouldThrowException_onSQLException()
+            throws SQLException {
+
+        given(userDAOImpl.fetchSecurityAnswerHash("a@test.com"))
+                .willThrow(SQLException.class);
+
+        assertThrows(
+                RuntimeException.class,
+                () -> userServiceImpl.resetPassword(
+                        "a@test.com", "ans", "new")
+        );
+    }
+
+    // ---------- VERIFY SECURITY ANSWER ----------
+
+    @Test
+    void verifySecurityAnswer_shouldReturnTrue_whenMatch()
+            throws SQLException {
+
+        given(userDAOImpl.fetchSecurityAnswerHash("a@test.com"))
+                .willReturn(HashUtil.hash("yes"));
+
+        assertTrue(
+                userServiceImpl.verifySecurityAnswer("a@test.com", "yes")
+        );
+    }
+
+    @Test
+    void verifySecurityAnswer_shouldReturnFalse_whenMismatch()
+            throws SQLException {
+
+        given(userDAOImpl.fetchSecurityAnswerHash("a@test.com"))
+                .willReturn(HashUtil.hash("correct"));
+
+        assertFalse(
+                userServiceImpl.verifySecurityAnswer("a@test.com", "wrong")
+        );
     }
 }

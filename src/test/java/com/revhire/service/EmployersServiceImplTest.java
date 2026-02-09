@@ -2,7 +2,6 @@ package com.revhire.service;
 
 import com.revhire.dao.impl.EmployersDAOImpl;
 import com.revhire.service.impl.EmployersServiceImpl;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,27 +24,23 @@ class EmployersServiceImplTest {
 
     @Test
     void getEmployerIdByUserId_shouldReturnEmployerId() {
-        int userId = 10;
-
-        when(employersDAOImpl.getEmployerIdByUserId(userId))
+        when(employersDAOImpl.getEmployerIdByUserId(10))
                 .thenReturn(1001);
 
         int result =
-                employersServiceImpl.getEmployerIdByUserId(userId);
+                employersServiceImpl.getEmployerIdByUserId(10);
 
         assertEquals(1001, result);
     }
 
     @Test
     void getEmployerIdByUserId_shouldThrowExceptionWhenNotFound() {
-        int userId = 10;
-
-        when(employersDAOImpl.getEmployerIdByUserId(userId))
+        when(employersDAOImpl.getEmployerIdByUserId(10))
                 .thenReturn(null);
 
         RuntimeException ex = assertThrows(
                 RuntimeException.class,
-                () -> employersServiceImpl.getEmployerIdByUserId(userId)
+                () -> employersServiceImpl.getEmployerIdByUserId(10)
         );
 
         assertEquals("Employer profile not found", ex.getMessage());
@@ -65,14 +60,16 @@ class EmployersServiceImplTest {
                 anyString()
         )).thenReturn(1);
 
-        employersServiceImpl.updateCompanyProfile(
-                1,
-                "RevHire",
-                "IT",
-                100,
-                "Hiring platform",
-                "https://revhire.com",
-                "India"
+        assertDoesNotThrow(() ->
+                employersServiceImpl.updateCompanyProfile(
+                        1,
+                        "RevHire",
+                        "IT",
+                        100,
+                        "Hiring platform",
+                        "https://revhire.com",
+                        "India"
+                )
         );
 
         verify(employersDAOImpl).updateCompanyProfile(
@@ -90,12 +87,12 @@ class EmployersServiceImplTest {
     void updateCompanyProfile_shouldHandleNoRowsUpdated() {
         when(employersDAOImpl.updateCompanyProfile(
                 anyInt(),
-                any(),
-                any(),
-                any(),
-                any(),
-                any(),
-                any()
+                anyString(),
+                anyString(),
+                anyInt(),
+                anyString(),
+                anyString(),
+                anyString()
         )).thenReturn(0);
 
         assertDoesNotThrow(() ->

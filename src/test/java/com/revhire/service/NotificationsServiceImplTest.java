@@ -5,9 +5,9 @@ import com.revhire.dao.impl.NotificationsDAOImpl;
 import com.revhire.model.Notification;
 import com.revhire.service.impl.NotificationsServiceImpl;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -27,8 +27,17 @@ class NotificationsServiceImplTest {
     @Mock
     private JobSeekersDAOImpl jobSeekersDAO;
 
-    @InjectMocks
     private NotificationsServiceImpl notificationsServiceImpl;
+
+    // ✅ FORCE constructor injection (VERY IMPORTANT)
+    @BeforeEach
+    void setup() {
+        notificationsServiceImpl =
+                new NotificationsServiceImpl(
+                        notificationsDAOImpl,
+                        jobSeekersDAO
+                );
+    }
 
     // ---------------- addNotification ----------------
     @Test
@@ -56,8 +65,10 @@ class NotificationsServiceImplTest {
     @Test
     void fetchUnreadNotifications_shouldReturnList() throws Exception {
         Notification n =
-                new Notification(1, 1, "Test", 'N',
-                        new Timestamp(System.currentTimeMillis()));
+                new Notification(
+                        1, 1, "Test", 'N',
+                        new Timestamp(System.currentTimeMillis())
+                );
 
         when(notificationsDAOImpl.fetchUnreadNotifications(1))
                 .thenReturn(List.of(n));
@@ -84,8 +95,10 @@ class NotificationsServiceImplTest {
     @Test
     void showUnreadNotifications_shouldReturnFormattedMessages() throws Exception {
         Notification n =
-                new Notification(1, 1, "Test", 'N',
-                        new Timestamp(System.currentTimeMillis()));
+                new Notification(
+                        1, 1, "Test", 'N',
+                        new Timestamp(System.currentTimeMillis())
+                );
 
         when(notificationsDAOImpl.fetchUnreadNotifications(1))
                 .thenReturn(List.of(n));
@@ -153,5 +166,21 @@ class NotificationsServiceImplTest {
 
         verify(notificationsDAOImpl, times(2))
                 .insertNotification(anyInt(), contains("Java Developer"));
+    }
+
+    @Test
+    void notifyMatchingJobSeekers_shouldHandleExceptionGracefully() throws Exception {
+        when(jobSeekersDAO.findMatchingSeekerUserIds(
+                anyString(), anyInt(), anyString()))
+                .thenThrow(new RuntimeException("DB down"));
+
+        assertDoesNotThrow(() ->
+                notificationsServiceImpl.notifyMatchingJobSeekers(
+                        "Java Dev", "Java", 2, "Pune"
+                )
+        );
+
+        verify(notificationsDAOImpl, never())
+                .insertNotification(anyInt(), anyString());
     }
 }

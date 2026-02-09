@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,8 +24,6 @@ class ResumeServiceImplTest {
     @InjectMocks
     private ResumeServiceImpl resumeServiceImpl;
 
-    // ---------------- saveOrUpdateResume ----------------
-
     @Test
     void saveOrUpdateResume_shouldCallDAO() throws SQLException {
         // given
@@ -34,26 +34,29 @@ class ResumeServiceImplTest {
         // when
         resumeServiceImpl.saveOrUpdateResume(
                 1,
-                "Obj",
-                "Edu",
-                "Exp",
+                "Objective",
+                "Education",
+                "Experience",
                 "Skills",
                 "Projects"
         );
 
         // then
-        then(resumesDAOImpl).should().upsertResume(
-                1,
-                "Obj",
-                "Edu",
-                "Exp",
-                "Skills",
-                "Projects"
-        );
+        then(resumesDAOImpl).should(times(1))
+                .upsertResume(
+                        1,
+                        "Objective",
+                        "Education",
+                        "Experience",
+                        "Skills",
+                        "Projects"
+                );
     }
 
     @Test
-    void saveOrUpdateResume_shouldThrowRuntimeExceptionOnSQLException() throws SQLException {
+    void saveOrUpdateResume_shouldThrowRuntimeExceptionOnSQLException()
+            throws SQLException {
+
         // given
         willThrow(SQLException.class)
                 .given(resumesDAOImpl)
@@ -64,9 +67,9 @@ class ResumeServiceImplTest {
                 RuntimeException.class,
                 () -> resumeServiceImpl.saveOrUpdateResume(
                         1,
-                        "Obj",
-                        "Edu",
-                        "Exp",
+                        "Objective",
+                        "Education",
+                        "Experience",
                         "Skills",
                         "Projects"
                 )

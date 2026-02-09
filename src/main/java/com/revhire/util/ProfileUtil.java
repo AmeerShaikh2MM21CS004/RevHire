@@ -21,7 +21,7 @@ public class ProfileUtil {
 
         try (Connection conn = DBConnection.getConnection()) {
 
-            // ================= JOB SEEKER PROFILE =================
+            // ---------------- JOB SEEKER PROFILE ----------------
             String profileSql =
                     "SELECT full_name, phone, location, total_experience " +
                             "FROM job_seekers WHERE seeker_id = ?";
@@ -42,7 +42,7 @@ public class ProfileUtil {
                 }
             }
 
-            // ================= RESUME (OPTIONAL ROW) =================
+            // ---------------- RESUME (OPTIONAL ROW) ----------------
             String resumeSql =
                     "SELECT objective, education, experience, skills, projects " +
                             "FROM resumes WHERE seeker_id = ?";
@@ -64,7 +64,7 @@ public class ProfileUtil {
             int percentage = (filled * 100) / TOTAL_FIELDS;
             logger.info("Profile completion calculated | seekerId={}, percentage={}", seekerId, percentage);
 
-            // ================= UPDATE PROFILE COMPLETION =================
+            // ---------------- UPDATE PROFILE COMPLETION ----------------
             String updateSql =
                     "UPDATE job_seekers " +
                             "SET profile_completion = ?, " +

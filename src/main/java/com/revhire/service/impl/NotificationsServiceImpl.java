@@ -25,7 +25,7 @@
             this.jobSeekersDAO = new JobSeekersDAOImpl();
         }
 
-        // Constructor for unit testing
+        // Constructor for unit testing (IMPORTANT)
         public NotificationsServiceImpl(
                 NotificationsDAOImpl notificationsDAOImpl,
                 JobSeekersDAOImpl jobSeekersDAO) {
