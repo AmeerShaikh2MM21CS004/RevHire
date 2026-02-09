@@ -41,8 +41,6 @@ public class JobSeekersDAOImpl implements JobSeekersDAO {
 
             ps.executeUpdate();
             logger.info("Job seeker profile created for userId={}", userId);
-            System.out.println();
-            System.out.println("Job seeker profile created for userId");
 
         } catch (SQLException e) {
             logger.error("Error inserting job seeker for userId={}", userId, e);

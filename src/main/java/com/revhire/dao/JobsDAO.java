@@ -22,7 +22,7 @@ public interface JobsDAO {
 
     List<Job> getAllOpenJobs();
 
-    List<String> getJobsByEmployer(int employerId);
+    List<Job> getJobsByEmployer(int employerId);
 
     List<Job> searchJobs(
             String title,

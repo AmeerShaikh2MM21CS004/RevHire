@@ -1,12 +1,15 @@
 package com.revhire.service.impl;
 
-import com.revhire.dao.impl.UserDAOImpl;
+import com.revhire.dao.impl.*;
 import com.revhire.model.User;
+import com.revhire.util.DBConnection;
 import com.revhire.util.HashUtil;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,6 +17,7 @@ public class UserServiceImpl implements com.revhire.service.UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     private final UserDAOImpl userDAOImpl;
+
 
     // Default constructor
     public UserServiceImpl() {
@@ -168,5 +172,19 @@ public class UserServiceImpl implements com.revhire.service.UserService {
             logger.error("Security answer verification failed | email={}", email, e);
             return false;
         }
+    }
+
+    @Override
+    public int getUserIdBySeekerId(int seekerId) {
+
+        logger.debug("Service call: getUserIdBySeekerId | seekerId={}", seekerId);
+
+        int userId = UserDAOImpl.getUserIdBySeekerId(seekerId);
+
+        if (userId == -1) {
+            logger.warn("No userId found for seekerId={}", seekerId);
+        }
+
+        return userId;
     }
 }

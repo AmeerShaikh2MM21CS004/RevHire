@@ -11,7 +11,7 @@ public interface ApplicationsDAO {
 
     boolean hasAlreadyApplied(int jobId, int seekerId);
 
-    void updateStatus(int applicationId, String status, String reason);
+    boolean updateStatus(int applicationId, String status, String reason);
 
     List<Application> getApplicationsBySeeker(int seekerId);
 

@@ -93,6 +93,11 @@ VALUES (
 );
 
 SELECT * FROM jobs;
+
+SELECT job_id, title, location, experience_required, education_required
+               salary, job_type, deadline, status
+        FROM jobs
+        WHERE employer_id =21; 
 SELECT job_id, title, status FROM jobs WHERE status = 'OPEN';
 
 
@@ -118,6 +123,7 @@ COMMIT;
 -- Verify
 SELECT * FROM applications;
 
+SELECT user_id FROM applications WHERE application_id =5;
 
 --INSERT NOTIFICATION
 INSERT INTO notifications (user_id, message)
@@ -135,7 +141,9 @@ select *
 from notifications
 where is_read ='N' and user_id='3';
 
-
+update notifications
+set is_read = 'Y'
+where user_id = 1;
 
 --IMPORTANT SELECT QUERIES (REAL USE CASES)
 
@@ -187,9 +195,16 @@ DROP TABLE users CASCADE CONSTRAINTS;
 COMMIT;
 
 
-
+SELECT seeker_id FROM applications WHERE application_id = 6;
+                                
 SHOW USER;
 
+
+SELECT seeker_id FROM applications WHERE application_id =1
+
+SELECT user_id
+        FROM job_seekers
+        WHERE seeker_id =1
 
 
 

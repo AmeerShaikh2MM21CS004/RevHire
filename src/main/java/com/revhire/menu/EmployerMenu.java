@@ -1,6 +1,7 @@
 package com.revhire.menu;
 
 import com.revhire.model.Application;
+import com.revhire.model.Job;
 import com.revhire.model.Notification;
 import com.revhire.service.impl.*;
 import com.revhire.util.ProfileUtil;
@@ -37,6 +38,7 @@ public class EmployerMenu {
 
             if (!unread.isEmpty()) {
                 logger.info("User has {} unread notifications | userId={}", unread.size(), userId);
+                System.out.println();
                 System.out.println("🔔 You have " + unreadCount + " new notifications");
             }
 
@@ -111,10 +113,38 @@ public class EmployerMenu {
                 }
 
                 case 3 -> {
-                    List<String> jobs = jobService.getAllJobsOfEmployer(employerId);
+                    List<Job> jobs = jobService.getAllJobsOfEmployer(employerId);
                     logger.info("Viewing all jobs | employerId={}, count={}", employerId, jobs.size());
-                    jobs.forEach(System.out::println);
 
+                    if (jobs.isEmpty()) {
+                        System.out.println("\n[!] No jobs posted yet.");
+                    } else {
+                        System.out.println("\n" + "=".repeat(130));
+                        System.out.printf(
+                                "%-5s | %-25s | %-15s | %-5s | %-12s | %-12s | %-10s | %-12s | %-8s%n",
+                                "ID", "JOB TITLE", "LOCATION", "EXP", "EDU",
+                                "SALARY", "TYPE", "DEADLINE", "STATUS"
+                        );
+                        System.out.println("=".repeat(130));
+
+                        jobs.forEach(job -> {
+                            String title = job.getTitle().length() > 25 ? job.getTitle().substring(0, 22) + "..." : job.getTitle();
+
+                            System.out.printf(
+                                    "%-5d | %-25s | %-15s | %-5d | %-12s | %-12s | %-10s | %-12s | %-8s%n",
+                                    job.getJobId(),
+                                    title,
+                                    job.getLocation(),
+                                    job.getExperienceRequired(),
+                                    job.getEducationRequired(),
+                                    job.getSalary(),
+                                    job.getJobType(),
+                                    job.getDeadline(),
+                                    job.getStatus()
+                            );
+                        });
+                        System.out.println("-".repeat(130));
+                    }
                     System.out.println("\nPress Enter to return to dashboard...");
                     sc.nextLine();
                 }
@@ -145,9 +175,7 @@ public class EmployerMenu {
                     String jobType = sc.nextLine();
                     System.out.print("New Deadline (YYYY-MM-DD): ");
                     String deadlineInput = sc.nextLine();
-                    Date deadline = deadlineInput.isBlank()
-                            ? null
-                            : Date.valueOf(deadlineInput);
+                    Date deadline = deadlineInput.isBlank() ? null : Date.valueOf(deadlineInput);
 
                     jobService.updateJob(
                             jobId, employerId,
@@ -161,7 +189,6 @@ public class EmployerMenu {
                             jobType.isBlank() ? null : jobType,
                             deadline
                     );
-
                     logger.info("Job updated | employerId={}, jobId={}", employerId, jobId);
                 }
 
@@ -194,10 +221,48 @@ public class EmployerMenu {
                     List<Application> apps =
                             applicationService.getApplicantsForJob(jobId);
 
-                    logger.info("Viewing applicants | employerId={}, jobId={}, count={}",
-                            employerId, jobId, apps.size());
+                    logger.info(
+                            "Viewing applicants | employerId={}, jobId={}, count={}",
+                            employerId, jobId, apps.size()
+                    );
 
-                    apps.forEach(System.out::println);
+                    if (apps.isEmpty()) {
+                        System.out.println("\n[!] No applications found.");
+                    } else {
+
+                        System.out.println("\n" + "=".repeat(120));
+                        System.out.printf(
+                                "%-8s | %-8s | %-20s | %-12s | %-23s | %-40s%n",
+                                "APP ID", "JOB ID", "SEEKER NAME",
+                                "STATUS", "APPLIED DATE", "WITHDRAW REASON"
+                        );
+                        System.out.println("-".repeat(120));
+
+                        apps.forEach(app -> {
+
+                            String reason =
+                                    app.getWithdrawReason() != null
+                                            ? app.getWithdrawReason()
+                                            : "N/A";
+
+                            String formattedReason =
+                                    reason.length() > 40
+                                            ? reason.substring(0, 37) + "..."
+                                            : reason;
+
+                            System.out.printf(
+                                    "%-8d | %-8d | %-20s | %-12s | %-20s | %-40s%n",
+                                    app.getApplicationId(),
+                                    app.getJobId(),
+                                    app.getSeekerName(),
+                                    app.getStatus(),
+                                    app.getAppliedAt(),
+                                    formattedReason
+                            );
+                        });
+
+                        System.out.println("=".repeat(120));
+                    }
 
                     System.out.println("\nPress Enter to return to dashboard...");
                     sc.nextLine();
@@ -207,13 +272,18 @@ public class EmployerMenu {
                     System.out.print("Application ID: ");
                     int appId = sc.nextInt();
                     sc.nextLine();
+
                     System.out.print("Status (SHORTLISTED / REJECTED): ");
                     String status = sc.nextLine().toUpperCase();
 
                     applicationService.updateApplicationStatus(appId, status);
 
+                    int seekerId =
+                            applicationService.getSeekerIdByApplicationId(appId);
+
                     int seekerUserId =
-                            applicationService.getSeekerUserIdByApplicationId(appId);
+                            userService.getUserIdBySeekerId(seekerId);
+
                     int jobId =
                             applicationService.getJobIdByApplicationId(appId);
 
@@ -224,8 +294,10 @@ public class EmployerMenu {
                         );
                     }
 
-                    logger.info("Application status updated | employerId={}, appId={}, status={}",
-                            employerId, appId, status);
+                    logger.info(
+                            "Application status updated | employerId={}, appId={}, status={}",
+                            employerId, appId, status
+                    );
                 }
 
                 case 9 -> {

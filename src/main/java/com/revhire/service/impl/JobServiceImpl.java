@@ -67,11 +67,11 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
     }
 
     // ---------------- GET EMPLOYER JOBS ----------------
-    public List<String> getAllJobsOfEmployer(int employerId) {
-
+    public List<Job> getAllJobsOfEmployer(int employerId) {
         logger.info("Fetching jobs for employerId={}", employerId);
         return jobsDAOImpl.getJobsByEmployer(employerId);
     }
+
 
     // ---------------- SEARCH JOBS ----------------
     public List<Job> searchJobs(

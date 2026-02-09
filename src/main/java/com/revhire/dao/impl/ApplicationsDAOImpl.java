@@ -79,40 +79,37 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
   }
 
   // ---------------- UPDATE STATUS WITH REASON ----------------
-  public void updateStatus(int applicationId, String status, String reason) {
+  // In ApplicationsDAOImpl.java
+  public boolean updateStatus(int applicationId, String status, String reason) {
+    logger.info("Attempting update | appId={}, status={}", applicationId, status);
 
-    logger.info("Updating application status | appId={}, status={}", applicationId, status);
-
-    String sql =
-        """
-                UPDATE applications
-                SET status = ?,
-                    withdraw_reason = ?
-                WHERE application_id = ?
-                """;
+    String sql = """
+            UPDATE applications
+            SET status = ?,
+                withdraw_reason = ?
+            WHERE application_id = ?
+            """;
 
     try (Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
       ps.setString(1, status);
+      ps.setString(2, (reason == null || reason.isBlank()) ? "Withdrawn" : reason);
+      ps.setInt(3, applicationId);
 
-      if (reason != null && !reason.isBlank()) {
-        ps.setString(2, reason);
+      int rowsAffected = ps.executeUpdate();
+
+      if (rowsAffected > 0) {
+        logger.info("Application {} updated successfully", applicationId);
+        return true;
       } else {
-        ps.setNull(2, Types.VARCHAR);
+        logger.warn("Update failed: Application ID {} not found", applicationId);
+        return false;
       }
 
-      ps.setInt(3, applicationId);
-      ps.executeUpdate();
-
-      logger.info("Application status updated successfully");
-      System.out.println();
-      System.out.println("Application status updated successfully!!!");
-
     } catch (SQLException e) {
-      logger.error("Error updating application status", e);
-      System.out.println();
-      System.out.println("Something Went Wrong!!");
+      logger.error("Database error during withdrawal", e);
+      return false;
     }
   }
 
@@ -121,12 +118,12 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
     logger.info("Fetching applications for seekerId={}", seekerId);
     List<Application> list = new ArrayList<>();
 
-    // Corrected SQL: changed applied_at to applied_date
-    String sql = """
-            SELECT a.application_id, a.job_id, a.seeker_id, a.status, a.applied_date 
-            FROM applications a
-            JOIN jobs j ON a.job_id = j.job_id
-            WHERE a.seeker_id = ?
+    String sql =
+        """
+            SELECT a.application_id, a.job_id, a.seeker_id, a.status, a.applied_date , a.withdraw_reason
+                       FROM applications a
+                       JOIN jobs j ON a.job_id = j.job_id
+                       WHERE a.seeker_id = ?
             """;
 
     try (Connection conn = DBConnection.getConnection();
@@ -140,7 +137,8 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
                   rs.getInt("job_id"),
                   rs.getInt("seeker_id"),
                   rs.getString("status"),
-                  rs.getTimestamp("applied_date") // Updated to match your DB column
+                  rs.getTimestamp("applied_date"),
+                  rs.getString("withdraw_reason")
           );
           list.add(app);
         }
@@ -159,34 +157,43 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
 
     logger.info("Fetching applications for jobId={}", jobId);
 
-    String sql =
-        """
-                SELECT application_id, job_id, seeker_id, status, applied_date
-                FROM applications
-                WHERE job_id = ?
-                """;
+    String sql = """
+        SELECT
+            a.application_id,
+            a.job_id,
+            a.seeker_id,
+            js.full_name AS seeker_name,
+            a.status,
+            a.applied_date,
+            a.withdraw_reason
+        FROM applications a
+        JOIN job_seekers js
+            ON a.seeker_id = js.seeker_id
+        WHERE a.job_id = ?
+    """;
 
     List<Application> list = new ArrayList<>();
 
     try (Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
       ps.setInt(1, jobId);
       ResultSet rs = ps.executeQuery();
 
       while (rs.next()) {
-        list.add(
-            new Application(
+        list.add(new Application(
                 rs.getInt("application_id"),
                 rs.getInt("job_id"),
                 rs.getInt("seeker_id"),
+                rs.getString("seeker_name"),
                 rs.getString("status"),
-                rs.getTimestamp("applied_date")));
+                rs.getTimestamp("applied_date"),
+                rs.getString("withdraw_reason")
+        ));
       }
 
       logger.info("Applications fetched: {}", list.size());
     }
-
     return list;
   }
 
@@ -211,21 +218,27 @@ public class ApplicationsDAOImpl implements ApplicationsDAO {
     }
   }
 
-  // ---------------- FETCH SEEKER ID ----------------
+  @Override
   public int fetchSeekerUserIdByApplicationId(int appId) throws SQLException {
+    return 0;
+  }
+
+  // ---------------- FETCH SEEKER ID ----------------
+  public int fetchSeekerIdByApplicationId(int appId) throws SQLException {
 
     logger.debug("Fetching seekerId for appId={}", appId);
 
     String sql = "SELECT seeker_id FROM applications WHERE application_id = ?";
 
     try (Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
       ps.setInt(1, appId);
       ResultSet rs = ps.executeQuery();
       return rs.next() ? rs.getInt("seeker_id") : -1;
     }
   }
+
 
   // ---------------- FETCH JOB ID ----------------
   public int fetchJobIdByApplicationId(int appId) throws SQLException {

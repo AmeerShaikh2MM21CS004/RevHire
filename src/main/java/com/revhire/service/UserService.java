@@ -28,4 +28,6 @@ public interface UserService {
     // ---------- VERIFY SECURITY ANSWERS  ----------
     boolean verifySecurityAnswer(String email, String answer);
 
+    int  getUserIdBySeekerId(int seeker);
+
 }

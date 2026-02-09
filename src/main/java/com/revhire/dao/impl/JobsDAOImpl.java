@@ -95,45 +95,59 @@ public class JobsDAOImpl implements JobsDAO {
         return jobs;
     }
 
-    public List<String> getJobsByEmployer(int employerId) {
-        List<String> jobs = new ArrayList<>();
+    public List<Job> getJobsByEmployer(int employerId) {
+
+        List<Job> jobs = new ArrayList<>();
+
         String sql = """
-            SELECT job_id, title, description, skills_required,
-                                       experience_required, education_required,
-                                       location, salary, job_type, deadline, status
-                                FROM jobs
-                                WHERE employer_id = ?
-        """;
+        SELECT job_id, title, description, skills_required,
+               experience_required, education_required,
+               location, salary, job_type, deadline, status
+        FROM jobs
+        WHERE employer_id = ?
+    """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, employerId);
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                jobs.add(
-                        rs.getInt("job_id") + " | " +
-                                rs.getString("title") + " | " +
-                                rs.getString("description") + " | " +
-                                rs.getString("skills_required") + " | " +
-                                rs.getInt("experience_required") + " | " +
-                                rs.getString("education_required") + " | " +
-                                rs.getString("location") + " | " +
-                                rs.getString("salary") + " | " +
-                                rs.getString("job_type") + " | " +
-                                rs.getDate("deadline") + " | " +
-                                rs.getString("status")
-                );
+                Job job = new Job();
+
+                job.setJobId(rs.getInt("job_id"));
+                job.setTitle(rs.getString("title"));
+                job.setDescription(rs.getString("description"));
+                job.setSkillsRequired(rs.getString("skills_required"));
+                job.setExperienceRequired(rs.getInt("experience_required"));
+                job.setEducationRequired(rs.getString("education_required"));
+                job.setLocation(rs.getString("location"));
+                job.setSalary(rs.getString("salary"));
+                job.setJobType(rs.getString("job_type"));
+                job.setDeadline(rs.getDate("deadline"));
+                job.setStatus(rs.getString("status"));
+
+                jobs.add(job);
             }
-            logger.info("Fetched jobs by employer | employerId={}, count={}", employerId, jobs.size());
+
+            logger.info(
+                    "Fetched jobs by employer | employerId={}, count={}",
+                    employerId, jobs.size()
+            );
 
         } catch (SQLException e) {
-            logger.error("Failed to fetch jobs by employer | employerId={}, error={}", employerId, e.getMessage());
+            logger.error(
+                    "Failed to fetch jobs by employer | employerId={}, error={}",
+                    employerId, e.getMessage()
+            );
             throw new RuntimeException(e);
         }
+
         return jobs;
     }
+
 
     public List<Job> searchJobs(String title, String location, Integer maxExp,
                                 String company, String salary, String type) {

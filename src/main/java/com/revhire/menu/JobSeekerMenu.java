@@ -32,12 +32,12 @@ public class JobSeekerMenu {
         logger.info("Job Seeker Menu started | userId={}", userId);
 
         while (true) {
-
             int completion = ProfileUtil.calculateJobSeekerCompletion(seekerId);
             int unreadCount = notificationService.getUnreadNotificationCount(userId);
 
             if (unreadCount > 0) {
                 logger.info("User has {} unread notifications | userId={}", unreadCount, userId);
+                System.out.println();
                 System.out.println("🔔 You have " + unreadCount + " new notifications");
             }
 
@@ -184,14 +184,17 @@ public class JobSeekerMenu {
                     int jobId = sc.nextInt();
                     sc.nextLine();
 
-                    applicationService.applyForJob(jobId, seekerId);
+                    boolean applied = applicationService.applyForJob(jobId, seekerId);
 
-                    int employerUserId = jobService.getEmployerUserIdByJob(jobId);
-                    if (employerUserId != -1) {
-                        notificationService.addNotification(
-                                employerUserId,
-                                "New application received for Job ID: " + jobId
-                        );
+                    if (applied) {
+                        int employerUserId = jobService.getEmployerUserIdByJob(jobId);
+
+                        if (employerUserId != -1) {
+                            notificationService.addNotification(
+                                    employerUserId,
+                                    "New application received for Job ID: " + jobId
+                            );
+                        }
                     }
 
                     logger.info(
@@ -211,32 +214,47 @@ public class JobSeekerMenu {
                     );
 
                     if (apps.isEmpty()) {
-                        System.out.println("\n[!] No applications found.");
+                        System.out.println("\n [!] No applications found.");
                     } else {
-                        // Professional Formatting Logic
-                        System.out.println("\n" + "=".repeat(90));
-                        System.out.printf("║ %-10s │ %-10s │ %-15s │ %-30s%n",
-                                "APP ID", "JOB ID", "STATUS", "APPLIED DATE");
-                        System.out.println("╟" + "─".repeat(12) + "┼" + "─".repeat(12) + "┼" + "─".repeat(17) + "┼" + "─".repeat(32) + "╢");
+                        // Width increased to 120 to fit the Reason column
+                        System.out.println("\n" + "=".repeat(120));
+                        System.out.printf("%-8s | %-8s | %-12s | %-20s | %-40s%n",
+                                "APP ID", "JOB ID", "STATUS", "APPLIED DATE", "WITHDRAWAL REASON");
+                        System.out.println("-".repeat(120));
 
                         apps.forEach(app -> {
-                            System.out.printf("║ %-10d │ %-10d │ %-15s │ %-30s ║%n",
+                            // Handling potential nulls for the reason field
+                            String reason = (app.getWithdrawReason() != null) ? app.getWithdrawReason() : "N/A";
+
+                            // Applying truncate logic to the reason so it doesn't wrap and break the UI
+                            String formattedReason = (reason.length() > 40) ? reason.substring(0, 37) + "..." : reason;
+
+                            System.out.printf("%-8d | %-8d | %-12s | %-20s | %-40s%n",
                                     app.getApplicationId(),
                                     app.getJobId(),
                                     app.getStatus(),
-                                    app.getAppliedAt()
+                                    app.getAppliedAt(),
+                                    formattedReason
                             );
                         });
-                        System.out.println("=".repeat(90));
+                        System.out.println("=".repeat(120));
                     }
-
                     System.out.println("\nPress Enter to return to dashboard...");
                     sc.nextLine();
                 }
 
                 // ================= WITHDRAW APPLICATION =================
                 case 7 -> {
-                    System.out.print("Application ID: ");
+                    System.out.println("\n--- Withdraw Application ---");
+                    System.out.print("Enter Application ID to withdraw: ");
+
+                    // Validate that input is actually a number to prevent crashes
+                    if (!sc.hasNextInt()) {
+                        System.out.println(" Invalid input. ID must be a number.");
+                        sc.nextLine();
+                        break;
+                    }
+
                     int applicationId = sc.nextInt();
                     sc.nextLine();
 
@@ -244,14 +262,21 @@ public class JobSeekerMenu {
                     String reason = sc.nextLine();
                     if (reason.isBlank()) reason = "Withdrawn by candidate";
 
-                    applicationService.withdrawApplication(
+                    // Call service and capture success/failure
+                    boolean success = applicationService.withdrawApplication(
                             applicationId, "WITHDRAWN", reason
                     );
 
-                    logger.info(
-                            "Application withdrawn | applicationId={}, seekerId={}",
-                            applicationId, seekerId
-                    );
+                    if (success) {
+                        System.out.println("\n Application " + applicationId + " has been successfully withdrawn.");
+                        logger.info("Application withdrawn | applicationId={}, seekerId={}", applicationId, seekerId);
+                    } else {
+                        System.out.println("\n Error: Application ID " + applicationId + " does not exist or could not be found.");
+                        // We do not log successful withdrawal here because it failed
+                    }
+
+                    System.out.println("\nPress Enter to return to dashboard...");
+                    sc.nextLine();
                 }
 
                 // ================= CHANGE PASSWORD =================

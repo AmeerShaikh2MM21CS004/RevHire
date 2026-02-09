@@ -194,4 +194,38 @@ public class UserDAOImpl implements UserDAO {
 
         return ps.executeQuery();
     }
+
+    public static int getUserIdBySeekerId(int seekerId) {
+
+        logger.debug("Fetching userId for seekerId={}", seekerId);
+
+        String sql = """
+        SELECT user_id
+        FROM job_seekers
+        WHERE seeker_id = ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, seekerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("user_id");
+                logger.debug("Found userId={} for seekerId={}", userId, seekerId);
+                return userId;
+            }
+
+            logger.warn("No user found for seekerId={}", seekerId);
+            return -1;   // or throw exception if you prefer
+
+        } catch (SQLException e) {
+            logger.error(
+                    "Failed to fetch userId for seekerId={} | error={}",
+                    seekerId, e.getMessage()
+            );
+            throw new RuntimeException(e);
+        }
+    }
 }

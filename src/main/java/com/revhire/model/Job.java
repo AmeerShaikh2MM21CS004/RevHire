@@ -18,6 +18,7 @@ public class Job {
     private String status;
     private Timestamp postedDate;
 
+
     public int getJobId() { return jobId; }
     public void setJobId(int jobId) { this.jobId = jobId; }
 

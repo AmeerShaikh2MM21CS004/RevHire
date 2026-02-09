@@ -26,29 +26,58 @@ class JobSeekerServiceImplTest {
 
     @Test
     void createProfile_shouldCreateProfileSuccessfully() throws SQLException {
+
         doNothing().when(jobSeekersDAOImpl)
-                .insertJobSeeker(1, "John Doe", "1234567890", "Mumbai", 3, 'Y');
+                .insertJobSeeker(
+                        1,
+                        "John Doe",
+                        "1234567890",
+                        "Mumbai",
+                        3,
+                        'Y'
+                );
 
         assertDoesNotThrow(() ->
                 jobSeekerServiceImpl.createProfile(
-                        1, "John Doe", "1234567890", "Mumbai", 3
+                        1,
+                        "John Doe",
+                        "1234567890",
+                        "Mumbai",
+                        3
                 )
         );
 
         verify(jobSeekersDAOImpl).insertJobSeeker(
-                1, "John Doe", "1234567890", "Mumbai", 3, 'Y'
+                1,
+                "John Doe",
+                "1234567890",
+                "Mumbai",
+                3,
+                'Y'
         );
     }
 
     @Test
     void createProfile_shouldThrowRuntimeExceptionOnSQLException() throws SQLException {
+
         doThrow(SQLException.class).when(jobSeekersDAOImpl)
-                .insertJobSeeker(anyInt(), any(), any(), any(), anyInt(), anyChar());
+                .insertJobSeeker(
+                        anyInt(),
+                        anyString(),
+                        anyString(),
+                        anyString(),
+                        anyInt(),
+                        anyChar()
+                );
 
         RuntimeException ex = assertThrows(
                 RuntimeException.class,
                 () -> jobSeekerServiceImpl.createProfile(
-                        1, "John", "123", "Mumbai", 2
+                        1,
+                        "John",
+                        "123",
+                        "Mumbai",
+                        2
                 )
         );
 
@@ -59,43 +88,76 @@ class JobSeekerServiceImplTest {
 
     @Test
     void updateJobSeekerProfile_shouldLogSuccessWhenRowsUpdated() throws SQLException {
+
         when(jobSeekersDAOImpl.updateJobSeeker(
-                anyInt(), any(), any(), any(), any()
+                anyInt(),
+                anyString(),
+                anyString(),
+                anyString(),
+                any()
         )).thenReturn(1);
 
         assertDoesNotThrow(() ->
                 jobSeekerServiceImpl.updateJobSeekerProfile(
-                        10, "John Doe", "12345", "Delhi", 4
+                        10,
+                        "John Doe",
+                        "12345",
+                        "Delhi",
+                        4
                 )
         );
 
         verify(jobSeekersDAOImpl).updateJobSeeker(
-                10, "John Doe", "12345", "Delhi", 4
+                10,
+                "John Doe",
+                "12345",
+                "Delhi",
+                4
         );
     }
 
     @Test
     void updateJobSeekerProfile_shouldHandleZeroRowsUpdated() throws SQLException {
+
         when(jobSeekersDAOImpl.updateJobSeeker(
-                anyInt(), any(), any(), any(), any()
+                anyInt(),
+                anyString(),
+                anyString(),
+                anyString(),
+                any()
         )).thenReturn(0);
 
         assertDoesNotThrow(() ->
                 jobSeekerServiceImpl.updateJobSeekerProfile(
-                        10, "John", "123", "Delhi", 3
+                        10,
+                        "John",
+                        "123",
+                        "Delhi",
+                        3
                 )
         );
     }
 
     @Test
     void updateJobSeekerProfile_shouldThrowRuntimeExceptionOnSQLException() throws SQLException {
+
         doThrow(SQLException.class).when(jobSeekersDAOImpl)
-                .updateJobSeeker(anyInt(), any(), any(), any(), any());
+                .updateJobSeeker(
+                        anyInt(),
+                        anyString(),
+                        anyString(),
+                        anyString(),
+                        any()
+                );
 
         RuntimeException ex = assertThrows(
                 RuntimeException.class,
                 () -> jobSeekerServiceImpl.updateJobSeekerProfile(
-                        10, "John", "123", "Delhi", 3
+                        10,
+                        "John",
+                        "123",
+                        "Delhi",
+                        3
                 )
         );
 
@@ -106,6 +168,7 @@ class JobSeekerServiceImplTest {
 
     @Test
     void getSeekerIdByUserId_shouldReturnSeekerId() throws SQLException {
+
         when(jobSeekersDAOImpl.findSeekerIdByUserId(5))
                 .thenReturn(1001);
 
@@ -116,6 +179,7 @@ class JobSeekerServiceImplTest {
 
     @Test
     void getSeekerIdByUserId_shouldThrowWhenProfileNotFound() throws SQLException {
+
         when(jobSeekersDAOImpl.findSeekerIdByUserId(5))
                 .thenReturn(-1);
 
@@ -129,6 +193,7 @@ class JobSeekerServiceImplTest {
 
     @Test
     void getSeekerIdByUserId_shouldThrowOnSQLException() throws SQLException {
+
         doThrow(SQLException.class).when(jobSeekersDAOImpl)
                 .findSeekerIdByUserId(anyInt());
 
@@ -144,13 +209,26 @@ class JobSeekerServiceImplTest {
 
     @Test
     void createJobSeeker_shouldCreateDefaultProfile() throws SQLException {
+
         doNothing().when(jobSeekersDAOImpl)
-                .insertJobSeeker(anyInt(), isNull(), isNull(), isNull(), eq(0), eq('Y'));
+                .insertJobSeeker(
+                        anyInt(),
+                        isNull(),
+                        isNull(),
+                        isNull(),
+                        eq(0),
+                        eq('Y')
+                );
 
         jobSeekerServiceImpl.createJobSeeker(7);
 
         verify(jobSeekersDAOImpl).insertJobSeeker(
-                7, null, null, null, 0, 'Y'
+                7,
+                null,
+                null,
+                null,
+                0,
+                'Y'
         );
     }
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.mockStatic;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -29,12 +31,18 @@ class UserServiceImplTest {
 
     @Test
     void addUserAndReturnId_shouldReturnUserId() {
+
         given(userDAOImpl.insertUserAndReturnId(
-                anyString(), anyString(), anyString(), anyString(), anyString()))
-                .willReturn(10);
+                anyString(), anyString(), anyString(), anyString(), anyString()
+        )).willReturn(10);
 
         int id = userServiceImpl.addUserAndReturnId(
-                "a@test.com", "hash", "USER", "Q", "A");
+                "a@test.com",
+                "hash",
+                "USER",
+                "Q",
+                "A"
+        );
 
         assertEquals(10, id);
     }
@@ -43,6 +51,7 @@ class UserServiceImplTest {
 
     @Test
     void login_shouldReturnUser_whenValidCredentials() throws SQLException {
+
         ResultSet rs = mock(ResultSet.class);
 
         given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
@@ -56,10 +65,12 @@ class UserServiceImplTest {
 
         assertNotNull(user);
         assertEquals(1, user.getUserId());
+        assertEquals("USER", user.getRole());
     }
 
     @Test
     void login_shouldReturnNull_whenPasswordWrong() throws SQLException {
+
         ResultSet rs = mock(ResultSet.class);
 
         given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
@@ -72,6 +83,7 @@ class UserServiceImplTest {
 
     @Test
     void login_shouldReturnNull_whenUserNotFound() throws SQLException {
+
         ResultSet rs = mock(ResultSet.class);
 
         given(userDAOImpl.fetchLoginData("a@test.com")).willReturn(rs);
@@ -84,12 +96,14 @@ class UserServiceImplTest {
 
     @Test
     void changePassword_shouldReturnTrue_whenSuccess() throws SQLException {
+
         ResultSet rs = mock(ResultSet.class);
 
         given(userDAOImpl.fetchLoginDataById(1)).willReturn(rs);
         given(rs.next()).willReturn(true);
         given(rs.getString("password_hash"))
                 .willReturn(HashUtil.hash("old"));
+
         given(userDAOImpl.updatePasswordByUserId(eq(1), anyString()))
                 .willReturn(true);
 
@@ -110,21 +124,45 @@ class UserServiceImplTest {
         assertFalse(userServiceImpl.changePassword(1, "wrong", "new"));
     }
 
+    // ---------- FORGOT PASSWORD ----------
+
+    @Test
+    void getSecurityQuestionByEmail_shouldReturnQuestion()
+            throws SQLException {
+
+        given(userDAOImpl.fetchSecurityQuestion("a@test.com"))
+                .willReturn("Your pet name?");
+
+        String question =
+                userServiceImpl.getSecurityQuestionByEmail("a@test.com");
+
+        assertEquals("Your pet name?", question);
+    }
+
+    @Test
+    void getSecurityQuestionByEmail_shouldReturnNull_onSQLException()
+            throws SQLException {
+
+        given(userDAOImpl.fetchSecurityQuestion("a@test.com"))
+                .willThrow(SQLException.class);
+
+        assertNull(userServiceImpl.getSecurityQuestionByEmail("a@test.com"));
+    }
+
     // ---------- RESET PASSWORD ----------
 
     @Test
-    void resetPassword_shouldUpdate_whenAnswerCorrect() throws SQLException {
-        // given
+    void resetPassword_shouldUpdate_whenAnswerCorrect()
+            throws SQLException {
+
         given(userDAOImpl.fetchSecurityAnswerHash("a@test.com"))
                 .willReturn(HashUtil.hash("ans"));
 
         given(userDAOImpl.updatePasswordByEmail(anyString(), anyString()))
                 .willReturn(true);
 
-        // when
         userServiceImpl.resetPassword("a@test.com", "ans", "newPass");
 
-        // then
         then(userDAOImpl).should()
                 .updatePasswordByEmail(eq("a@test.com"), anyString());
     }
@@ -139,7 +177,8 @@ class UserServiceImplTest {
         assertThrows(
                 RuntimeException.class,
                 () -> userServiceImpl.resetPassword(
-                        "a@test.com", "ans", "new")
+                        "a@test.com", "ans", "new"
+                )
         );
     }
 
@@ -167,5 +206,37 @@ class UserServiceImplTest {
         assertFalse(
                 userServiceImpl.verifySecurityAnswer("a@test.com", "wrong")
         );
+    }
+
+    // ---------- getUserIdBySeekerId (STATIC DAO METHOD) ----------
+
+    @Test
+    void getUserIdBySeekerId_shouldReturnUserId() {
+
+        try (MockedStatic<UserDAOImpl> mocked =
+                     mockStatic(UserDAOImpl.class)) {
+
+            mocked.when(() -> UserDAOImpl.getUserIdBySeekerId(5))
+                    .thenReturn(101);
+
+            int userId = userServiceImpl.getUserIdBySeekerId(5);
+
+            assertEquals(101, userId);
+        }
+    }
+
+    @Test
+    void getUserIdBySeekerId_shouldReturnMinusOne_whenNotFound() {
+
+        try (MockedStatic<UserDAOImpl> mocked =
+                     mockStatic(UserDAOImpl.class)) {
+
+            mocked.when(() -> UserDAOImpl.getUserIdBySeekerId(99))
+                    .thenReturn(-1);
+
+            int userId = userServiceImpl.getUserIdBySeekerId(99);
+
+            assertEquals(-1, userId);
+        }
     }
 }

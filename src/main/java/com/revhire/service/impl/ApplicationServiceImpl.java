@@ -25,31 +25,37 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public void applyForJob(int jobId, int seekerId) {
+    public boolean applyForJob(int jobId, int seekerId) {
 
         logger.info("Applying for jobId={} by seekerId={}", jobId, seekerId);
 
         if (applicationsDAOImpl.hasAlreadyApplied(jobId, seekerId)) {
             logger.warn("Duplicate application attempt: jobId={}, seekerId={}", jobId, seekerId);
-            System.out.println("\n❌ You have already applied for this job.\n");
-            return;
+            System.out.println("\n You have already applied for this job.\n");
+            return false;
         }
-
-
         applicationsDAOImpl.applyJob(jobId, seekerId);
         logger.info("Job application submitted successfully: jobId={}, seekerId={}", jobId, seekerId);
+        return true;
     }
 
     // Withdraw application with optional reason
     @Override
-    public void withdrawApplication(int applicationId, String status, String reason) {
+    public boolean withdrawApplication(int applicationId, String status, String reason) {
 
         logger.info("Withdrawing applicationId={}, status={}, reason={}",
                 applicationId, status, reason);
 
-        applicationsDAOImpl.updateStatus(applicationId, status, reason);
+        // Capture the boolean result from the DAO
+        boolean isUpdated = applicationsDAOImpl.updateStatus(applicationId, status, reason);
 
-        logger.info("Application withdrawn successfully: applicationId={}", applicationId);
+        if (isUpdated) {
+            logger.info("Application withdrawn successfully: applicationId={}", applicationId);
+        } else {
+            logger.warn("Withdrawal failed: applicationId={} not found", applicationId);
+        }
+
+        return isUpdated;
     }
 
     @Override
@@ -85,16 +91,20 @@ public class ApplicationServiceImpl implements ApplicationService {
         }
     }
 
-    // Get the jobseeker (user) ID for a given application
     @Override
     public int getSeekerUserIdByApplicationId(int appId) {
+        return 0;
+    }
 
-        logger.info("Fetching seeker userId for applicationId={}", appId);
+    // Get the jobseeker (user) ID for a given application
+    @Override
+    public int getSeekerIdByApplicationId(int appId) {
+        logger.info("Fetching seekerId for applicationId={}", appId);
 
         try {
-            return applicationsDAOImpl.fetchSeekerUserIdByApplicationId(appId);
+            return applicationsDAOImpl.fetchSeekerIdByApplicationId(appId);
         } catch (Exception e) {
-            logger.error("Error fetching seeker userId for applicationId={}", appId, e);
+            logger.error("Error fetching seekerId for applicationId={}", appId, e);
             return -1;
         }
     }

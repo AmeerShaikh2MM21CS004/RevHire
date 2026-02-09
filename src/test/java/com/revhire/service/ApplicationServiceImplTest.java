@@ -9,11 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,10 +31,10 @@ class ApplicationServiceImplTest {
         when(applicationsDAOImpl.hasAlreadyApplied(101, 201))
                 .thenReturn(false);
 
-        applicationService.applyForJob(101, 201);
+        boolean result = applicationService.applyForJob(101, 201);
 
-        verify(applicationsDAOImpl)
-                .applyJob(101, 201);
+        assertTrue(result);
+        verify(applicationsDAOImpl).applyJob(101, 201);
     }
 
     @Test
@@ -43,8 +42,9 @@ class ApplicationServiceImplTest {
         when(applicationsDAOImpl.hasAlreadyApplied(101, 201))
                 .thenReturn(true);
 
-        applicationService.applyForJob(101, 201);
+        boolean result = applicationService.applyForJob(101, 201);
 
+        assertFalse(result);
         verify(applicationsDAOImpl, never())
                 .applyJob(anyInt(), anyInt());
     }
@@ -52,42 +52,50 @@ class ApplicationServiceImplTest {
     // ---------------- withdrawApplication ----------------
 
     @Test
-    void withdrawApplication_shouldUpdateStatus() {
-        applicationService.withdrawApplication(
-                1, "WITHDRAWN", "Not interested");
+    void withdrawApplication_shouldReturnTrueWhenUpdated() {
+        when(applicationsDAOImpl.updateStatus(eq(1), eq("WITHDRAWN"), any()))
+                .thenReturn(true);
 
+        boolean result =
+                applicationService.withdrawApplication(1, "WITHDRAWN", "Reason");
+
+        assertTrue(result);
         verify(applicationsDAOImpl)
-                .updateStatus(1, "WITHDRAWN", "Not interested");
+                .updateStatus(eq(1), eq("WITHDRAWN"), any());
+    }
+
+    @Test
+    void withdrawApplication_shouldReturnFalseWhenNotUpdated() {
+        when(applicationsDAOImpl.updateStatus(eq(99), eq("WITHDRAWN"), isNull()))
+                .thenReturn(false);
+
+        boolean result =
+                applicationService.withdrawApplication(99, "WITHDRAWN", null);
+
+        assertFalse(result);
     }
 
     // ---------------- viewMyApplications ----------------
 
     @Test
     void viewMyApplications_shouldReturnApplications() {
-        // Arrange: Create mock Application objects
-        Application app1 = new Application(1, 101, 201, "PENDING", new Timestamp(System.currentTimeMillis()));
-        Application app2 = new Application(2, 102, 201, "ACCEPTED", new Timestamp(System.currentTimeMillis()));
+        Application app = mock(Application.class);
 
-        // Mock the DAO to return the list of objects
         when(applicationsDAOImpl.getApplicationsBySeeker(201))
-                .thenReturn(List.of(app1, app2));
+                .thenReturn(List.of(app));
 
-        // Act: Call the service method
-        List<Application> result = applicationService.viewMyApplications(201);
+        List<Application> result =
+                applicationService.viewMyApplications(201);
 
-        // Assert: Verify size and content
-        assertEquals(2, result.size(), "Should return exactly 2 applications");
-        assertEquals("PENDING", result.get(0).getStatus());
-        assertEquals(102, result.get(1).getJobId());
-
-        // Verification: Ensure the DAO was called exactly once with the right ID
-        verify(applicationsDAOImpl, times(1)).getApplicationsBySeeker(201);
+        assertEquals(1, result.size());
+        verify(applicationsDAOImpl)
+                .getApplicationsBySeeker(201);
     }
 
     // ---------------- getApplicantsForJob ----------------
 
     @Test
-    void getApplicantsForJob_shouldReturnApplicants() throws Exception {
+    void getApplicantsForJob_shouldReturnList() throws Exception {
         when(applicationsDAOImpl.fetchApplicationsByJobId(101))
                 .thenReturn(List.of(mock(Application.class)));
 
@@ -105,13 +113,17 @@ class ApplicationServiceImplTest {
         List<Application> result =
                 applicationService.getApplicantsForJob(101);
 
+        assertNotNull(result);
         assertTrue(result.isEmpty());
     }
 
     // ---------------- updateApplicationStatus ----------------
 
     @Test
-    void updateApplicationStatus_shouldUpdateStatus() throws SQLException {
+    void updateApplicationStatus_shouldCallDAO() throws Exception {
+        when(applicationsDAOImpl.updateStatusByApplicationId(1, "APPROVED"))
+                .thenReturn(true);
+
         assertDoesNotThrow(() ->
                 applicationService.updateApplicationStatus(1, "APPROVED"));
 
@@ -120,35 +132,34 @@ class ApplicationServiceImplTest {
     }
 
     @Test
-    void updateApplicationStatus_shouldHandleExceptionGracefully() throws SQLException {
-        doThrow(new RuntimeException("DB error"))
-                .when(applicationsDAOImpl)
-                .updateStatusByApplicationId(anyInt(), anyString());
+    void updateApplicationStatus_shouldHandleException() throws Exception {
+        when(applicationsDAOImpl.updateStatusByApplicationId(anyInt(), anyString()))
+                .thenThrow(new RuntimeException("DB error"));
 
         assertDoesNotThrow(() ->
                 applicationService.updateApplicationStatus(1, "REJECTED"));
     }
 
-    // ---------------- getSeekerUserIdByApplicationId ----------------
+    // ---------------- getSeekerIdByApplicationId ----------------
 
     @Test
-    void getSeekerUserIdByApplicationId_shouldReturnUserId() throws Exception {
-        when(applicationsDAOImpl.fetchSeekerUserIdByApplicationId(1))
-                .thenReturn(5001);
+    void getSeekerIdByApplicationId_shouldReturnSeekerId() throws Exception {
+        when(applicationsDAOImpl.fetchSeekerIdByApplicationId(1))
+                .thenReturn(501);
 
         int result =
-                applicationService.getSeekerUserIdByApplicationId(1);
+                applicationService.getSeekerIdByApplicationId(1);
 
-        assertEquals(5001, result);
+        assertEquals(501, result);
     }
 
     @Test
-    void getSeekerUserIdByApplicationId_shouldReturnMinusOneOnException() throws Exception {
-        when(applicationsDAOImpl.fetchSeekerUserIdByApplicationId(anyInt()))
+    void getSeekerIdByApplicationId_shouldReturnMinusOneOnException() throws Exception {
+        when(applicationsDAOImpl.fetchSeekerIdByApplicationId(anyInt()))
                 .thenThrow(new RuntimeException());
 
         int result =
-                applicationService.getSeekerUserIdByApplicationId(1);
+                applicationService.getSeekerIdByApplicationId(1);
 
         assertEquals(-1, result);
     }
