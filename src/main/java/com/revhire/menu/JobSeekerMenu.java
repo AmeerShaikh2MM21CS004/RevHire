@@ -1,5 +1,6 @@
 package com.revhire.menu;
 
+import com.revhire.model.Job;
 import com.revhire.service.impl.*;
 import com.revhire.util.ProfileUtil;
 import com.revhire.util.ValidationUtil;
@@ -8,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static java.awt.SystemColor.text;
 
 public class JobSeekerMenu {
 
@@ -51,13 +54,12 @@ public class JobSeekerMenu {
                     1. View Notifications
                     2. Create / Update Resume
                     3. Manage Profile
-                    4. View All Jobs
-                    5. Search Jobs with Filters
-                    6. Apply for Job
-                    7. View My Applications
-                    8. Withdraw Application
-                    9. Change Password
-                    10. Logout
+                    4. Search Jobs
+                    5. Apply for Job
+                    6. View My Applications
+                    7. Withdraw Application
+                    8. Change Password
+                    9. Logout
                     """);
             System.out.print("Choice: ");
 
@@ -133,23 +135,14 @@ public class JobSeekerMenu {
                     logger.info("Profile updated | seekerId={}", seekerId);
                 }
 
-                // ================= VIEW ALL JOBS =================
-                case 4 -> {
-                    logger.info("Viewing all jobs | userId={}", userId);
-                    jobService.getAllJobs().forEach(System.out::println);
-                    System.out.println("\nPress Enter to return to dashboard...");
-                    sc.nextLine();
-                }
-
                 // ================= SEARCH JOBS =================
-                case 5 -> {
-                    System.out.println("=== Job Search Filters ===");
-
+                case 4 -> {
+                    System.out.println("\n=== Job Search Filters (Leave blank to skip) ===");
                     System.out.print("Job Title: ");
                     String title = sc.nextLine();
                     System.out.print("Location: ");
                     String loc = sc.nextLine();
-                    System.out.print("Max Experience Required: ");
+                    System.out.print("Max Experience: ");
                     String expInput = sc.nextLine();
                     Integer maxExp = expInput.isBlank() ? null : Integer.parseInt(expInput);
                     System.out.print("Company Name: ");
@@ -159,24 +152,33 @@ public class JobSeekerMenu {
                     System.out.print("Job Type: ");
                     String jobType = sc.nextLine();
 
-                    List<String> results = jobService.searchJobs(
-                            title, loc, maxExp, company, salary, jobType
-                    );
-
-                    logger.info(
-                            "Job search performed | userId={}, results={}",
-                            userId, results.size()
-                    );
+                    List<Job> results = jobService.searchJobs(title, loc, maxExp, company, salary, jobType);
 
                     if (results.isEmpty()) {
-                        System.out.println("\n No jobs found.\n");
+                        System.out.println("\n[!] No jobs found matching those criteria.");
                     } else {
-                        results.forEach(System.out::println);
+                        System.out.println("\n" + "=".repeat(110));
+                        System.out.printf("%-5s | %-25s | %-20s | %-15s | %-12s | %-10s%n", "ID", "JOB TITLE", "COMPANY", "LOCATION", "SALARY", "TYPE");
+                        System.out.println("-".repeat(110));
+
+                        results.forEach(job -> {
+                            System.out.printf("%-5d | %-25s | %-20s | %-15s | %-12s | %-10s%n",
+                                    job.getJobId(),
+                                    (job.getTitle().length() > 25 ? job.getTitle().substring(0, 22) + "..." : job.getTitle()),
+                                    (job.getCompanyName().length() > 20 ? job.getCompanyName().substring(0, 17) + "..." : job.getCompanyName()),
+                                    job.getLocation(),
+                                    job.getSalary(),
+                                    job.getJobType()
+                            );
+                        });
+                        System.out.println("=".repeat(110));
                     }
+                    System.out.println("\nPress Enter to return...");
+                    sc.nextLine();
                 }
 
                 // ================= APPLY FOR JOB =================
-                case 6 -> {
+                case 5 -> {
                     System.out.print("Job ID: ");
                     int jobId = sc.nextInt();
                     sc.nextLine();
@@ -198,7 +200,7 @@ public class JobSeekerMenu {
                 }
 
                 // ================= VIEW APPLICATIONS =================
-                case 7 -> {
+                case 6 -> {
                     List<String> apps =
                             applicationService.viewMyApplications(seekerId);
 
@@ -213,7 +215,7 @@ public class JobSeekerMenu {
                 }
 
                 // ================= WITHDRAW APPLICATION =================
-                case 8 -> {
+                case 7 -> {
                     System.out.print("Application ID: ");
                     int applicationId = sc.nextInt();
                     sc.nextLine();
@@ -233,7 +235,7 @@ public class JobSeekerMenu {
                 }
 
                 // ================= CHANGE PASSWORD =================
-                case 9 -> {
+                case 8 -> {
                     try {
                         System.out.print("Enter Current Password: ");
                         String currentPassword = sc.nextLine().trim();
@@ -297,7 +299,7 @@ public class JobSeekerMenu {
                 }
 
                 // ================= LOGOUT =================
-                case 10 -> {
+                case 9 -> {
                     logger.info("User logged out | userId={}", userId);
                     System.out.println("\nLogged out.");
                     return;
@@ -313,4 +315,12 @@ public class JobSeekerMenu {
             }
         }
     }
+
+    private static String truncate(String text, int size) {
+        if (text != null && text.length() > size) {
+            return text.substring(0, size - 3) + "...";
+        }
+        return text;
+    }
+
 }

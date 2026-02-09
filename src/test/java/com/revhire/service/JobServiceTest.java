@@ -1,6 +1,7 @@
 package com.revhire.service;
 
 import com.revhire.dao.impl.JobsDAOImpl;
+import com.revhire.model.Job;
 import com.revhire.service.impl.JobServiceImpl;
 import com.revhire.service.NotificationsService;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,18 +52,6 @@ class JobServiceTest {
         );
     }
 
-    // ---------------- getAllJobs ----------------
-
-    @Test
-    void getAllJobs_shouldReturnJobs() {
-        when(jobsDAOImpl.getAllOpenJobs())
-                .thenReturn(List.of("Job1", "Job2"));
-
-        List<String> jobs = jobService.getAllJobs();
-
-        assertEquals(2, jobs.size());
-    }
-
     // ---------------- getAllJobsOfEmployer ----------------
 
     @Test
@@ -78,21 +68,53 @@ class JobServiceTest {
     // ---------------- searchJobs ----------------
 
     @Test
-    void searchJobs_shouldReturnFilteredJobs() {
-        when(jobsDAOImpl.searchJobs(
-                "Dev", "Mumbai", 3, "ABC", "10L", "Full-Time"
-        )).thenReturn(List.of("JobX"));
+    void searchJobs_shouldReturnFilteredJobs_WhenMatchesExist() {
+        Job mockJob = new Job();
+        mockJob.setJobId(101);
+        mockJob.setTitle("Java Developer");
+        mockJob.setCompanyName("ABC Corp");
+        mockJob.setLocation("Mumbai");
+        mockJob.setSalary("10L");
+        mockJob.setJobType("Full-Time");
 
-        List<String> jobs = jobService.searchJobs(
-                "Dev", "Mumbai", 3, "ABC", "10L", "Full-Time"
-        );
+        when(jobsDAOImpl.searchJobs("Dev", "Mumbai", 3, "ABC", "10L", "Full-Time"))
+                .thenReturn(List.of(mockJob));
 
-        assertEquals(1, jobs.size());
-        assertEquals("JobX", jobs.get(0));
+        // Act
+        List<Job> results = jobService.searchJobs("Dev", "Mumbai", 3, "ABC", "10L", "Full-Time");
+
+        // Assert
+        assertEquals(1, results.size(), "Should return exactly one job");
+        assertEquals("Java Developer", results.get(0).getTitle());
+        assertEquals("ABC Corp", results.get(0).getCompanyName());
+
+        verify(jobsDAOImpl, times(1)).searchJobs("Dev", "Mumbai", 3, "ABC", "10L", "Full-Time");
+    }
+
+    @Test
+    void searchJobs_shouldReturnEmptyList_WhenNoMatchesFound() {
+        // Arrange
+        when(jobsDAOImpl.searchJobs(anyString(), anyString(), anyInt(), anyString(), anyString(), anyString()))
+                .thenReturn(Collections.emptyList());
+
+        // Act
+        List<Job> results = jobService.searchJobs("NonExistent", "Mars", 10, "NASA", "0", "Contract");
+
+        // Assert
+        assertTrue(results.isEmpty(), "Result list should be empty for non-matching criteria");
+    }
+
+    @Test
+    void searchJobs_shouldThrowException_WhenDatabaseFails() {
+        when(jobsDAOImpl.searchJobs(any(), any(), any(), any(), any(), any()))
+                .thenThrow(new RuntimeException("DB Connection Down"));
+
+        assertThrows(RuntimeException.class, () -> {
+            jobService.searchJobs(null, null, null, null, null, null);
+        });
     }
 
     // ---------------- updateJob ----------------
-
     @Test
     void updateJob_shouldLogSuccess_whenRowsUpdated() {
         when(jobsDAOImpl.updateJob(

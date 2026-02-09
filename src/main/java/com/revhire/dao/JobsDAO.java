@@ -1,7 +1,8 @@
 package com.revhire.dao;
 
+import com.revhire.model.Job;
+
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface JobsDAO {
@@ -19,11 +20,11 @@ public interface JobsDAO {
             Date deadline
     );
 
-    List<String> getAllOpenJobs();
+    List<Job> getAllOpenJobs();
 
     List<String> getJobsByEmployer(int employerId);
 
-    List<String> searchJobs(
+    List<Job> searchJobs(
             String title,
             String location,
             Integer maxExp,

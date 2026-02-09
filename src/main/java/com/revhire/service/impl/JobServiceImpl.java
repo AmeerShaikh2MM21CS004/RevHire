@@ -1,6 +1,7 @@
 package com.revhire.service.impl;
 
 import com.revhire.dao.impl.JobsDAOImpl;
+import com.revhire.model.Job;
 import com.revhire.service.NotificationsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,9 +61,8 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
     }
 
     // ---------------- GET ALL JOBS ----------------
-    public List<String> getAllJobs() {
-
-        logger.info("Fetching all open jobs");
+    public List<Job> getAllJobs() {
+        logger.info("Fetching all open jobs from service");
         return jobsDAOImpl.getAllOpenJobs();
     }
 
@@ -74,7 +74,7 @@ public class JobServiceImpl extends JobSeekerServiceImpl {
     }
 
     // ---------------- SEARCH JOBS ----------------
-    public List<String> searchJobs(
+    public List<Job> searchJobs(
             String title,
             String location,
             Integer maxExp,

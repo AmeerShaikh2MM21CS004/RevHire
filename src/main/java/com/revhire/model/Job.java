@@ -56,4 +56,9 @@ public class Job {
 
     public Timestamp getPostedDate() { return postedDate; }
     public void setPostedDate(Timestamp postedDate) { this.postedDate = postedDate; }
+
+    private String companyName;
+
+    public String getCompanyName() { return companyName; }
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
 }

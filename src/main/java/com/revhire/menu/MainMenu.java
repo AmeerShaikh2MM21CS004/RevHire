@@ -59,13 +59,11 @@ public class MainMenu {
                     // ================= LOGIN =================
                     case 1 -> handleLogin(
                             sc, userService, jobSeekerService, employerService,
-                            jobService, applicationService, notificationService, resumeService
-                    );
+                            jobService, applicationService, notificationService, resumeService );
 
                     // ================= REGISTER =================
                     case 2 -> handleRegistration(
-                            sc, userService, jobSeekerService, employerService
-                    );
+                            sc, userService, jobSeekerService, employerService );
 
                     // ================= FORGOT PASSWORD =================
                     case 3 -> handleForgotPassword(sc, userService);
@@ -126,22 +124,17 @@ public class MainMenu {
         logger.info("User logged in | userId={}, role={}", userId, user.getRole());
 
         if ("JOB_SEEKER".equals(user.getRole())) {
-
             int seekerId = jobSeekerService.getSeekerIdByUserId(userId);
             logger.info("Redirecting to Job Seeker Menu | seekerId={}", seekerId);
-
             JobSeekerMenu.start(
                     sc, userId, seekerId,
                     jobService, applicationService,
                     notificationService, userService,
                     jobSeekerService, resumeService
             );
-
         } else {
-
             int employerId = employerService.getEmployerIdByUserId(userId);
             logger.info("Redirecting to Employer Menu | employerId={}", employerId);
-
             EmployerMenu.start(
                     sc, userId, employerId,
                     jobService, applicationService,
@@ -150,7 +143,6 @@ public class MainMenu {
             );
         }
     }
-
 
     // =================== REGISTRATION HANDLER ===================
     private static void handleRegistration(

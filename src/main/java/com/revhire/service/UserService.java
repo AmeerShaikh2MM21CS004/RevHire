@@ -22,8 +22,10 @@ public interface UserService {
     // ---------- FORGOT PASSWORD ----------
     String getSecurityQuestionByEmail(String email);
 
+    // ---------- RESET PASSWORD ----------
     void resetPassword(String email, String answer, String newPassword);
 
+    // ---------- VERIFY SECURITY ANSWERS  ----------
     boolean verifySecurityAnswer(String email, String answer);
 
 }

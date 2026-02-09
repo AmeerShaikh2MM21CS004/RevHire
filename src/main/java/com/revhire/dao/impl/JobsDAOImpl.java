@@ -1,5 +1,6 @@
 package com.revhire.dao.impl;
 
+import com.revhire.model.Job;
 import com.revhire.util.DBConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,36 +63,34 @@ public class JobsDAOImpl implements JobsDAO {
         }
     }
 
-    public List<String> getAllOpenJobs() {
-        List<String> jobs = new ArrayList<>();
+    // In JobDAOImpl.java
+    public List<Job> getAllOpenJobs() {
+        List<Job> jobs = new ArrayList<>();
         String sql = """
-            SELECT j.job_id, j.title, e.company_name,
-                   j.location, j.salary, j.job_type, j.status
-            FROM jobs j
-            JOIN employers e ON j.employer_id = e.employer_id
-            WHERE j.status = 'OPEN'
-        """;
+        SELECT j.job_id, j.title, e.company_name,
+               j.location, j.salary, j  .job_type, j.status
+        FROM jobs j
+        JOIN employers e ON j.employer_id = e.employer_id
+        WHERE j.status = 'OPEN'
+    """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                jobs.add(
-                        rs.getInt("job_id") + " | " +
-                                rs.getString("title") + " | " +
-                                rs.getString("company_name") + " | " +
-                                rs.getString("location") + " | " +
-                                rs.getString("salary") + " | " +
-                                rs.getString("job_type") + " | " +
-                                rs.getString("status")
-                );
+                Job job = new Job();
+                job.setJobId(rs.getInt("job_id"));
+                job.setTitle(rs.getString("title"));
+                job.setCompanyName(rs.getString("company_name")); // Map the JOINed column
+                job.setLocation(rs.getString("location"));
+                job.setSalary(rs.getString("salary"));
+                job.setJobType(rs.getString("job_type"));
+                job.setStatus(rs.getString("status"));
+                jobs.add(job);
             }
-            logger.info("Fetched all open jobs | count={}", jobs.size());
-
         } catch (SQLException e) {
-            logger.error("Failed to fetch open jobs | error={}", e.getMessage());
-            throw new RuntimeException(e);
+            logger.error("Failed to fetch open jobs", e);
         }
         return jobs;
     }
@@ -136,25 +135,21 @@ public class JobsDAOImpl implements JobsDAO {
         return jobs;
     }
 
-    public List<String> searchJobs(
-            String title,
-            String location,
-            Integer maxExp,
-            String company,
-            String salary,
-            String type) {
+    public List<Job> searchJobs(String title, String location, Integer maxExp,
+                                String company, String salary, String type) {
 
-        List<String> jobs = new ArrayList<>();
+        List<Job> jobs = new ArrayList<>();
         StringBuilder sql = new StringBuilder("""
-            SELECT j.job_id, j.title, e.company_name,
-                   j.location, j.salary, j.job_type, j.status
-            FROM jobs j
-            JOIN employers e ON j.employer_id = e.employer_id
-            WHERE j.status = 'OPEN'
-        """);
+        SELECT j.job_id, j.title, e.company_name,
+               j.location, j.salary, j.job_type, j.status
+        FROM jobs j
+        JOIN employers e ON j.employer_id = e.employer_id
+        WHERE j.status = 'OPEN'
+    """);
 
         List<Object> params = new ArrayList<>();
 
+        // Keep all your exact filter conditions
         if (title != null && !title.isBlank()) {
             sql.append(" AND LOWER(j.title) LIKE ?");
             params.add("%" + title.toLowerCase() + "%");
@@ -189,15 +184,18 @@ public class JobsDAOImpl implements JobsDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                jobs.add(
-                        rs.getInt("job_id") + " | " +
-                                rs.getString("title") + " | " +
-                                rs.getString("company_name") + " | " +
-                                rs.getString("location") + " | " +
-                                rs.getString("salary") + " | " +
-                                rs.getString("job_type")
-                );
+                Job job = new Job();
+                job.setJobId(rs.getInt("job_id"));
+                job.setTitle(rs.getString("title"));
+                job.setCompanyName(rs.getString("company_name")); // From JOIN
+                job.setLocation(rs.getString("location"));
+                job.setSalary(rs.getString("salary"));
+                job.setJobType(rs.getString("job_type"));
+                job.setStatus(rs.getString("status"));
+                jobs.add(job);
             }
+
+            // Exact logging as per your request
             logger.info("Searched jobs | filters=[title={}, location={}, maxExp={}, company={}, salary={}, type={}] results={}",
                     title, location, maxExp, company, salary, type, jobs.size());
 
