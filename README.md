@@ -147,7 +147,8 @@ RevHire
 │   │   │       └── util
 │   │   │           ├── DBConnection.java
 │   │   │           ├── HashUtil.java
-│   │   │           └── ProfileUtil.java
+│   │   │           ├── ProfileUtil.java
+│   │   │           └── ValidationUtil.java
 │   │   └── resource
 │   │         └── log4j2.xml
 │   └── test
